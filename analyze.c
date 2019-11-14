@@ -14,9 +14,14 @@
 
 
 
-//#include "/Users/marekwalczak/Data/2018PbPb/518/ReadTree.C"
 #include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
-
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/ReadTree.C"
 
 void analyze(){
 
@@ -40,9 +45,14 @@ void analyze(){
   bool isMC = false;
 
 
-
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2.root","read");
    TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/MC_gg_2M_2.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/MC_coh_1S_05M.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/MC_coh_2S_05M.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/MC_coh_3S_05M.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/MC_incoh_1S_05M.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/MC_incoh_2S_05M.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/MC_incoh_3S_05M.root","read");   
   
     //TTree* myTree_1 = (TTree*)file1->Get("myTree"); // some files don't have hionia folder....
     TTree* myTree_1 = (TTree*)file1->Get("hionia/myTree"); // use for MC and data
@@ -211,14 +221,14 @@ void analyze(){
 */ 
                                         
 
-  //for (Long64_t i=0; i<100000; i++) {
+  //for (Long64_t i=0; i<1000; i++) {
   for (Long64_t i=0; i<nentries; i++) {
-  
+  //if (i==14771) break;
      myTree_1->GetEntry(i);
 
 		Long64_t ientry = tree->LoadTree(i); // ...
 		if (ientry < 0) break; // ...
-  			if (i%100000==0) cout << "Processing event # " << i << endl;
+  			if (i%10000==0) cout << "Processing event # " << i << endl;
 
 
 
@@ -444,7 +454,7 @@ void analyze(){
 
   cout << endl << "******* opening output file and saving histos *******" << endl;
 
-  system("mkdir plots");
+  //system("mkdir plots");
   TFile* outFile = new TFile("plots/plots.root","RECREATE");
   
   if (isMC) {
@@ -529,7 +539,7 @@ void analyze(){
    system("root -l -b -q DrawHisto_mu_rap.C");
    system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
         
-        system("mv plots plots_test");
+        system("mv plots plots_test_data");
 
       
   cout << endl << "******* finished and saved *******" << endl;
