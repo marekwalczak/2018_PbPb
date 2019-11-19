@@ -15,15 +15,15 @@
 
 
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
-#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/ReadTree.C"
+#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/ReadTree.C"
 
-void analyze(){
+void analyze_noGen(){
 
 
 
@@ -42,17 +42,16 @@ void analyze(){
 /********************* when changing the input file change the ReadTree.h file above ************************/
   
   
-  bool isMC = true;
 
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/MC_gg_2M_2.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/MC_gg_2M_2.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/MC_coh_1S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/MC_coh_2S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/MC_coh_3S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/MC_incoh_1S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/MC_incoh_2S_05M.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/MC_incoh_3S_05M.root","read");   
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/MC_incoh_3S_05M.root","read");   
   
     //TTree* myTree_1 = (TTree*)file1->Get("myTree"); // some files don't have hionia folder....
     TTree* myTree_1 = (TTree*)file1->Get("hionia/myTree"); // use for MC and data
@@ -95,12 +94,6 @@ void analyze(){
 	double mumi_pT;
 	double mumi_rap;
 
-	double Gen_mupl_pT;
-	double Gen_mupl_rap;
-	double Gen_mumi_pT;
-	double Gen_mumi_rap;
-
-
 	double mupl_Phi;
 	double mumi_Phi;
 
@@ -116,8 +109,6 @@ void analyze(){
 	int mupl_idx=-1;
 	int mumi_idx=-1;
 
-	int Gen_mupl_idx=-1;
-	int Gen_mumi_idx=-1;
 
     // soft mu ID
     bool TMOneStaTight_mupl;
@@ -239,58 +230,8 @@ void analyze(){
   			if (i%10000==0) cout << "Processing event # " << i << endl;
 
 
-/*          OLD Gen Lvl STUFF:
 
-            // assuming, that in MC on Gen level there is always one dimuon (what is true)
-            if (isMC) {
-            
-			TLorentzVector *Gen_QQ_4mom = (TLorentzVector*)tree->Gen_QQ_4mom->At(0);
-			TLorentzVector *Gen_mupl_4mom = (TLorentzVector*)tree->Gen_QQ_mupl_4mom->At(0);
-			TLorentzVector *Gen_mumi_4mom = (TLorentzVector*)tree->Gen_QQ_mumi_4mom->At(0);
-
-			QQ_rap_Gen = Gen_QQ_4mom->Rapidity();
-			QQ_pT_Gen = Gen_QQ_4mom->Pt();
-			
-			mupl_pT_Gen = Gen_mupl_4mom->Pt();
-			mupl_rap_Gen = Gen_mupl_4mom->Rapidity();
-			mumi_pT_Gen = Gen_mumi_4mom->Pt();
-			mumi_rap_Gen = Gen_mumi_4mom->Rapidity();
-
-
-            histo_QQ_pT_Gen->Fill(QQ_pT_Gen);
-            histo_QQ_rap_Gen->Fill(QQ_rap_Gen);
-            sp_QQ_pT_QQ_rap_Gen->Fill(QQ_rap_Gen, QQ_pT_Gen);
-            histo_mu_rap_Gen->Fill(mupl_rap_Gen);
-            histo_mu_rap_Gen->Fill(mumi_rap_Gen);
-            sp_mu_pT_mu_rap_Gen->Fill(mumi_rap_Gen, mumi_pT_Gen);
-            sp_mu_pT_mu_rap_Gen->Fill(mupl_rap_Gen, mupl_pT_Gen);
-            
-            }
-
-*/
-
-//          New Gen Lvl STUFF:
-
-            // assuming, that in MC on Gen level there is always one dimuon (what is true)
-        if (isMC) {
-		
-
-
-     	  TLorentzVector *Gen_mupl_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(0);
-     	  TLorentzVector *Gen_mumi_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(1);
-
-     	  
-     	  
-     	  	Gen_mupl_pT = Gen_mupl_4mom->Pt();
-			Gen_mupl_rap = Gen_mupl_4mom->Rapidity();
-			Gen_mumi_pT = Gen_mumi_4mom->Pt();
-			Gen_mumi_rap = Gen_mumi_4mom->Rapidity();
-
-		  if (i%1000==0) cout << "->>>>>> "  << Gen_mupl_pT << ", " << Gen_mumi_pT << endl;     	  
-		  if (i%1000==0) cout << "->>>>>> "  << Gen_mupl_rap << ", " << Gen_mumi_rap << endl;     	  
-
-
-        } // is MC
+   
 
 /*		
 *         _ _                               _                   
@@ -490,14 +431,7 @@ void analyze(){
   //system("mkdir plots");
   TFile* outFile = new TFile("plots/plots.root","RECREATE");
   
-  if (isMC) {
-  histo_QQ_rap_Acc->Divide(histo_QQ_rap, histo_QQ_rap_Gen, 1, 1);
-  sp_QQ_pT_QQ_rap_Acc->Divide(sp_QQ_pT_QQ_rap, sp_QQ_pT_QQ_rap_Gen, 1, 1);
-  histo_mu_rap_Acc->Divide(histo_mu_rap, histo_mu_rap_Gen, 1, 1);
-  sp_mu_pT_mu_rap_Acc->Divide(sp_mu_pT_mu_rap, sp_mu_pT_mu_rap_Gen, 1, 1);
-  histo_QQ_pT_Acc->Divide(histo_QQ_pT, histo_QQ_pT_Gen, 1, 1);
-  }
-  
+   
           histo_HF_energy_Min->Write();
           histo_HF_energy_Pl->Write();
           sp_HF->Write();
@@ -510,8 +444,7 @@ void analyze(){
           histo_QQ_M->Write();
           
           histo_QQ_pT->Write();
-          if (isMC) histo_QQ_pT_Gen->Write();
-          if (isMC) histo_QQ_pT_Acc->Write();
+
           
           histo_QQ_pT2->Write();
           histo_QQ_vtx_z->Write();
@@ -520,20 +453,16 @@ void analyze(){
           histo_mu_pT->Write();
           
           histo_QQ_rap->Write();
-          if (isMC) histo_QQ_rap_Gen->Write();
-          if (isMC) histo_QQ_rap_Acc->Write();
+
 
           sp_QQ_pT_QQ_rap->Write();
-          if (isMC) sp_QQ_pT_QQ_rap_Gen->Write();
-          if (isMC) sp_QQ_pT_QQ_rap_Acc->Write();
+
 
           histo_mu_rap->Write();
-          if (isMC) histo_mu_rap_Gen->Write();
-          if (isMC) histo_mu_rap_Acc->Write();
+
           
           sp_mu_pT_mu_rap->Write();
-          if (isMC) sp_mu_pT_mu_rap_Gen->Write();
-          if (isMC) sp_mu_pT_mu_rap_Acc->Write();
+
           
           histo_aco->Write();
           histo_mu_Phi->Write();
@@ -560,7 +489,6 @@ void analyze(){
  
         /////  drawing codes:  //////
         system("root -l -b -q draw.c");
-        if (isMC) system("root -l -b -q draw_acc.c");
         //system("root -l -b -q FitMass.c");
         //system("root -l -b -q mass_fit.c > plots/roofit.txt");
         
@@ -572,7 +500,7 @@ void analyze(){
    system("root -l -b -q DrawHisto_mu_rap.C");
    system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
         
-        system("mv plots plots_test_gg_dupa");
+        system("mv plots plots_test_incoh_3S");
 
       
   cout << endl << "******* finished and saved *******" << endl;
