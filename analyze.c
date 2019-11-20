@@ -74,6 +74,19 @@ void analyze(){
 
     double pi  = 3.14159;
 
+	double Gen_mupl_pT;
+	double Gen_mupl_rap;
+	double Gen_mumi_pT;
+	double Gen_mumi_rap;
+	
+	double Gen_QQ_pT;
+	double Gen_QQ_rap;
+	double Gen_QQ_M;
+
+	
+	Int_t Gen_mupl_charge;
+	Int_t Gen_mumi_charge;
+
 	double invmass;
 	double QQ_rap;
 	double QQ_pT;
@@ -81,8 +94,10 @@ void analyze(){
 	int *QQ_Ntrk;
 	Int_t Ntracks;
 	int sign;
+	
 	ULong64_t QQ_trig;
 	ULong64_t HLTrig;
+	
 	double QQ_vtx_z;
 	double QQ_vtx_x;
 	double QQ_vtx_y;
@@ -95,20 +110,13 @@ void analyze(){
 	double mumi_pT;
 	double mumi_rap;
 
-	double Gen_mupl_pT;
-	double Gen_mupl_rap;
-	double Gen_mumi_pT;
-	double Gen_mumi_rap;
 
-
+	
+	
 	double mupl_Phi;
 	double mumi_Phi;
 
-	double mupl_pT_Gen;
-	double mupl_rap_Gen;
-	double mumi_pT_Gen;
-	double mumi_rap_Gen;
-	
+
 	double aco;
 	
 	int evts=0;
@@ -236,7 +244,7 @@ void analyze(){
 
 		Long64_t ientry = tree->LoadTree(i); // ...
 		if (ientry < 0) break; // ...
-  			if (i%10000==0) cout << "Processing event # " << i << endl;
+  			if (i%10000==0) cout << "-> Processing event # " << i << endl;
 
 
 /*          OLD Gen Lvl STUFF:
@@ -276,19 +284,47 @@ void analyze(){
 		
 
 
-     	  TLorentzVector *Gen_mupl_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(0);
-     	  TLorentzVector *Gen_mumi_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(1);
+		  if (tree->Gen_mu_charge[0]==1) {
+		  mupl_idx = 0;
+		  mumi_idx = 1;
+		  
+		  } else if (tree->Gen_mu_charge[0]==-1) {
+		  mupl_idx = 1;
+		  mumi_idx = 0;
+		  
+		  } else cout << "-> something is wrong with the Gen lvl charges!" << endl;
+		  
+		  		  
+		  TLorentzVector *Gen_mupl_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(mupl_idx);
+     	  TLorentzVector *Gen_mumi_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(mumi_idx);
 
-     	  
-     	  
      	  	Gen_mupl_pT = Gen_mupl_4mom->Pt();
 			Gen_mupl_rap = Gen_mupl_4mom->Rapidity();
 			Gen_mumi_pT = Gen_mumi_4mom->Pt();
 			Gen_mumi_rap = Gen_mumi_4mom->Rapidity();
+			Gen_mupl_charge = tree->Gen_mu_charge[mupl_idx];
+			Gen_mumi_charge = tree->Gen_mu_charge[mumi_idx];
+		  
+		  //if (i%10000==0) cout << "Gen_mupl_charge: " << Gen_mupl_charge << ", Gen_mumi_charge: " << Gen_mumi_charge << endl;
+		  //if (i%10000==0) cout << "Gen_mupl_pT: "  << Gen_mupl_pT << ", Gen_mumi_pT: " << Gen_mumi_pT << endl;     	  
+		  //if (i%10000==0) cout << "Gen_mupl_rap: "  << Gen_mupl_rap << ", Gen_mumi_rap: " << Gen_mumi_rap << endl;     	  
 
-		  if (i%1000==0) cout << "->>>>>> "  << Gen_mupl_pT << ", " << Gen_mumi_pT << endl;     	  
-		  if (i%1000==0) cout << "->>>>>> "  << Gen_mupl_rap << ", " << Gen_mumi_rap << endl;     	  
+		  TLorentzVector Gen_QQ_4mom = *Gen_mupl_4mom + *Gen_mumi_4mom;
+		  
+		  Gen_QQ_rap = Gen_QQ_4mom.Rapidity();
+		  //if (i%1000==0) cout << "Gen_QQ_Eta: "  << Gen_QQ_Eta << endl;
+		  Gen_QQ_pT = Gen_QQ_4mom.Pt();
+		  //if (i%10000==0) cout << "Gen_QQ_pT: "  << Gen_QQ_pT << endl;
+		  Gen_QQ_M = Gen_QQ_4mom.M();
+		  //if (i%10000==0) cout << "Gen_QQ_M: "  << Gen_QQ_M << endl;     	  
 
+            histo_QQ_pT_Gen->Fill(Gen_QQ_pT);
+            histo_QQ_rap_Gen->Fill(Gen_QQ_rap);
+            sp_QQ_pT_QQ_rap_Gen->Fill(Gen_QQ_rap, Gen_QQ_pT);
+            histo_mu_rap_Gen->Fill(Gen_mupl_rap);
+            histo_mu_rap_Gen->Fill(Gen_mumi_rap);
+            sp_mu_pT_mu_rap_Gen->Fill(Gen_mumi_rap, Gen_mumi_pT);
+            sp_mu_pT_mu_rap_Gen->Fill(Gen_mupl_rap, Gen_mupl_pT);
 
         } // is MC
 
