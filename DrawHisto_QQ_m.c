@@ -55,7 +55,7 @@ void DrawHisto_QQ_m(){
   // Draw histograms
   cout << "Drawing histogram: " << massHisto->GetEntries() << " entries"<< endl;
   massHisto->GetXaxis()->SetRangeUser(8,12);
-  massHisto->GetYaxis()->SetRangeUser(0,700);
+  //massHisto->GetYaxis()->SetRangeUser(0,700);
   massHisto->GetXaxis()->SetTitleFont(42);
   massHisto->GetYaxis()->SetTitleFont(42);
   massHisto->GetXaxis()->SetTitle("mass [GeV]");

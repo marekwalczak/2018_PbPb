@@ -55,7 +55,7 @@ void DrawHisto_mu_rap(){
   // Draw histograms
   cout << "Drawing histogram: " << RapHisto->GetEntries() << " entries"<< endl;
   RapHisto->GetXaxis()->SetRangeUser(-3,3);
-  RapHisto->GetYaxis()->SetRangeUser(0,500);
+  //RapHisto->GetYaxis()->SetRangeUser(0,500);
   RapHisto->GetXaxis()->SetTitleFont(42);
   RapHisto->GetYaxis()->SetTitleFont(42);
   RapHisto->GetXaxis()->SetTitle("y");

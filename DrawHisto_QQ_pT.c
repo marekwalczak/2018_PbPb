@@ -56,7 +56,7 @@ void DrawHisto_QQ_pT(){
   // Draw histograms
   cout << "Drawing histogram: " << pTHisto->GetEntries() << " entries"<< endl;
   pTHisto->GetXaxis()->SetRangeUser(0,1);
-  pTHisto->GetYaxis()->SetRangeUser(0,1300);
+  //pTHisto->GetYaxis()->SetRangeUser(0,1300);
   pTHisto->GetXaxis()->SetTitleFont(42);
   pTHisto->GetYaxis()->SetTitleFont(42);
   pTHisto->GetXaxis()->SetTitle("p_{T} [GeV]");

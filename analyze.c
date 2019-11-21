@@ -15,8 +15,8 @@
 
 
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
-#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/ReadTree.C"
+#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/ReadTree.C"
@@ -46,8 +46,8 @@ void analyze(){
 
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/MC_gg_2M_2.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/MC_coh_1S_05M.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/MC_gg_2M_2.root","read");
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/MC_coh_1S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/MC_coh_2S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/MC_coh_3S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/MC_incoh_1S_05M.root","read");
@@ -110,7 +110,8 @@ void analyze(){
 	double mumi_pT;
 	double mumi_rap;
 
-
+   	double m_min = 9.0; // 
+    double m_max = 11.0; //   
 	
 	
 	double mupl_Phi;
@@ -466,9 +467,8 @@ void analyze(){
           sp_QQ_trig_HLTrig->Fill(QQ_trig, HLTrig);
           
     	  //////     mass cut for some histos:    ///////////
-   		  float m_min = 9.2; // 
-    	  float m_max = 9.8; //           
-          if (invmass > m_min && invmass < m_max) {
+        
+          //if (invmass > m_min && invmass < m_max) {
           
           
           histo_HF_energy_Min->Fill(HadEnergy_HF_Minus);
@@ -504,7 +504,7 @@ void analyze(){
 
 
 
-          } // mass window selection
+         // } // mass window selection
           
           			} // cuts  
           			} // soft muon ID
@@ -601,14 +601,14 @@ void analyze(){
         //system("root -l -b -q mass_fit.c > plots/roofit.txt");
         
 
-   system("root -l -b -q DrawHisto_QQ_m.C");
-   system("root -l -b -q DrawHisto_QQ_pT.C");
-   system("root -l -b -q DrawHisto_QQ_rap.C");
-   system("root -l -b -q DrawHisto_mu_pT.C");
-   system("root -l -b -q DrawHisto_mu_rap.C");
+   system("root -l -b -q DrawHisto_QQ_m.c");
+   system("root -l -b -q DrawHisto_QQ_pT.c");
+   system("root -l -b -q DrawHisto_QQ_rap.c");
+   system("root -l -b -q DrawHisto_mu_pT.c");
+   system("root -l -b -q DrawHisto_mu_rap.c");
    system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
         
-        system("mv plots plots_test_gg_dupa");
+        system("mv plots plots_test_coh_1S_Gen");
 
       
   cout << endl << "******* finished and saved *******" << endl;
