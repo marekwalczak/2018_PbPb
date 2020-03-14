@@ -173,7 +173,7 @@ void mass_fit_pol2(const float hbcut=2.0, const float ptcut=1.00)
   gStyle->SetStatFormat("5.2g");
   gStyle->SetFitFormat("5.2g");
 
- TString flatfile="plots_soft_standard/m.txt";
+ TString flatfile="plots_test_data/m.txt";
 // TString flatfile="m_trig4.txt";
  //  TString flatfile="data_pos_8-12.txt";
 
@@ -406,7 +406,7 @@ void mass_fit_pol2(const float hbcut=2.0, const float ptcut=1.00)
   //RooAbsReal* intPdf = mm->createIntegral(*mMuMu,Range("signal")) ;
   cout<<"integral:  "<<(nmm->getVal()*intPdf->getVal())<<endl;
   //c->SaveAs("datafit_pol1.gif");
-  c->SaveAs("soft_standard.pdf");
+  c->SaveAs("test_fit.pdf");
 
 }
 

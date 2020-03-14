@@ -12,16 +12,16 @@
 
 
 
-
-
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/ReadTree.C"
-#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/ReadTree.C"
+#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/ReadTree.C"
+
+
 
 void analyze(){
 
@@ -47,12 +47,12 @@ void analyze(){
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/MC_gg_2M_2.root","read");
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/MC_coh_1S_05M.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/MC_coh_1S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/MC_coh_2S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/MC_coh_3S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/MC_incoh_1S_05M.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/MC_incoh_2S_05M.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/MC_incoh_3S_05M.root","read");   
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/MC_incoh_3S_05M.root","read");   
   
     //TTree* myTree_1 = (TTree*)file1->Get("myTree"); // some files don't have hionia folder....
     TTree* myTree_1 = (TTree*)file1->Get("hionia/myTree"); // use for MC and data
@@ -608,7 +608,7 @@ void analyze(){
    system("root -l -b -q DrawHisto_mu_rap.c");
    system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
         
-        system("mv plots plots_test_coh_1S_Gen");
+        system("mv plots plots_test_incoh_3S_Gen");
 
       
   cout << endl << "******* finished and saved *******" << endl;

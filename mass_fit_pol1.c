@@ -2,7 +2,7 @@
 #include "RooGlobalFunc.h"
 #endif
 #include "RooRealVar.h"
-#include "RooGaussian.h"
+//#include "RooGaussian.h"
 #include "RooConstVar.h"
 #include "RooAbsReal.h"
 #include "RooPlot.h"
@@ -166,14 +166,13 @@ void setTDRStyle() {
 void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
 {
 
-
   setTDRStyle();
   gROOT->LoadMacro("CMS_lumi.C"); 
   //writeExtraText= false;
   gStyle->SetStatFormat("5.2g");
   gStyle->SetFitFormat("5.2g");
 
- TString flatfile="plots_for_test_3/m.txt";
+ TString flatfile="mass_fit/m_trig1.txt";
 // TString flatfile="m_trig4.txt";
  //  TString flatfile="data_pos_8-12.txt";
 
@@ -406,7 +405,7 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   //RooAbsReal* intPdf = mm->createIntegral(*mMuMu,Range("signal")) ;
   cout<<"integral:  "<<(nmm->getVal()*intPdf->getVal())<<endl;
   //c->SaveAs("datafit_pol1.gif");
-  c->SaveAs("datafit_pTa05.pdf");
+  c->SaveAs("datafit_test.pdf");
 
 }
 
