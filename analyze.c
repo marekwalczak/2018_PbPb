@@ -10,22 +10,28 @@
 #include <TClonesArray.h>
 #include "TFile.h"
 
-
-
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/ReadTree.C"
-#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/ReadTree.C"
+
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
+
+#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/ReadTree.C"
+
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M_xDM/ReadTree.C"
+
+//#include "/Users/marekwalczak/Data/2018PbPb/pythia/ReadTree.C"
+
+
+
+
 
 
 
 void analyze(){
-
-
 
 /*                       _    __ _ _      
 *                       | |  / _(_) |     
@@ -38,21 +44,25 @@ void analyze(){
 
   cout << endl << "******* opening files *******" << endl;
   
-  
 /********************* when changing the input file change the ReadTree.h file above ************************/
-  
   
   bool isMC = true;
 
-
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_2/MC_gg_2M_2.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M/MC_coh_1S_05M.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M/MC_coh_2S_05M.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M/MC_coh_3S_05M.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M/MC_incoh_1S_05M.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M/MC_incoh_2S_05M.root","read");
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M/MC_incoh_3S_05M.root","read");   
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
+
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
+
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/MC_coh_2S_05M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/MC_coh_3S_05M_xDM.root","read");
+
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M_xDM/MC_incoh_1S_05M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M_xDM/MC_incoh_2S_05M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M_xDM/MC_incoh_3S_05M_xDM.root","read");   
+
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/pythia/Pythia_jpsi_200files.root","read");   
+  
   
     //TTree* myTree_1 = (TTree*)file1->Get("myTree"); // some files don't have hionia folder....
     TTree* myTree_1 = (TTree*)file1->Get("hionia/myTree"); // use for MC and data
@@ -177,9 +187,9 @@ void analyze(){
   TH2F* sp_QQ_pT_QQ_rap_Gen = new TH2F("sp_QQ_pT_QQ_rap_Gen","QQ_pT vs QQ_rap; rapidity; pT",50,-5,5,50,0,1);
   TH2F* sp_QQ_pT_QQ_rap_Acc = new TH2F("sp_QQ_pT_QQ_rap_Acc","QQ_pT vs QQ_rap; rapidity; pT",50,-5,5,50,0,1);
 
-  TH2F* sp_mu_pT_mu_rap = new TH2F("sp_mu_pT_mu_rap","mu_pT vs mu_rap; rapidity; pT",100,-8,8,100,0,5);
-  TH2F* sp_mu_pT_mu_rap_Gen = new TH2F("sp_mu_pT_mu_rap_Gen","mu_pT vs mu_rap; rapidity; pT",100,-8,8,100,0,5);
-  TH2F* sp_mu_pT_mu_rap_Acc = new TH2F("sp_mu_pT_mu_rap_Acc","Acc: mu_pT vs mu_rap; rapidity; pT",100,-8,8,100,0,5);
+  TH2F* sp_mu_pT_mu_rap = new TH2F("sp_mu_pT_mu_rap","mu_pT vs mu_rap; rapidity; pT",100,-10,10,100,0,10);
+  TH2F* sp_mu_pT_mu_rap_Gen = new TH2F("sp_mu_pT_mu_rap_Gen","mu_pT vs mu_rap; rapidity; pT",100,-10,10,100,0,10);
+  TH2F* sp_mu_pT_mu_rap_Acc = new TH2F("sp_mu_pT_mu_rap_Acc","Acc: mu_pT vs mu_rap; rapidity; pT",100,-10,10,100,0,10);
 
   TH1F* histo_QQ_size = new TH1F("histo_QQ_size","QQ_size; QQ_size;events ",20,0,20);
   TH1F* histo_QQ_Ntrk = new TH1F("histo_QQ_Ntrk","QQ_Ntrk; QQ_Ntrk;events ",20,0,20);
@@ -200,10 +210,13 @@ void analyze(){
 
 
   TH1F* histo_mu_pT = new TH1F("histo_mu_pT","mu_pT; mu_pT [GeV]; muons ",100,0,10);
+  TH1F* histo_mu_pT_Gen = new TH1F("histo_mu_pT_Gen","mu_pT; mu_pT [GeV]; muons ",100,0,10);
+  TH1F* histo_mu_pT_Acc = new TH1F("histo_mu_pT_Acc","mu_pT; mu_pT [GeV]; muons ",100,0,10);
   
-  TH1F* histo_mu_rap = new TH1F("histo_mu_rap","mu_rap; mu_rap; muons ",100,-5,5);
-  TH1F* histo_mu_rap_Gen = new TH1F("histo_mu_rap_Gen","mu_rap; mu_rap; muons ",100,-5,5);
-  TH1F* histo_mu_rap_Acc = new TH1F("histo_mu_rap_Acc","mu_rap; mu_rap; muons ",100,-5,5);
+  TH1F* histo_mu_rap = new TH1F("histo_mu_rap","mu_rap; mu_rap; muons ",100,-10,10);
+  TH1F* histo_mu_rap_Gen = new TH1F("histo_mu_rap_Gen","mu_rap; mu_rap; muons ",100,-10,10);
+  TH1F* histo_mu_rap_Acc = new TH1F("histo_mu_rap_Acc","mu_rap; mu_rap; muons ",100,-10,10);
+  
   TH1F* histo_mu_Phi = new TH1F("histo_mu_Phi","mu_Phi; mu_Phi; events ",100,-4,4);
 
   TH1F* histo_aco = new TH1F("histo_aco", "histo_aco; acoplanarity; events", 110, 0.0, 1.1);
@@ -293,7 +306,7 @@ void analyze(){
 		  mupl_idx = 1;
 		  mumi_idx = 0;
 		  
-		  } else cout << "-> something is wrong with the Gen lvl charges!" << endl;
+		  } else cout << endl << "-> something is wrong with the Gen lvl charges!" << endl;
 		  
 		  		  
 		  TLorentzVector *Gen_mupl_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(mupl_idx);
@@ -324,6 +337,8 @@ void analyze(){
             sp_QQ_pT_QQ_rap_Gen->Fill(Gen_QQ_rap, Gen_QQ_pT);
             histo_mu_rap_Gen->Fill(Gen_mupl_rap);
             histo_mu_rap_Gen->Fill(Gen_mumi_rap);
+            histo_mu_pT_Gen->Fill(Gen_mupl_pT);
+            histo_mu_pT_Gen->Fill(Gen_mumi_pT);
             sp_mu_pT_mu_rap_Gen->Fill(Gen_mumi_rap, Gen_mumi_pT);
             sp_mu_pT_mu_rap_Gen->Fill(Gen_mupl_rap, Gen_mupl_pT);
 
@@ -341,7 +356,7 @@ void analyze(){
 */
 
 		nsize  = tree->Reco_QQ_size; //get the size
-		
+		if (nsize<1) continue; // only Gen lvl events are saved for MC if no Reco information is present
 		
 		//for (int m=0; m<nsize; m++) { // loops over all dimuons		
 		  //if (nsize==1) { // only events with exactly one dimuon
@@ -354,6 +369,7 @@ void analyze(){
 			HLTrig = tree->HLTriggers;
 			TLorentzVector *QQ_4mom = (TLorentzVector*)tree->Reco_QQ_4mom->At(m);
 			TVector3 *QQ_vtx = (TVector3*)tree->Reco_QQ_vtx->At(m);
+
 
 			invmass = QQ_4mom->M();
 			QQ_pT = QQ_4mom->Pt();
@@ -447,15 +463,16 @@ void analyze(){
         
 					
           // 				 && QQ_pT>0.5 && mupl_pT<5.2 && mumi_pT<5.2
-     	  if     ( ((QQ_trig&2)==2) && ((HLTrig&2)==2) && *QQ_Ntrk==2 && sign==0 && mupl_pT>3 && mumi_pT>3  && HadEnergy_HF_Minus<5 && HadEnergy_HF_Plus<5 && mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 ) {
+     	  //if     ( ((QQ_trig&2)==2) && ((HLTrig&2)==2) && *QQ_Ntrk==2 && sign==0 && mupl_pT>3 && mumi_pT>3  && HadEnergy_HF_Minus<5 && HadEnergy_HF_Plus<5 && mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 ) {
+          if (((QQ_trig&8)==8) && ((HLTrig&8)==8)){
           // soft muon:
-          if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_miupl==true && highPurity_miumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
+          //if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_miupl==true && highPurity_miumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
 
           histo_QQ_size->Fill(nsize);
           sp_QQ_Ntrk_QQ_size->Fill(*QQ_Ntrk, nsize);
           sp_Ntracks_QQ_size->Fill(Ntracks, nsize);
 
-          evts++;   
+          evts++;
 		  
 		  ///////    fills m_pT_y.txt file:    /////////
           textfile << invmass << " " << QQ_pT << " " << QQ_rap << endl;
@@ -467,7 +484,7 @@ void analyze(){
           sp_QQ_trig_HLTrig->Fill(QQ_trig, HLTrig);
           
     	  //////     mass cut for some histos:    ///////////
-        
+          
           //if (invmass > m_min && invmass < m_max) {
           
           
@@ -507,7 +524,7 @@ void analyze(){
          // } // mass window selection
           
           			} // cuts  
-          			} // soft muon ID
+          			//} // soft muon ID
 			      	//} // dimuon loop OR selection of exactly one dimuon
    } // loop over i (entries)
 
@@ -527,11 +544,26 @@ void analyze(){
   TFile* outFile = new TFile("plots/plots.root","RECREATE");
   
   if (isMC) {
-  histo_QQ_rap_Acc->Divide(histo_QQ_rap, histo_QQ_rap_Gen, 1, 1);
-  sp_QQ_pT_QQ_rap_Acc->Divide(sp_QQ_pT_QQ_rap, sp_QQ_pT_QQ_rap_Gen, 1, 1);
-  histo_mu_rap_Acc->Divide(histo_mu_rap, histo_mu_rap_Gen, 1, 1);
-  sp_mu_pT_mu_rap_Acc->Divide(sp_mu_pT_mu_rap, sp_mu_pT_mu_rap_Gen, 1, 1);
-  histo_QQ_pT_Acc->Divide(histo_QQ_pT, histo_QQ_pT_Gen, 1, 1);
+  
+    histo_QQ_rap_Acc->Divide(histo_QQ_rap, histo_QQ_rap_Gen, 1, 1);
+    sp_QQ_pT_QQ_rap_Acc->Divide(sp_QQ_pT_QQ_rap, sp_QQ_pT_QQ_rap_Gen, 1, 1);
+    histo_mu_pT_Acc->Divide(histo_mu_pT, histo_mu_pT_Gen, 1, 1);
+    histo_mu_rap_Acc->Divide(histo_mu_rap, histo_mu_rap_Gen, 1, 1);
+    sp_mu_pT_mu_rap_Acc->Divide(sp_mu_pT_mu_rap, sp_mu_pT_mu_rap_Gen, 1, 1);
+    histo_QQ_pT_Acc->Divide(histo_QQ_pT, histo_QQ_pT_Gen, 1, 1);
+
+    sp_QQ_pT_QQ_rap_Gen->Write();
+    sp_QQ_pT_QQ_rap_Acc->Write();
+    sp_mu_pT_mu_rap_Gen->Write();
+    sp_mu_pT_mu_rap_Acc->Write();
+    histo_mu_pT_Gen->Write();
+    histo_mu_pT_Acc->Write();
+    histo_mu_rap_Gen->Write();
+    histo_mu_rap_Acc->Write();
+    histo_QQ_rap_Gen->Write();
+    histo_QQ_rap_Acc->Write();
+    histo_QQ_pT_Gen->Write();
+    histo_QQ_pT_Acc->Write();
   }
   
           histo_HF_energy_Min->Write();
@@ -544,37 +576,17 @@ void analyze(){
           histo_QQ_Ntrk->Write();
           histo_Ntracks->Write();
           histo_QQ_M->Write();
-          
           histo_QQ_pT->Write();
-          if (isMC) histo_QQ_pT_Gen->Write();
-          if (isMC) histo_QQ_pT_Acc->Write();
-          
           histo_QQ_pT2->Write();
           histo_QQ_vtx_z->Write();
-
-                    
           histo_mu_pT->Write();
-          
           histo_QQ_rap->Write();
-          if (isMC) histo_QQ_rap_Gen->Write();
-          if (isMC) histo_QQ_rap_Acc->Write();
-
           sp_QQ_pT_QQ_rap->Write();
-          if (isMC) sp_QQ_pT_QQ_rap_Gen->Write();
-          if (isMC) sp_QQ_pT_QQ_rap_Acc->Write();
-
           histo_mu_rap->Write();
-          if (isMC) histo_mu_rap_Gen->Write();
-          if (isMC) histo_mu_rap_Acc->Write();
-          
           sp_mu_pT_mu_rap->Write();
-          if (isMC) sp_mu_pT_mu_rap_Gen->Write();
-          if (isMC) sp_mu_pT_mu_rap_Acc->Write();
-          
           histo_aco->Write();
           histo_mu_Phi->Write();
           histo_QQ_Phi->Write();
-
           histo_QQ_trig->Write();
           histo_HLTrig->Write();
           sp_QQ_trig_HLTrig->Write();
@@ -608,7 +620,7 @@ void analyze(){
    system("root -l -b -q DrawHisto_mu_rap.c");
    system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
         
-        system("mv plots plots_test_incoh_3S_Gen");
+        //system("mv plots plots_acc_coh1s");
 
       
   cout << endl << "******* finished and saved *******" << endl;
