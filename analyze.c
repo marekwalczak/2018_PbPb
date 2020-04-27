@@ -13,9 +13,9 @@
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/ReadTree.C"
 
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
+#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
 
-#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/ReadTree.C"
 
@@ -51,9 +51,9 @@ void analyze(){
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
 
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
 
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/MC_coh_2S_05M_xDM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/MC_coh_3S_05M_xDM.root","read");
 
@@ -183,13 +183,15 @@ void analyze(){
   TH2F* sp_Ntracks_QQ_size = new TH2F("sp_Ntracks_QQ_size","QQ_size vs Ntracks; Ntracks; QQ_size",20,0,20,20,0,20);
   TH2F* sp_Ntracks_QQ_Ntrk = new TH2F("sp_Ntracks_QQ_Ntrk","QQ_Ntrk vs Ntracks; Ntracks; QQ_Ntrk",20,0,20,20,0,20);
 
-  TH2F* sp_QQ_pT_QQ_rap = new TH2F("sp_QQ_pT_QQ_rap","QQ_pT vs QQ_rap; rapidity; pT",50,-5,5,50,0,1);
-  TH2F* sp_QQ_pT_QQ_rap_Gen = new TH2F("sp_QQ_pT_QQ_rap_Gen","QQ_pT vs QQ_rap; rapidity; pT",50,-5,5,50,0,1);
-  TH2F* sp_QQ_pT_QQ_rap_Acc = new TH2F("sp_QQ_pT_QQ_rap_Acc","QQ_pT vs QQ_rap; rapidity; pT",50,-5,5,50,0,1);
+  TH2F* sp_QQ_pT_QQ_rap = new TH2F("sp_QQ_pT_QQ_rap","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
+  TH2F* sp_QQ_pT_QQ_rap_Gen = new TH2F("sp_QQ_pT_QQ_rap_Gen","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
+  TH2F* sp_QQ_pT_QQ_rap_Reco_Gen = new TH2F("sp_QQ_pT_QQ_rap_Reco_Gen","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
+  TH2F* sp_QQ_pT_QQ_rap_Acc = new TH2F("sp_QQ_pT_QQ_rap_Acc","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
 
-  TH2F* sp_mu_pT_mu_rap = new TH2F("sp_mu_pT_mu_rap","mu_pT vs mu_rap; rapidity; pT",100,-10,10,100,0,10);
-  TH2F* sp_mu_pT_mu_rap_Gen = new TH2F("sp_mu_pT_mu_rap_Gen","mu_pT vs mu_rap; rapidity; pT",100,-10,10,100,0,10);
-  TH2F* sp_mu_pT_mu_rap_Acc = new TH2F("sp_mu_pT_mu_rap_Acc","Acc: mu_pT vs mu_rap; rapidity; pT",100,-10,10,100,0,10);
+  TH2F* sp_mu_pT_mu_rap = new TH2F("sp_mu_pT_mu_rap","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
+  TH2F* sp_mu_pT_mu_rap_Gen = new TH2F("sp_mu_pT_mu_rap_Gen","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
+  TH2F* sp_mu_pT_mu_rap_Reco_Gen = new TH2F("sp_mu_pT_mu_rap_Reco_Gen","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
+  TH2F* sp_mu_pT_mu_rap_Acc = new TH2F("sp_mu_pT_mu_rap_Acc","Acc: mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
 
   TH1F* histo_QQ_size = new TH1F("histo_QQ_size","QQ_size; QQ_size;events ",20,0,20);
   TH1F* histo_QQ_Ntrk = new TH1F("histo_QQ_Ntrk","QQ_Ntrk; QQ_Ntrk;events ",20,0,20);
@@ -197,24 +199,29 @@ void analyze(){
 
   TH1F* histo_QQ_M = new TH1F("histo_QQ_M","Mass; Mass; events",100,8,12);
 
-  TH1F* histo_QQ_pT = new TH1F("histo_QQ_pT","QQ_pT; QQ_pT [GeV]; events ",200,0,4);
-  TH1F* histo_QQ_pT_Gen = new TH1F("histo_QQ_pT_Gen","QQ_pT; QQ_pT [GeV]; events ",200,0,4);
-  TH1F* histo_QQ_pT_Acc = new TH1F("histo_QQ_pT_Acc","QQ_pT; QQ_pT [GeV]; events ",200,0,4);
-  TH1F* histo_QQ_pT2 = new TH1F("histo_QQ_pT2","QQ_pT2; QQ_pT2 [GeV^[2]]; events ",250,0,5);
-  TH1F* histo_QQ_rap = new TH1F("histo_QQ_rap","QQ_rap; QQ_rap; events ",100,-5,5);
-  TH1F* histo_QQ_rap_Gen = new TH1F("histo_QQ_rap_Gen","QQ_rap_Gen; QQ_rap_Gen; events ",100,-5,5);
-  TH1F* histo_QQ_rap_Acc = new TH1F("histo_QQ_rap_Acc","QQ_rap_Acc; QQ_rap_Acc; events ",100,-5,5);
+  TH1F* histo_QQ_pT = new TH1F("histo_QQ_pT","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
+  TH1F* histo_QQ_pT_Gen = new TH1F("histo_QQ_pT_Gen","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
+  TH1F* histo_QQ_pT_Reco_Gen = new TH1F("histo_QQ_pT_Reco_Gen","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
+  TH1F* histo_QQ_pT_Acc = new TH1F("histo_QQ_pT_Acc","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
+  TH1F* histo_QQ_pT2 = new TH1F("histo_QQ_pT2","QQ_pT2; QQ_pT2 [GeV^[2]]; events ",200,0,10);
+
+  TH1F* histo_QQ_rap = new TH1F("histo_QQ_rap","QQ_rap; QQ_rap; events ",100,-10,10);
+  TH1F* histo_QQ_rap_Gen = new TH1F("histo_QQ_rap_Gen","QQ_rap_Gen; QQ_rap_Gen; events ",100,-10,10);
+  TH1F* histo_QQ_rap_Reco_Gen = new TH1F("histo_QQ_rap_Reco_Gen","QQ_rap_Gen; QQ_rap_Gen; events ",100,-10,10);
+  TH1F* histo_QQ_rap_Acc = new TH1F("histo_QQ_rap_Acc","QQ_rap_Acc; QQ_rap_Acc; events ",100,-10,10);
   
   TH1F* histo_QQ_vtx_z = new TH1F("histo_QQ_vtx_z","QQ_vtx_z; QQ_vtx_z; events ",100,-50,50);
   TH1F* histo_QQ_Phi = new TH1F("histo_QQ_Phi","QQ_Phi; QQ_Phi; events ",100,-4,4);
 
 
-  TH1F* histo_mu_pT = new TH1F("histo_mu_pT","mu_pT; mu_pT [GeV]; muons ",100,0,10);
-  TH1F* histo_mu_pT_Gen = new TH1F("histo_mu_pT_Gen","mu_pT; mu_pT [GeV]; muons ",100,0,10);
-  TH1F* histo_mu_pT_Acc = new TH1F("histo_mu_pT_Acc","mu_pT; mu_pT [GeV]; muons ",100,0,10);
+  TH1F* histo_mu_pT = new TH1F("histo_mu_pT","mu_pT; mu_pT [GeV]; muons ",200,0,10);
+  TH1F* histo_mu_pT_Gen = new TH1F("histo_mu_pT_Gen","mu_pT; mu_pT [GeV]; muons ",200,0,10);
+  TH1F* histo_mu_pT_Reco_Gen = new TH1F("histo_mu_pT_Reco_Gen","mu_pT; mu_pT [GeV]; muons ",200,0,10);
+  TH1F* histo_mu_pT_Acc = new TH1F("histo_mu_pT_Acc","mu_pT; mu_pT [GeV]; muons ",200,0,10);
   
   TH1F* histo_mu_rap = new TH1F("histo_mu_rap","mu_rap; mu_rap; muons ",100,-10,10);
   TH1F* histo_mu_rap_Gen = new TH1F("histo_mu_rap_Gen","mu_rap; mu_rap; muons ",100,-10,10);
+  TH1F* histo_mu_rap_Reco_Gen = new TH1F("histo_mu_rap_Reco_Gen","mu_rap; mu_rap; muons ",100,-10,10);
   TH1F* histo_mu_rap_Acc = new TH1F("histo_mu_rap_Acc","mu_rap; mu_rap; muons ",100,-10,10);
   
   TH1F* histo_mu_Phi = new TH1F("histo_mu_Phi","mu_Phi; mu_Phi; events ",100,-4,4);
@@ -466,7 +473,7 @@ void analyze(){
      	  //if     ( ((QQ_trig&2)==2) && ((HLTrig&2)==2) && *QQ_Ntrk==2 && sign==0 && mupl_pT>3 && mumi_pT>3  && HadEnergy_HF_Minus<5 && HadEnergy_HF_Plus<5 && mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 ) {
           if (((QQ_trig&8)==8) && ((HLTrig&8)==8)){
           // soft muon:
-          //if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_miupl==true && highPurity_miumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
+          if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_miupl==true && highPurity_miumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
 
           histo_QQ_size->Fill(nsize);
           sp_QQ_Ntrk_QQ_size->Fill(*QQ_Ntrk, nsize);
@@ -513,7 +520,26 @@ void analyze(){
 
           sp_mu_pT_mu_rap->Fill(mumi_rap, mumi_pT);
           sp_mu_pT_mu_rap->Fill(mupl_rap, mupl_pT);
+
+
+        if (isMC) {
+          histo_QQ_pT_Reco_Gen->Fill(Gen_QQ_pT);
+          histo_QQ_rap_Reco_Gen->Fill(Gen_QQ_rap);
+
+          histo_mu_pT_Reco_Gen->Fill(Gen_mupl_pT);
+          histo_mu_pT_Reco_Gen->Fill(Gen_mumi_pT);
           
+          histo_mu_rap_Reco_Gen->Fill(Gen_mupl_rap);
+          histo_mu_rap_Reco_Gen->Fill(Gen_mumi_rap);
+
+          sp_QQ_pT_QQ_rap_Reco_Gen->Fill(Gen_QQ_rap, Gen_QQ_pT);
+
+          sp_mu_pT_mu_rap_Reco_Gen->Fill(Gen_mumi_rap, Gen_mumi_pT);
+          sp_mu_pT_mu_rap_Reco_Gen->Fill(Gen_mupl_rap, Gen_mupl_pT);
+          
+                  }
+
+
           histo_aco->Fill(aco);
           histo_mu_Phi->Fill(mupl_Phi);
           histo_mu_Phi->Fill(mumi_Phi);
@@ -524,7 +550,7 @@ void analyze(){
          // } // mass window selection
           
           			} // cuts  
-          			//} // soft muon ID
+          			} // soft muon ID
 			      	//} // dimuon loop OR selection of exactly one dimuon
    } // loop over i (entries)
 
@@ -545,12 +571,20 @@ void analyze(){
   
   if (isMC) {
   
-    histo_QQ_rap_Acc->Divide(histo_QQ_rap, histo_QQ_rap_Gen, 1, 1);
-    sp_QQ_pT_QQ_rap_Acc->Divide(sp_QQ_pT_QQ_rap, sp_QQ_pT_QQ_rap_Gen, 1, 1);
-    histo_mu_pT_Acc->Divide(histo_mu_pT, histo_mu_pT_Gen, 1, 1);
-    histo_mu_rap_Acc->Divide(histo_mu_rap, histo_mu_rap_Gen, 1, 1);
-    sp_mu_pT_mu_rap_Acc->Divide(sp_mu_pT_mu_rap, sp_mu_pT_mu_rap_Gen, 1, 1);
-    histo_QQ_pT_Acc->Divide(histo_QQ_pT, histo_QQ_pT_Gen, 1, 1);
+    histo_QQ_rap_Acc->Divide(histo_QQ_rap_Reco_Gen, histo_QQ_rap_Gen, 1, 1);
+    sp_QQ_pT_QQ_rap_Acc->Divide(sp_QQ_pT_QQ_rap_Reco_Gen, sp_QQ_pT_QQ_rap_Gen, 1, 1);
+    histo_mu_pT_Acc->Divide(histo_mu_pT_Reco_Gen, histo_mu_pT_Gen, 1, 1);
+    histo_mu_rap_Acc->Divide(histo_mu_rap_Reco_Gen, histo_mu_rap_Gen, 1, 1);
+    sp_mu_pT_mu_rap_Acc->Divide(sp_mu_pT_mu_rap_Reco_Gen, sp_mu_pT_mu_rap_Gen, 1, 1);
+    histo_QQ_pT_Acc->Divide(histo_QQ_pT_Reco_Gen, histo_QQ_pT_Gen, 1, 1);
+
+
+    histo_QQ_rap_Reco_Gen->Write();
+    sp_QQ_pT_QQ_rap_Reco_Gen->Write();
+    histo_mu_pT_Reco_Gen->Write();
+    histo_mu_rap_Reco_Gen->Write();
+    sp_mu_pT_mu_rap_Reco_Gen->Write();
+    histo_QQ_pT_Reco_Gen->Write();
 
     sp_QQ_pT_QQ_rap_Gen->Write();
     sp_QQ_pT_QQ_rap_Acc->Write();
@@ -608,7 +642,7 @@ void analyze(){
  
         /////  drawing codes:  //////
         system("root -l -b -q draw.c");
-        if (isMC) system("root -l -b -q draw_acc.c");
+        if (isMC) system("root -l -b -q draw_Gen.c");
         //system("root -l -b -q FitMass.c");
         //system("root -l -b -q mass_fit.c > plots/roofit.txt");
         
