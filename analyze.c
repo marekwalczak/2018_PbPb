@@ -13,9 +13,9 @@
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/ReadTree.C"
 
-#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
 
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
+#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/ReadTree.C"
 
@@ -51,9 +51,9 @@ void analyze(){
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
 
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
 
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/MC_coh_2S_05M_xDM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/MC_coh_3S_05M_xDM.root","read");
 
@@ -148,8 +148,8 @@ void analyze(){
     int nPixWMea_mupl=0;
     int nPixWMea_mumi=0;
     
-    bool highPurity_miupl;
-    bool highPurity_miumi;
+    bool highPurity_mupl;
+    bool highPurity_mumi;
 	     
 	double dxy_mupl=0;
 	double dxy_mumi=0;
@@ -363,7 +363,7 @@ void analyze(){
 */
 
 		nsize  = tree->Reco_QQ_size; //get the size
-		if (nsize<1) continue; // only Gen lvl events are saved for MC if no Reco information is present
+		if (nsize!=1) continue; // only Gen lvl events are saved for MC if no Reco information is present
 		
 		//for (int m=0; m<nsize; m++) { // loops over all dimuons		
 		  //if (nsize==1) { // only events with exactly one dimuon
@@ -428,8 +428,8 @@ void analyze(){
     nPixWMea_mupl = tree->Reco_mu_nPixWMea[mupl_idx];
     nPixWMea_mumi = tree->Reco_mu_nPixWMea[mumi_idx];
     
-    highPurity_miupl = tree->Reco_mu_highPurity[mupl_idx];
-    highPurity_miumi = tree->Reco_mu_highPurity[mumi_idx];
+    highPurity_mupl = tree->Reco_mu_highPurity[mupl_idx];
+    highPurity_mumi = tree->Reco_mu_highPurity[mumi_idx];
 	     
 	dxy_mupl = abs(tree->Reco_mu_dxy[mupl_idx]);
 	dxy_mumi = abs(tree->Reco_mu_dxy[mumi_idx]);
@@ -438,7 +438,7 @@ void analyze(){
 	dz_mumi = abs(tree->Reco_mu_dz[mumi_idx]);    
 
     // test
-    //if (i%100000==0 ) cout << endl << "Processing event # " << i << "TMOneStaTight_mupl: " << TMOneStaTight_mupl << ", :TMOneStaTight_mumi" << TMOneStaTight_mumi << endl << ", nTrkWMea_mupl:" << nTrkWMea_mupl << ", :nTrkWMea_mumi" << nTrkWMea_mumi << endl  << ", nPixWMea_mupl:"  << nPixWMea_mupl << ", nPixWMea_mumi:" << nPixWMea_mumi << endl  << ", highPurity_miupl:"  << highPurity_miupl << endl  << ", highPurity_miumi:"  << highPurity_miumi << ", dxy_mupl:" << dxy_mupl << endl  << ", dxy_mumi:"  << dxy_mumi << ", dxy_mumi:" << dxy_mumi << endl << ", dz_mupl:" << dz_mupl << endl  << ", dz_mumi:"  << dz_mumi << endl << endl;
+    //if (i%100000==0 ) cout << endl << "Processing event # " << i << "TMOneStaTight_mupl: " << TMOneStaTight_mupl << ", :TMOneStaTight_mumi" << TMOneStaTight_mumi << endl << ", nTrkWMea_mupl:" << nTrkWMea_mupl << ", :nTrkWMea_mumi" << nTrkWMea_mumi << endl  << ", nPixWMea_mupl:"  << nPixWMea_mupl << ", nPixWMea_mumi:" << nPixWMea_mumi << endl  << ", highPurity_mupl:"  << highPurity_mupl << endl  << ", highPurity_mumi:"  << highPurity_mumi << ", dxy_mupl:" << dxy_mupl << endl  << ", dxy_mumi:"  << dxy_mumi << ", dxy_mumi:" << dxy_mumi << endl << ", dz_mupl:" << dz_mupl << endl  << ", dz_mumi:"  << dz_mumi << endl << endl;
 
 
 
@@ -469,11 +469,11 @@ void analyze(){
            // abs(QQ_rap)>1.4 && 
         
 					
-          // 				 && QQ_pT>0.5 && mupl_pT<5.2 && mumi_pT<5.2
+          // 				 && QQ_pT>0.5 && mupl_pT<5.2 && mumi_pT<5.2    ((QQ_trig&8)==8) && ((HLTrig&8)==8)
      	  //if     ( ((QQ_trig&2)==2) && ((HLTrig&2)==2) && *QQ_Ntrk==2 && sign==0 && mupl_pT>3 && mumi_pT>3  && HadEnergy_HF_Minus<5 && HadEnergy_HF_Plus<5 && mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 ) {
-          if (((QQ_trig&8)==8) && ((HLTrig&8)==8)){
+          if (mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 && ((QQ_trig&8)==8) && ((HLTrig&8)==8) ){
           // soft muon:
-          if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_miupl==true && highPurity_miumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
+          //if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
 
           histo_QQ_size->Fill(nsize);
           sp_QQ_Ntrk_QQ_size->Fill(*QQ_Ntrk, nsize);
@@ -550,7 +550,7 @@ void analyze(){
          // } // mass window selection
           
           			} // cuts  
-          			} // soft muon ID
+          			//} // soft muon ID
 			      	//} // dimuon loop OR selection of exactly one dimuon
    } // loop over i (entries)
 
@@ -654,7 +654,7 @@ void analyze(){
    system("root -l -b -q DrawHisto_mu_rap.c");
    system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
         
-        //system("mv plots plots_acc_coh1s");
+   system("mv plots plots_Acc_coh1s_mueta_trig12");
 
       
   cout << endl << "******* finished and saved *******" << endl;
