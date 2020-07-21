@@ -214,7 +214,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   c5->SetLogz();
   
   sp_mu_pT_mu_rap_Gen->GetXaxis()->SetRangeUser(-7,7);
-  sp_mu_pT_mu_rap_Gen->GetYaxis()->SetRangeUser(1,6.5);
+  sp_mu_pT_mu_rap_Gen->GetYaxis()->SetRangeUser(0,8);
   sp_mu_pT_mu_rap_Gen->GetXaxis()->SetTitleOffset(1.2);
   sp_mu_pT_mu_rap_Gen->GetYaxis()->SetTitleOffset(1.22);
  

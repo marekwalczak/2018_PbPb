@@ -34,7 +34,7 @@
 
 
 
-void analyze(){
+void analyze_muAcc(){
 
 /*                       _    __ _ _      
 *                       | |  / _(_) |     
@@ -60,6 +60,7 @@ void analyze(){
    TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/MC_coh_1S_05M_xDM_official.root","read");
    
    
+   
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/MC_coh_2S_05M_xDM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/MC_coh_3S_05M_xDM.root","read");
 
@@ -68,6 +69,7 @@ void analyze(){
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M_xDM/MC_incoh_3S_05M_xDM.root","read");   
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/pythia/Pythia_jpsi_200files.root","read");   
+
   
   
     //TTree* myTree_1 = (TTree*)file1->Get("myTree"); // some files don't have hionia folder....
@@ -90,8 +92,8 @@ void analyze(){
 
     double pi  = 3.14159;
 
-	double Gen_mupl_pT;
-	double Gen_mupl_rap;
+	double Gen_mu_pT;
+	double Gen_mu_rap;
 	double Gen_mumi_pT;
 	double Gen_mumi_rap;
 	
@@ -100,8 +102,8 @@ void analyze(){
 	double Gen_QQ_M;
 
 	
-	Int_t Gen_mupl_charge;
-	Int_t Gen_mumi_charge;
+	////Int_t Gen_mu_charge;
+/////Int_t Gen_mumi_charge;
 
 	double invmass;
 	double QQ_rap;
@@ -121,8 +123,8 @@ void analyze(){
 	double QQ_pT_Gen;
 	double QQ_Phi;
 
-	double mupl_pT;
-	double mupl_rap;
+	double mu_pT;
+	double mu_rap;
 	double mumi_pT;
 	double mumi_rap;
 
@@ -130,7 +132,7 @@ void analyze(){
     double m_max = 11.0; //   
 	
 	
-	double mupl_Phi;
+	double mu_Phi;
 	double mumi_Phi;
 
 
@@ -138,30 +140,47 @@ void analyze(){
 	
 	int evts=0;
 	
-	int mupl_idx=-1;
+	int mu_idx=-1;
 	int mumi_idx=-1;
 
-	int Gen_mupl_idx=-1;
+	int Gen_mu_idx=-1;
 	int Gen_mumi_idx=-1;
 
+	int Gen_mu_size=-1;
+	int Reco_mu_size=-1;
+
+
+    int Gen_mu_charge=0;
+    int mu_charge=0;
+    
+    
+    int Reco_co = 0;
+    int Gen_co = 0;
+    int Gen_Reco_co = 0;
+    int Gen_mu_whichRec=0;
+    int index_finder = 0;
+    
     // soft mu ID
-    bool TMOneStaTight_mupl;
+    bool TMOneStaTight_mu;
     bool TMOneStaTight_mumi;
     
-    int nTrkWMea_mupl=0;
+    int nTrkWMea_mu=0;
     int nTrkWMea_mumi=0;
     
-    int nPixWMea_mupl=0;
+    int nPixWMea_mu=0;
     int nPixWMea_mumi=0;
     
-    bool highPurity_mupl;
+    bool highPurity_mu;
     bool highPurity_mumi;
 	     
-	double dxy_mupl=0;
+	double dxy_mu=0;
 	double dxy_mumi=0;
 	
-	double dz_mupl=0;
+	double dz_mu=0;
 	double dz_mumi=0;    
+	
+	double abseta = 0.0;
+
 
 	
   // get branches
@@ -244,8 +263,7 @@ void analyze(){
 
   ofstream textfile;
   system("mkdir plots");
-  system("cp analyze.c plots/");
-  textfile.open ("plots/m_pT_y.txt");
+  system("cp analyze_muAcc.c plots/");
   
 	int Ntrk_count=0;
 	int QQ_size_count=0;
@@ -264,7 +282,7 @@ void analyze(){
 */ 
                                         
 
-  //for (Long64_t i=0; i<1000; i++) {
+  //for (Long64_t i=0; i<100000; i++) {
   for (Long64_t i=0; i<nentries; i++) {
   //if (i==14771) break;
      myTree_1->GetEntry(i);
@@ -274,179 +292,47 @@ void analyze(){
   			if (i%10000==0) cout << "-> Processing event # " << i << endl;
 
 
-/*          OLD Gen Lvl STUFF:
-
-            // assuming, that in MC on Gen level there is always one dimuon (what is true)
-            if (isMC) {
-            
-			TLorentzVector *Gen_QQ_4mom = (TLorentzVector*)tree->Gen_QQ_4mom->At(0);
-			TLorentzVector *Gen_mupl_4mom = (TLorentzVector*)tree->Gen_QQ_mupl_4mom->At(0);
-			TLorentzVector *Gen_mumi_4mom = (TLorentzVector*)tree->Gen_QQ_mumi_4mom->At(0);
-
-			QQ_rap_Gen = Gen_QQ_4mom->Rapidity();
-			QQ_pT_Gen = Gen_QQ_4mom->Pt();
-			
-			mupl_pT_Gen = Gen_mupl_4mom->Pt();
-			mupl_rap_Gen = Gen_mupl_4mom->Rapidity();
-			mumi_pT_Gen = Gen_mumi_4mom->Pt();
-			mumi_rap_Gen = Gen_mumi_4mom->Rapidity();
 
 
-            histo_QQ_pT_Gen->Fill(QQ_pT_Gen);
-            histo_QQ_rap_Gen->Fill(QQ_rap_Gen);
-            sp_QQ_pT_QQ_rap_Gen->Fill(QQ_rap_Gen, QQ_pT_Gen);
-            histo_mu_rap_Gen->Fill(mupl_rap_Gen);
-            histo_mu_rap_Gen->Fill(mumi_rap_Gen);
-            sp_mu_pT_mu_rap_Gen->Fill(mumi_rap_Gen, mumi_pT_Gen);
-            sp_mu_pT_mu_rap_Gen->Fill(mupl_rap_Gen, mupl_pT_Gen);
-            
-            }
+/***
+ *     _____              _       _   _                   
+ *    |  __ \            | |     | | | |                  
+ *    | |  \/ ___ _ __   | |_   _| | | | ___   ___  _ __  
+ *    | | __ / _ \ '_ \  | \ \ / / | | |/ _ \ / _ \| '_ \ 
+ *    | |_\ \  __/ | | | | |\ V /| | | | (_) | (_) | |_) |
+ *     \____/\___|_| |_| |_| \_/ |_| |_|\___/ \___/| .__/ 
+ *                                                 | |    
+ *                                                 |_|    
+ */ 
+ 
+ //        Gen Lvl STUFF:
 
-*/
-
-//          New Gen Lvl STUFF:
-
-            // assuming, that in MC on Gen level there is always one dimuon (what is true)
-        if (isMC) {
-		
-
-
-		  if (tree->Gen_mu_charge[0]==1) {
-		  mupl_idx = 0;
-		  mumi_idx = 1;
-		  
-		  } else if (tree->Gen_mu_charge[0]==-1) {
-		  mupl_idx = 1;
-		  mumi_idx = 0;
-		  
-		  } else cout << endl << "-> something is wrong with the Gen lvl charges!" << endl;
-		  
+		  Gen_mu_size = tree->Gen_mu_size;
+          for (int G_mu=0; G_mu<Gen_mu_size; G_mu++) { // loops over Gen muons		
 		  		  
-		  TLorentzVector *Gen_mupl_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(mupl_idx);
-     	  TLorentzVector *Gen_mumi_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(mumi_idx);
-
-     	  	Gen_mupl_pT = Gen_mupl_4mom->Pt();
-			Gen_mupl_rap = Gen_mupl_4mom->Rapidity();
-			Gen_mumi_pT = Gen_mumi_4mom->Pt();
-			Gen_mumi_rap = Gen_mumi_4mom->Rapidity();
-			Gen_mupl_charge = tree->Gen_mu_charge[mupl_idx];
-			Gen_mumi_charge = tree->Gen_mu_charge[mumi_idx];
-		  
-		  //if (i%10000==0) cout << "Gen_mupl_charge: " << Gen_mupl_charge << ", Gen_mumi_charge: " << Gen_mumi_charge << endl;
-		  //if (i%10000==0) cout << "Gen_mupl_pT: "  << Gen_mupl_pT << ", Gen_mumi_pT: " << Gen_mumi_pT << endl;     	  
-		  //if (i%10000==0) cout << "Gen_mupl_rap: "  << Gen_mupl_rap << ", Gen_mumi_rap: " << Gen_mumi_rap << endl;     	  
-
-		  TLorentzVector Gen_QQ_4mom = *Gen_mupl_4mom + *Gen_mumi_4mom;
-		  
-		  Gen_QQ_rap = Gen_QQ_4mom.Rapidity();
-		  //if (i%1000==0) cout << "Gen_QQ_Eta: "  << Gen_QQ_Eta << endl;
-		  Gen_QQ_pT = Gen_QQ_4mom.Pt();
-		  //if (i%10000==0) cout << "Gen_QQ_pT: "  << Gen_QQ_pT << endl;
-		  Gen_QQ_M = Gen_QQ_4mom.M();
-		  //if (i%10000==0) cout << "Gen_QQ_M: "  << Gen_QQ_M << endl;     	  
-
-            histo_QQ_pT_Gen->Fill(Gen_QQ_pT);
-            histo_QQ_rap_Gen->Fill(Gen_QQ_rap);
-            sp_QQ_pT_QQ_rap_Gen->Fill(Gen_QQ_rap, Gen_QQ_pT);
-            histo_mu_rap_Gen->Fill(Gen_mupl_rap);
-            histo_mu_rap_Gen->Fill(Gen_mumi_rap);
-            histo_mu_pT_Gen->Fill(Gen_mupl_pT);
-            histo_mu_pT_Gen->Fill(Gen_mumi_pT);
-            sp_mu_pT_mu_rap_Gen->Fill(Gen_mumi_rap, Gen_mumi_pT);
-            sp_mu_pT_mu_rap_Gen->Fill(Gen_mupl_rap, Gen_mupl_pT);
-
-        } // is MC
-
-/*		
-*         _ _                               _                   
-*        | (_)                             | |                  
-*      __| |_ _ __ ___  _   _  ___  _ __   | | ___   ___  _ __  
-*     / _` | | '_ ` _ \| | | |/ _ \| '_ \  | |/ _ \ / _ \| '_ \ 
-*    | (_| | | | | | | | |_| | (_) | | | | | | (_) | (_) | |_) |
-*     \__,_|_|_| |_| |_|\__,_|\___/|_| |_| |_|\___/ \___/| .__/ 
-*                                                        | |    
-* 		                                                 |_|    
-*/
-
-		nsize  = tree->Reco_QQ_size; //get the size
-		if (nsize!=1) continue; // only Gen lvl events are saved for MC if no Reco information is present
-		
-		//for (int m=0; m<nsize; m++) { // loops over all dimuons		
-		  //if (nsize==1) { // only events with exactly one dimuon
-		  int m=0; // uncomment with above only (now not used)
-
-			QQ_Ntrk = tree->Reco_QQ_Ntrk;
-			Ntracks = tree->Ntracks;
-			sign = tree->Reco_QQ_sign[m];
-			QQ_trig = tree->Reco_QQ_trig[m];
-			HLTrig = tree->HLTriggers;
-			TLorentzVector *QQ_4mom = (TLorentzVector*)tree->Reco_QQ_4mom->At(m);
-			TVector3 *QQ_vtx = (TVector3*)tree->Reco_QQ_vtx->At(m);
-
-
-			invmass = QQ_4mom->M();
-			QQ_pT = QQ_4mom->Pt();
-			QQ_rap = QQ_4mom->Rapidity();
-			QQ_vtx_z = QQ_vtx->z();
-			QQ_vtx_x = QQ_vtx->x();
-			QQ_vtx_y = QQ_vtx->y();	
-			QQ_Phi = QQ_4mom->Phi();
-
-/*          OLD SINGLE MUON STUFF:
-
-			TLorentzVector *mupl_4mom = (TLorentzVector*)tree->Reco_QQ_mupl_4mom->At(m);
-			TLorentzVector *mumi_4mom = (TLorentzVector*)tree->Reco_QQ_mumi_4mom->At(m);
-
-			mupl_pT = mupl_4mom->Pt();
-			mupl_rap = mupl_4mom->Rapidity();
-			mumi_pT = mumi_4mom->Pt();
-			mumi_rap = mumi_4mom->Rapidity();
+		    TLorentzVector *Gen_mu_4mom = (TLorentzVector*)tree->Gen_mu_4mom->At(G_mu);
+     	  	Gen_mu_pT = Gen_mu_4mom->Pt();
+			Gen_mu_rap = Gen_mu_4mom->Rapidity();
 			
-			mupl_Phi = mupl_4mom->Phi();
-			mumi_Phi = mumi_4mom->Phi();
-			aco = abs(1 -abs(mupl_Phi - mumi_Phi)/pi);
+            histo_mu_pT_Gen->Fill(Gen_mu_pT);
+            histo_mu_rap_Gen->Fill(Gen_mu_rap);
+            sp_mu_pT_mu_rap_Gen->Fill(Gen_mu_rap, Gen_mu_pT);
+ 
+/***
+ *    ______                 _       _ 
+ *    | ___ \               | |     | |
+ *    | |_/ /___  ___ ___   | |_   _| |
+ *    |    // _ \/ __/ _ \  | \ \ / / |
+ *    | |\ \  __/ (_| (_) | | |\ V /| |
+ *    \_| \_\___|\___\___/  |_| \_/ |_| 
+ *                                      
+ *                                      
+ */
 
-*/        
-
-//        NEW SINGLE MUON STUFF
-
-     	  mupl_idx  = tree->Reco_QQ_mupl_idx[m];
-     	  mumi_idx  = tree->Reco_QQ_mumi_idx[m];
-     	  TLorentzVector *mupl_4mom = (TLorentzVector*)tree->Reco_mu_4mom->At(mupl_idx);
-     	  TLorentzVector *mumi_4mom = (TLorentzVector*)tree->Reco_mu_4mom->At(mumi_idx);
-
-     	  	mupl_pT = mupl_4mom->Pt();
-			mupl_rap = mupl_4mom->Rapidity();
-			mumi_pT = mumi_4mom->Pt();
-			mumi_rap = mumi_4mom->Rapidity();
-			
-			mupl_Phi = mupl_4mom->Phi();
-			mumi_Phi = mumi_4mom->Phi();
-			aco = abs(1 -abs(mupl_Phi - mumi_Phi)/pi);
-			
-	// soft mu ID
-    TMOneStaTight_mupl = tree->Reco_mu_TMOneStaTight[mupl_idx];
-    TMOneStaTight_mumi = tree->Reco_mu_TMOneStaTight[mumi_idx];
-    
-    nTrkWMea_mupl = tree->Reco_mu_nTrkWMea[mupl_idx];
-    nTrkWMea_mumi = tree->Reco_mu_nTrkWMea[mumi_idx];
-    
-    nPixWMea_mupl = tree->Reco_mu_nPixWMea[mupl_idx];
-    nPixWMea_mumi = tree->Reco_mu_nPixWMea[mumi_idx];
-    
-    highPurity_mupl = tree->Reco_mu_highPurity[mupl_idx];
-    highPurity_mumi = tree->Reco_mu_highPurity[mumi_idx];
-	     
-	dxy_mupl = abs(tree->Reco_mu_dxy[mupl_idx]);
-	dxy_mumi = abs(tree->Reco_mu_dxy[mumi_idx]);
-	
-	dz_mupl = abs(tree->Reco_mu_dz[mupl_idx]);
-	dz_mumi = abs(tree->Reco_mu_dz[mumi_idx]);    
-
-    // test
-    //if (i%100000==0 ) cout << endl << "Processing event # " << i << "TMOneStaTight_mupl: " << TMOneStaTight_mupl << ", :TMOneStaTight_mumi" << TMOneStaTight_mumi << endl << ", nTrkWMea_mupl:" << nTrkWMea_mupl << ", :nTrkWMea_mumi" << nTrkWMea_mumi << endl  << ", nPixWMea_mupl:"  << nPixWMea_mupl << ", nPixWMea_mumi:" << nPixWMea_mumi << endl  << ", highPurity_mupl:"  << highPurity_mupl << endl  << ", highPurity_mumi:"  << highPurity_mumi << ", dxy_mupl:" << dxy_mupl << endl  << ", dxy_mumi:"  << dxy_mumi << ", dxy_mumi:" << dxy_mumi << endl << ", dz_mupl:" << dz_mupl << endl  << ", dz_mumi:"  << dz_mumi << endl << endl;
-
-
+ 
+            Gen_mu_whichRec = tree->Gen_mu_whichRec[G_mu];
+            if (Gen_mu_whichRec==-1) continue;
+ 
 
 /*                         _              _           _   _             
 *                         | |            | |         | | (_)            
@@ -456,111 +342,52 @@ void analyze(){
 *     \___| \_/ \___|_| |_|\__| |___/\___|_|\___|\___|\__|_|\___/|_| |_|
 *                                                                       
 */                                                                       
-         
-    		
-//       TRIGGER SELECTION:
-//       ((HLTrig&1)==1)   1 - HLT_HIUPC_DoubleMu0_NotMBHF2AND_MaxPixelTrack_v1
-//       ((HLTrig&2)==2)   2 - HLT_HIUPC_DoubleMu0_NotMBHF2AND_v1
-//       ((HLTrig&4)==4)   3 - HLT_HIUPC_SingleMu0_NotMBHF2AND_MaxPixelTrack_v1
-//       ((HLTrig&8)==8)   4 - HLT_HIUPC_SingleMu0_NotMBHF2AND_v1
-//       ((HLTrig&16)==16) 5 - HLT_HIUPC_SingleMuOpen_NotMBHF2AND_MaxPixelTrack_v1
-//       ((HLTrig&32)==32) 6 - HLT_HIUPC_SingleMuOpen_NotMBHF2AND_v1
+
+//
+
+   if ( Gen_mu_rap < 0) abseta = -1*Gen_mu_rap;
+   else abseta = Gen_mu_rap;
+
+   HLTrig = tree->HLTriggers;
+   
+   if ( ((HLTrig&8)==8) && abseta < 2.4 && (
+   Gen_mu_pT > 3.35 ||
+   ( abseta > 0.3 && Gen_mu_pT > 3.25) ||
+   (Gen_mu_pT > (-2.25*abseta + 5.5) && Gen_mu_pT > 2.35) ||
+   (Gen_mu_pT > (-4.75*abseta + 10.9) &&  Gen_mu_pT > 1.4)) 
+   ){
+   
 
 
-
-                      
-           // RAPIDITY BINS:
-           // abs(QQ_rap)<0.7 && 
-           // abs(QQ_rap)>0.7 && abs(QQ_rap)<1.4 && 
-           // abs(QQ_rap)>1.4 && 
-        
-					
-          // 				 && QQ_pT>0.5 && mupl_pT<5.2 && mumi_pT<5.2    ((QQ_trig&8)==8) && ((HLTrig&8)==8)
-     	 
-     	 //if     ( ((QQ_trig&2)==2) && ((HLTrig&2)==2) && *QQ_Ntrk==2 && sign==0 && mupl_pT>3 && mumi_pT>3  && HadEnergy_HF_Minus<5 && HadEnergy_HF_Plus<5 && mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 ) {
-           if (1==1) {
-         // if (mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 && ((QQ_trig&8)==8) && ((HLTrig&8)==8) ){
-          // soft muon:
-          //if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
-
-          histo_QQ_size->Fill(nsize);
-          sp_QQ_Ntrk_QQ_size->Fill(*QQ_Ntrk, nsize);
-          sp_Ntracks_QQ_size->Fill(Ntracks, nsize);
-
-          evts++;
-		  
-		  ///////    fills m_pT_y.txt file:    /////////
-          textfile << invmass << " " << QQ_pT << " " << QQ_rap << endl;
+          // soft mu ID
+          TMOneStaTight_mu = tree->Reco_mu_TMOneStaTight[Gen_mu_whichRec];
+          nTrkWMea_mu = tree->Reco_mu_nTrkWMea[Gen_mu_whichRec];
+          nPixWMea_mu = tree->Reco_mu_nPixWMea[Gen_mu_whichRec];
+          highPurity_mu = tree->Reco_mu_highPurity[Gen_mu_whichRec];
+          dxy_mu = abs(tree->Reco_mu_dxy[Gen_mu_whichRec]);
+          dz_mu = abs(tree->Reco_mu_dz[Gen_mu_whichRec]);
           
-          histo_QQ_M->Fill(invmass);
-          
-          histo_QQ_trig->Fill(QQ_trig);
-          histo_HLTrig->Fill(HLTrig);
-          sp_QQ_trig_HLTrig->Fill(QQ_trig, HLTrig);
-          
-    	  //////     mass cut for some histos:    ///////////
-          
-          //if (invmass > m_min && invmass < m_max) {
-          
-          
-          histo_HF_energy_Min->Fill(HadEnergy_HF_Minus);
-          histo_HF_energy_Pl->Fill(HadEnergy_HF_Plus);
-          sp_HF->Fill(HadEnergy_HF_Minus, HadEnergy_HF_Plus);
+          if ( (TMOneStaTight_mu>0 && nTrkWMea_mu>5 && nPixWMea_mu>0 && highPurity_mu==true && dxy_mu<0.3 && dz_mu<20) ){
 
-          sp_Ntracks_QQ_Ntrk->Fill(Ntracks, *QQ_Ntrk);
-          
-          
-          histo_QQ_pT->Fill(QQ_pT);
-          histo_QQ_pT2->Fill(QQ_pT*QQ_pT);
-          histo_QQ_vtx_z->Fill(QQ_vtx_z);
-          histo_QQ_rap->Fill(QQ_rap);
+     	    TLorentzVector *mu_4mom = (TLorentzVector*)tree->Reco_mu_4mom->At(Gen_mu_whichRec);
+     	  	mu_pT = mu_4mom->Pt();
+			mu_rap = mu_4mom->Rapidity();
 
-          histo_QQ_Ntrk->Fill(*QQ_Ntrk);
-          histo_Ntracks->Fill(Ntracks);
-          
-          histo_mu_pT->Fill(mupl_pT);
-          histo_mu_pT->Fill(mumi_pT);
-          
-          histo_mu_rap->Fill(mupl_rap);
-          histo_mu_rap->Fill(mumi_rap);
-          
-          sp_QQ_pT_QQ_rap->Fill(QQ_rap, QQ_pT);
-
-          sp_mu_pT_mu_rap->Fill(mumi_rap, mumi_pT);
-          sp_mu_pT_mu_rap->Fill(mupl_rap, mupl_pT);
+            histo_mu_pT->Fill(mu_pT);
+            histo_mu_rap->Fill(mu_rap);
+            sp_mu_pT_mu_rap->Fill(mu_rap, mu_pT);
 
 
-        if (isMC) {
-          histo_QQ_pT_Reco_Gen->Fill(Gen_QQ_pT);
-          histo_QQ_rap_Reco_Gen->Fill(Gen_QQ_rap);
+            histo_mu_pT_Reco_Gen->Fill(Gen_mu_pT);
+            histo_mu_rap_Reco_Gen->Fill(Gen_mu_rap);
+            sp_mu_pT_mu_rap_Reco_Gen->Fill(Gen_mu_rap, Gen_mu_pT);
+     
+     
+      } // soft
+             } // acceptance and trigger
+             } // Gen muon loop
+             } // nentries loop
 
-          histo_mu_pT_Reco_Gen->Fill(Gen_mupl_pT);
-          histo_mu_pT_Reco_Gen->Fill(Gen_mumi_pT);
-          
-          histo_mu_rap_Reco_Gen->Fill(Gen_mupl_rap);
-          histo_mu_rap_Reco_Gen->Fill(Gen_mumi_rap);
-
-          sp_QQ_pT_QQ_rap_Reco_Gen->Fill(Gen_QQ_rap, Gen_QQ_pT);
-
-          sp_mu_pT_mu_rap_Reco_Gen->Fill(Gen_mumi_rap, Gen_mumi_pT);
-          sp_mu_pT_mu_rap_Reco_Gen->Fill(Gen_mupl_rap, Gen_mupl_pT);
-          
-                  }
-
-
-          histo_aco->Fill(aco);
-          histo_mu_Phi->Fill(mupl_Phi);
-          histo_mu_Phi->Fill(mumi_Phi);
-          histo_QQ_Phi->Fill(QQ_Phi);
-
-
-
-         // } // mass window selection
-          
-          			} // cuts  
-          			//} // soft muon ID
-			      	//} // dimuon loop OR selection of exactly one dimuon
-   } // loop over i (entries)
 
 /*                          _     _     _                                      
 *                          | |   (_)   | |                                     
@@ -577,63 +404,27 @@ void analyze(){
   //system("mkdir plots");
   TFile* outFile = new TFile("plots/plots.root","RECREATE");
   
-  if (isMC) {
-  
-    histo_QQ_rap_Acc->Divide(histo_QQ_rap_Reco_Gen, histo_QQ_rap_Gen, 1, 1);
-    sp_QQ_pT_QQ_rap_Acc->Divide(sp_QQ_pT_QQ_rap_Reco_Gen, sp_QQ_pT_QQ_rap_Gen, 1, 1);
+
     histo_mu_pT_Acc->Divide(histo_mu_pT_Reco_Gen, histo_mu_pT_Gen, 1, 1);
     histo_mu_rap_Acc->Divide(histo_mu_rap_Reco_Gen, histo_mu_rap_Gen, 1, 1);
     sp_mu_pT_mu_rap_Acc->Divide(sp_mu_pT_mu_rap_Reco_Gen, sp_mu_pT_mu_rap_Gen, 1, 1);
-    histo_QQ_pT_Acc->Divide(histo_QQ_pT_Reco_Gen, histo_QQ_pT_Gen, 1, 1);
 
-
-    histo_QQ_rap_Reco_Gen->Write();
-    sp_QQ_pT_QQ_rap_Reco_Gen->Write();
-    histo_mu_pT_Reco_Gen->Write();
-    histo_mu_rap_Reco_Gen->Write();
-    sp_mu_pT_mu_rap_Reco_Gen->Write();
-    histo_QQ_pT_Reco_Gen->Write();
-
-    sp_QQ_pT_QQ_rap_Gen->Write();
-    sp_QQ_pT_QQ_rap_Acc->Write();
-    sp_mu_pT_mu_rap_Gen->Write();
-    sp_mu_pT_mu_rap_Acc->Write();
+    histo_mu_pT->Write();
     histo_mu_pT_Gen->Write();
+    histo_mu_pT_Reco_Gen->Write();
     histo_mu_pT_Acc->Write();
-    histo_mu_rap_Gen->Write();
-    histo_mu_rap_Acc->Write();
-    histo_QQ_rap_Gen->Write();
-    histo_QQ_rap_Acc->Write();
-    histo_QQ_pT_Gen->Write();
-    histo_QQ_pT_Acc->Write();
-  }
-  
-          histo_HF_energy_Min->Write();
-          histo_HF_energy_Pl->Write();
-          sp_HF->Write();
-          sp_QQ_Ntrk_QQ_size->Write();
-          sp_Ntracks_QQ_size->Write();
-          sp_Ntracks_QQ_Ntrk->Write();
-          histo_QQ_size->Write();
-          histo_QQ_Ntrk->Write();
-          histo_Ntracks->Write();
-          histo_QQ_M->Write();
-          histo_QQ_pT->Write();
-          histo_QQ_pT2->Write();
-          histo_QQ_vtx_z->Write();
-          histo_mu_pT->Write();
-          histo_QQ_rap->Write();
-          sp_QQ_pT_QQ_rap->Write();
-          histo_mu_rap->Write();
-          sp_mu_pT_mu_rap->Write();
-          histo_aco->Write();
-          histo_mu_Phi->Write();
-          histo_QQ_Phi->Write();
-          histo_QQ_trig->Write();
-          histo_HLTrig->Write();
-          sp_QQ_trig_HLTrig->Write();
 
-          outFile->Close();
+    histo_mu_rap->Write();
+    histo_mu_rap_Gen->Write();
+    histo_mu_rap_Reco_Gen->Write();
+    histo_mu_rap_Acc->Write();
+
+    sp_mu_pT_mu_rap->Write();
+    sp_mu_pT_mu_rap_Gen->Write();
+    sp_mu_pT_mu_rap_Reco_Gen->Write();
+    sp_mu_pT_mu_rap_Acc->Write();
+
+    outFile->Close();
           
     textfile.close();
    
@@ -648,21 +439,10 @@ void analyze(){
  *                                                                             |_|                    
  */   
  
-        /////  drawing codes:  //////
-        system("root -l -b -q draw.c");
-        if (isMC) system("root -l -b -q draw_Gen.c");
-        //system("root -l -b -q FitMass.c");
-        //system("root -l -b -q mass_fit.c > plots/roofit.txt");
-        
+ system("root -l -b -q draw_muAcc.c");
+ system("root -l -b -q draw_muAcc_profile.c");
 
-   system("root -l -b -q DrawHisto_QQ_m.c");
-   system("root -l -b -q DrawHisto_QQ_pT.c");
-   system("root -l -b -q DrawHisto_QQ_rap.c");
-   system("root -l -b -q DrawHisto_mu_pT.c");
-   system("root -l -b -q DrawHisto_mu_rap.c");
-   system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
-        
-   system("mv plots plots_ana_coh1s_official_noCuts");
+  // system("mv plots plots_muAcc");
 
       
   cout << endl << "******* finished and saved *******" << endl;
