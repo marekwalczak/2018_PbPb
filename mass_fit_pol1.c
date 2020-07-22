@@ -166,13 +166,16 @@ void setTDRStyle() {
 void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
 {
 
+
   setTDRStyle();
   gROOT->LoadMacro("CMS_lumi.C"); 
   //writeExtraText= false;
   gStyle->SetStatFormat("5.2g");
   gStyle->SetFitFormat("5.2g");
 
- TString flatfile="mass_fit/m_trig1.txt";
+ TString dirname = "plots_data_cuts_looser_pT/";
+
+ //TString flatfile="mass_fit/m_trig1.txt";
 // TString flatfile="m_trig4.txt";
  //  TString flatfile="data_pos_8-12.txt";
 
@@ -218,13 +221,13 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
 
 //    RooRealVar* nmm = new RooRealVar("N(dimuon events)","number of signal events",167.0);
 //    RooRealVar* nmm = new RooRealVar("N(dimuon events)","number of signal events",103.0);
-  RooRealVar* nmm = new RooRealVar("N(dimuon events)","number of signal events",28000.0,20000.0,1000000.0); 
+  RooRealVar* nmm = new RooRealVar("N(dimuon events)","number of signal events",28000.0,10000.0,100000.0); 
   /*  RooRealVar* nu1s = new RooRealVar("N(Upsilon(1S))","number of Upsilon 1S",35.0); 
       RooRealVar* nu2s = new RooRealVar("N(Upsilon(2S))","number of Upsilon 2S",17.0);
       RooRealVar* nu3s = new RooRealVar("N(Upsilon(3S))","number of Upsilon 3S",12.0);*/
-  RooRealVar* nu1s = new RooRealVar("N(Upsilon(1S))","number of Upsilon 1S", 900.0 ,400.0,1200.0);
-  RooRealVar* nu2s = new RooRealVar("N(Upsilon(2S))","number of Upsilon 2S",500,0.0,1000.0);
-  RooRealVar* nu3s = new RooRealVar("N(Upsilon(3S))","number of Upsilon 3S",300.0,0.0,1000.0);
+  RooRealVar* nu1s = new RooRealVar("N(Upsilon(1S))","number of Upsilon 1S", 600.0 ,0.0,2200.0);
+  RooRealVar* nu2s = new RooRealVar("N(Upsilon(2S))","number of Upsilon 2S",100,0.0,2000.0);
+  RooRealVar* nu3s = new RooRealVar("N(Upsilon(3S))","number of Upsilon 3S",50.0,00.0,2000.0);
 
 
   /*RooRealVar* nu1s = new RooRealVar("N(Upsilon(1S))","number of Upsilon 1S",50.0,0.0,1000.0); 
@@ -297,7 +300,10 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   //    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,*mm),RooArgList(*nu1s,*nu2s,meanup3s,*nmm));    //3s/2s ratio fix
 
   RooDataSet *datatmp = 0;
-  datatmp = RooDataSet::read(flatfile,RooArgList(*mMuMu));
+  
+  datatmp = RooDataSet::read(dirname + "m.txt",RooArgList(*mMuMu));
+  //datatmp = RooDataSet::read(flatfile,RooArgList(*mMuMu));
+  
   //datatmpfull = RooDataSet::read(flatfile,RooArgList(*mMuMuFull));
 
   
@@ -405,7 +411,8 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   //RooAbsReal* intPdf = mm->createIntegral(*mMuMu,Range("signal")) ;
   cout<<"integral:  "<<(nmm->getVal()*intPdf->getVal())<<endl;
   //c->SaveAs("datafit_pol1.gif");
-  c->SaveAs("datafit_test.pdf");
+  c->SaveAs(dirname + "massfit.pdf");
+  //c->SaveAs("massfit_test.pdf");
 
 }
 
