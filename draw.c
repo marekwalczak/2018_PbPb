@@ -118,7 +118,10 @@ cout << endl << "******* getting histos *******" << endl << endl;
 	histo_QQ_pT->SetLineWidth(2);
 	histo_QQ_pT->Draw("");
 	c11->SaveAs("./plots/pdf/histo_QQ_pT.pdf"); 
-	
+	c11->SetLogy();
+	histo_QQ_pT->Draw("");
+	c11->SaveAs("./plots/pdf/histo_QQ_pT_log.pdf"); 
+
 	TCanvas *c12 = new TCanvas("c12","c12",1000,600);
 	histo_QQ_pT2->SetLineWidth(2);
 	histo_QQ_pT2->Draw("");

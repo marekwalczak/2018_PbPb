@@ -71,7 +71,7 @@ void DrawHisto_QQ_m(){
   //
   
   double entries = massHisto->GetEntries();
-  writeExtraText = false;       // if extra text
+  writeExtraText = true;       // if extra text
   extraText      = Form("%g events", entries);  // default extra text is "Preliminary"
   
   //
@@ -84,7 +84,7 @@ void DrawHisto_QQ_m(){
   lumiTextOffset   = 0.3; // default 0.28
   
   //lumi_5TeV = "pp, ~20 pb^{-1} lumi";
-  lumi_5TeV = "PbPb, 1621,60 #mub^{-1}";
+  lumi_5TeV = "PbPb"; // , 1621,60 #mub^{-1}
 
   // Call the CMS_lumi macro to draw:
   // CMS preliminary, aligned on the right and justified (iPos=33, third argument)

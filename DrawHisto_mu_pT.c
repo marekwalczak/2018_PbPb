@@ -72,7 +72,7 @@ void DrawHisto_mu_pT(){
   //
   double entries = pTHisto->GetEntries();
   writeExtraText = true;       // if extra text
-  extraText      = Form("%g events", entries);  // default extra text is "Preliminary"
+  extraText      = Form("%g muons", entries);  // default extra text is "Preliminary"
   
   //
   // iPeriod options: 99 for pPb 5.02 TeV, 101 for PbPb 2011, 102 for pp 2013
@@ -84,7 +84,7 @@ void DrawHisto_mu_pT(){
   lumiTextOffset   = 0.3; // default 0.28
   
   //lumi_5TeV = "pp, ~20 pb^{-1} lumi";
-  lumi_5TeV = "PbPb, 1621,60 #mub^{-1}";
+  lumi_5TeV = "PbPb"; // , 1621,60 #mub^{-1}
 
   // Call the CMS_lumi macro to draw:
   // CMS preliminary, aligned on the right and justified (iPos=33, third argument)

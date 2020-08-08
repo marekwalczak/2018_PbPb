@@ -49,7 +49,14 @@ void analyze(){
   
 /********************* when changing the input file change the ReadTree.C file above ************************/
   
+  		   double mu_pT_cut_low = 0.0;
+		   double mu_pT_cut_high = 100.0;
+		   double QQ_pT_cut_low = 0.0;
+		   double QQ_pT_cut_high = 100.0;
+
+  
   bool isMC = false;
+  TString dirname = "plots_data_nopTcuts_975m106/";
 
    TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
@@ -189,10 +196,14 @@ void analyze(){
   TH2F* sp_Ntracks_QQ_size = new TH2F("sp_Ntracks_QQ_size","QQ_size vs Ntracks; Ntracks; QQ_size",20,0,20,20,0,20);
   TH2F* sp_Ntracks_QQ_Ntrk = new TH2F("sp_Ntracks_QQ_Ntrk","QQ_Ntrk vs Ntracks; Ntracks; QQ_Ntrk",20,0,20,20,0,20);
 
-  TH2F* sp_QQ_pT_QQ_rap = new TH2F("sp_QQ_pT_QQ_rap","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
-  TH2F* sp_QQ_pT_QQ_rap_Gen = new TH2F("sp_QQ_pT_QQ_rap_Gen","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
-  TH2F* sp_QQ_pT_QQ_rap_Reco_Gen = new TH2F("sp_QQ_pT_QQ_rap_Reco_Gen","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
-  TH2F* sp_QQ_pT_QQ_rap_Acc = new TH2F("sp_QQ_pT_QQ_rap_Acc","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,100,0,4);
+  TH2F* sp_HFm_QQ_pT = new TH2F("sp_HFm_QQ_pT","HF- vs QQ rap; QQ rap; HF-_LeadingTower [GeV]",100,0,10,100,0,10);
+  TH2F* sp_HFp_QQ_pT = new TH2F("sp_HFp_QQ_pT","HF+ vs QQ rap; QQ rap; HF+_LeadingTower [GeV]",100,0,10,100,0,10);
+
+
+  TH2F* sp_QQ_pT_QQ_rap = new TH2F("sp_QQ_pT_QQ_rap","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,200,0,8);
+  TH2F* sp_QQ_pT_QQ_rap_Gen = new TH2F("sp_QQ_pT_QQ_rap_Gen","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,200,0,8);
+  TH2F* sp_QQ_pT_QQ_rap_Reco_Gen = new TH2F("sp_QQ_pT_QQ_rap_Reco_Gen","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,200,0,8);
+  TH2F* sp_QQ_pT_QQ_rap_Acc = new TH2F("sp_QQ_pT_QQ_rap_Acc","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,200,0,8);
 
   TH2F* sp_mu_pT_mu_rap = new TH2F("sp_mu_pT_mu_rap","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
   TH2F* sp_mu_pT_mu_rap_Gen = new TH2F("sp_mu_pT_mu_rap_Gen","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
@@ -205,11 +216,11 @@ void analyze(){
 
   TH1F* histo_QQ_M = new TH1F("histo_QQ_M","Mass; Mass; events",100,8,12);
 
-  TH1F* histo_QQ_pT = new TH1F("histo_QQ_pT","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
-  TH1F* histo_QQ_pT_Gen = new TH1F("histo_QQ_pT_Gen","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
-  TH1F* histo_QQ_pT_Reco_Gen = new TH1F("histo_QQ_pT_Reco_Gen","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
-  TH1F* histo_QQ_pT_Acc = new TH1F("histo_QQ_pT_Acc","QQ_pT; QQ_pT [GeV]; events ",100,0,4);
-  TH1F* histo_QQ_pT2 = new TH1F("histo_QQ_pT2","QQ_pT2; QQ_pT2 [GeV^[2]]; events ",200,0,10);
+  TH1F* histo_QQ_pT = new TH1F("histo_QQ_pT","QQ_pT; QQ_pT [GeV]; events ",200,0,8);
+  TH1F* histo_QQ_pT_Gen = new TH1F("histo_QQ_pT_Gen","QQ_pT; QQ_pT [GeV]; events ",200,0,8);
+  TH1F* histo_QQ_pT_Reco_Gen = new TH1F("histo_QQ_pT_Reco_Gen","QQ_pT; QQ_pT [GeV]; events ",200,0,8);
+  TH1F* histo_QQ_pT_Acc = new TH1F("histo_QQ_pT_Acc","QQ_pT; QQ_pT [GeV]; events ",200,0,8);
+  TH1F* histo_QQ_pT2 = new TH1F("histo_QQ_pT2","QQ_pT2; QQ_pT2 [GeV^[2]]; events ",250,0,25);
 
   TH1F* histo_QQ_rap = new TH1F("histo_QQ_rap","QQ_rap; QQ_rap; events ",100,-10,10);
   TH1F* histo_QQ_rap_Gen = new TH1F("histo_QQ_rap_Gen","QQ_rap_Gen; QQ_rap_Gen; events ",100,-10,10);
@@ -475,12 +486,26 @@ void analyze(){
            // abs(QQ_rap)>1.4 && 
         
 					
-          // 				 && QQ_pT>0.5 && mupl_pT<5.2 && mumi_pT<5.2    ((QQ_trig&8)==8) && ((HLTrig&8)==8)
-     	 
-     	 //if     ( ((QQ_trig&2)==2) && ((HLTrig&2)==2) && *QQ_Ntrk==2 && sign==0 && mupl_pT>3.4 && mumi_pT>3.4  && HadEnergy_HF_Minus<5 && HadEnergy_HF_Plus<5 && mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 ) {
-          if (mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 && ((QQ_trig&8)==8) && ((HLTrig&8)==8 && *QQ_Ntrk==2 && sign==0 && mupl_pT>3.0 && mumi_pT>3.0 && mupl_pT<6 && mumi_pT<6 && HadEnergy_HF_Minus<5 && HadEnergy_HF_Plus<5) ){
+		   /*
+		   mu_pT_cut_low = ;
+		   mu_pT_cut_high = ;
+		   QQ_pT_cut_low = ;
+		   QQ_pT_cut_high = ;
+		   */
+		   //invmass>10 && invmass<11 && 
+		   
+		   
+     	  // cuts:
+          if (invmass>9.75 && invmass<10.6 && mupl_pT>mu_pT_cut_low && mumi_pT>mu_pT_cut_low && mupl_pT<mu_pT_cut_high && mumi_pT<mu_pT_cut_high && QQ_pT>QQ_pT_cut_low && QQ_pT<QQ_pT_cut_high && HadEnergy_HF_Minus<7.3 && HadEnergy_HF_Plus<7.6    &&    mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 && ((QQ_trig&8)==8) && ((HLTrig&8)==8 && *QQ_Ntrk==2 && sign==0 ) ){
+         
           // soft muon:
           if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
+          
+          // acceptance:
+         if ( ( abs(mupl_rap) < 2.4 && ( abs(mupl_pT) > 3.35 || ( abs(mupl_rap) > 0.3 && abs(mupl_pT) > 3.25) ||  (abs(mupl_pT) > (-2.25*abs(mupl_rap) + 5.5) && abs(mupl_rap) > 2.35) || (abs(mupl_pT) > (-4.75*abs(mupl_rap) + 10.9) &&  abs(mupl_pT) > 1.4)) ) &&
+              ( abs(mumi_rap) < 2.4 && ( abs(mumi_pT) > 3.35 || ( abs(mumi_rap) > 0.3 && abs(mumi_pT) > 3.25) ||  (abs(mumi_pT) > (-2.25*abs(mumi_rap) + 5.5) && abs(mumi_rap) > 2.35) || (abs(mumi_pT) > (-4.75*abs(mumi_rap) + 10.9) &&  abs(mumi_pT) > 1.4)) ) ) {
+
+
 
           histo_QQ_size->Fill(nsize);
           sp_QQ_Ntrk_QQ_size->Fill(*QQ_Ntrk, nsize);
@@ -505,6 +530,8 @@ void analyze(){
           histo_HF_energy_Min->Fill(HadEnergy_HF_Minus);
           histo_HF_energy_Pl->Fill(HadEnergy_HF_Plus);
           sp_HF->Fill(HadEnergy_HF_Minus, HadEnergy_HF_Plus);
+          sp_HFm_QQ_pT->Fill(HadEnergy_HF_Minus, QQ_pT);
+          sp_HFp_QQ_pT->Fill(HadEnergy_HF_Plus, QQ_pT);
 
           sp_Ntracks_QQ_Ntrk->Fill(Ntracks, *QQ_Ntrk);
           
@@ -556,6 +583,7 @@ void analyze(){
 
          // } // mass window selection
           
+          			} // acceptance
           			} // cuts  
           			} // soft muon ID
 			      	//} // dimuon loop OR selection of exactly one dimuon
@@ -631,6 +659,8 @@ void analyze(){
           histo_QQ_trig->Write();
           histo_HLTrig->Write();
           sp_QQ_trig_HLTrig->Write();
+          sp_HFm_QQ_pT->Write();
+          sp_HFp_QQ_pT->Write();
 
           outFile->Close();
           
@@ -661,7 +691,7 @@ void analyze(){
    system("root -l -b -q DrawHisto_mu_rap.c");
    system("awk '{print $1}' plots/m_pT_y.txt > plots/m.txt");
         
-   system("mv plots plots_data_cuts_looser_pT");
+   system("mv plots " + dirname);
 
       
   cout << endl << "******* finished and saved *******" << endl;

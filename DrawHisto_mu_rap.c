@@ -72,13 +72,13 @@ void DrawHisto_mu_rap(){
   
   double entries = RapHisto->GetEntries();
   writeExtraText = true;       // if extra text
-  extraText      = Form("%g events", entries);  // default extra text is "Preliminary"
+  extraText      = Form("%g muons", entries);  // default extra text is "Preliminary"
 
   int iPeriod      = 99;     
   lumiTextOffset   = 0.3; // default 0.28
   
   //lumi_5TeV = "pp, ~20 pb^{-1} lumi";
-  lumi_5TeV = "PbPb, 1621,60 #mub^{-1}";
+  lumi_5TeV = "PbPb"; // , 1621,60 #mub^{-1}
 
   CMS_lumi(yellowPlot,iPeriod,33);
 

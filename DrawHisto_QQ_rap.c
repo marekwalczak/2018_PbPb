@@ -78,7 +78,7 @@ void DrawHisto_QQ_rap(){
   lumiTextOffset   = 0.3; // default 0.28
   
   //lumi_5TeV = "pp, ~20 pb^{-1} lumi";
-  lumi_5TeV = "PbPb, 1621,60 #mub^{-1}";
+  lumi_5TeV = "PbPb,"; //  1621,60 #mub^{-1}
 
   CMS_lumi(yellowPlot,iPeriod,33);
 

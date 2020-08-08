@@ -55,7 +55,7 @@ void DrawHisto_QQ_pT(){
 
   // Draw histograms
   cout << "Drawing histogram: " << pTHisto->GetEntries() << " entries"<< endl;
-  pTHisto->GetXaxis()->SetRangeUser(0,1);
+  pTHisto->GetXaxis()->SetRangeUser(0,4);
   //pTHisto->GetYaxis()->SetRangeUser(0,1300);
   pTHisto->GetXaxis()->SetTitleFont(42);
   pTHisto->GetYaxis()->SetTitleFont(42);
@@ -84,7 +84,7 @@ void DrawHisto_QQ_pT(){
   lumiTextOffset   = 0.3; // default 0.28
   
   //lumi_5TeV = "pp, ~20 pb^{-1} lumi";
-  lumi_5TeV = "PbPb, 1621,60 #mub^{-1}";
+  lumi_5TeV = "PbPb"; // , 1621,60 #mub^{-1}
 
   // Call the CMS_lumi macro to draw:
   // CMS preliminary, aligned on the right and justified (iPos=33, third argument)
