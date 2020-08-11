@@ -49,14 +49,16 @@ void analyze(){
   
 /********************* when changing the input file change the ReadTree.C file above ************************/
   
-  		   double mu_pT_cut_low = 0.0;
-		   double mu_pT_cut_high = 100.0;
+  		   double mu_pT_cut_low = 3.0;
+		   double mu_pT_cut_high = 6.4;
 		   double QQ_pT_cut_low = 0.0;
 		   double QQ_pT_cut_high = 100.0;
+		   double m_cut_low = 8;
+		   double m_cut_high = 12;
 
   
   bool isMC = false;
-  TString dirname = "plots_data_nopTcuts_975m106/";
+  TString dirname = "plots_data_30mupt64_80m120/";
 
    TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
@@ -496,7 +498,7 @@ void analyze(){
 		   
 		   
      	  // cuts:
-          if (invmass>9.75 && invmass<10.6 && mupl_pT>mu_pT_cut_low && mumi_pT>mu_pT_cut_low && mupl_pT<mu_pT_cut_high && mumi_pT<mu_pT_cut_high && QQ_pT>QQ_pT_cut_low && QQ_pT<QQ_pT_cut_high && HadEnergy_HF_Minus<7.3 && HadEnergy_HF_Plus<7.6    &&    mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 && ((QQ_trig&8)==8) && ((HLTrig&8)==8 && *QQ_Ntrk==2 && sign==0 ) ){
+          if (invmass>m_cut_low && invmass<m_cut_high && mupl_pT>mu_pT_cut_low && mumi_pT>mu_pT_cut_low && mupl_pT<mu_pT_cut_high && mumi_pT<mu_pT_cut_high && QQ_pT>QQ_pT_cut_low && QQ_pT<QQ_pT_cut_high && HadEnergy_HF_Minus<7.3 && HadEnergy_HF_Plus<7.6    &&    mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 && ((QQ_trig&8)==8) && ((HLTrig&8)==8 && *QQ_Ntrk==2 && sign==0 ) ){
          
           // soft muon:
           if ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
