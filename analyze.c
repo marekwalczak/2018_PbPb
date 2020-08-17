@@ -10,21 +10,29 @@
 #include <TClonesArray.h>
 #include "TFile.h"
 
-#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/ReadTree.C"
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/ReadTree.C"
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/ReadTree.C"
 
-
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM_official/ReadTree.C"
+
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM_official/ReadTree.C"
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M_xDM_official/ReadTree.C"
+
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M_xDM_official/ReadTree.C"
+
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M_xDM/ReadTree.C"
+#include "/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M_xDM_official/ReadTree.C"
 
 //#include "/Users/marekwalczak/Data/2018PbPb/pythia/ReadTree.C"
 
@@ -50,31 +58,40 @@ void analyze(){
 /********************* when changing the input file change the ReadTree.C file above ************************/
   
   		   double mu_pT_cut_low = 3.0;
-		   double mu_pT_cut_high = 6.4;
+		   double mu_pT_cut_high = 6.0;
 		   double QQ_pT_cut_low = 0.0;
 		   double QQ_pT_cut_high = 100.0;
-		   double m_cut_low = 8;
-		   double m_cut_high = 12;
+		   double m_cut_low = 0;
+		   double m_cut_high = 100;
 
   
-  bool isMC = false;
-  TString dirname = "plots_data_30mupt64_80m120/";
+  bool isMC = true;
+  TString dirname = "plots_MCi3s_30mupt60_official/";
 
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
+  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
+  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/MC_gg_2M_xDM_official.root","read");
 
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
-   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/MC_coh_1S_05M_xDM_official.root","read");
+  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
+  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/MC_coh_1S_05M_xDM_official.root","read");
    
    
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/MC_coh_2S_05M_xDM.root","read");
+  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM_official/MC_coh_2S_05M_xDM_official.root","read");
+
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM/MC_coh_3S_05M_xDM.root","read");
+  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_3S_05M_xDM_official/MC_coh_3S_05M_xDM_official.root","read");
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M_xDM/MC_incoh_1S_05M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_1S_05M_xDM_official/MC_incoh_1S_05M_xDM_official.root","read");
+
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M_xDM/MC_incoh_2S_05M_xDM.root","read");
+   //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_2S_05M_xDM_official/MC_incoh_2S_05M_xDM_official.root","read");
+
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M_xDM/MC_incoh_3S_05M_xDM.root","read");   
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_incoh_3S_05M_xDM_official/MC_incoh_3S_05M_xDM_official.root","read");   
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/pythia/Pythia_jpsi_200files.root","read");   
   
