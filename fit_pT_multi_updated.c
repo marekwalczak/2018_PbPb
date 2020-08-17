@@ -355,12 +355,7 @@ void fit_pT_multi_updated(){
    TText T; T.SetTextFont(42); T.SetTextAlign(21);
    hs->SetTitle("dimuon p_{T} distribution");
 
-   hs->Draw(); 
-   hs->GetXaxis()->SetTitle("p_{T} [GeV]");
-   hs->GetYaxis()->SetTitle("dimuons");
-   cs->Modified();  
-  
-  
+
    //T.DrawTextNDC(.5 ,.95 , "dimuon pT distribution");
    //histo_Data->Draw("E0");
 
@@ -371,6 +366,15 @@ void fit_pT_multi_updated(){
    content = histo_Data->GetBinContent(i);
    hd->SetBinContent(i, content);
   }
+  
+  /*
+   hs->Draw(); 
+   hs->GetXaxis()->SetTitle("p_{T} [GeV]");
+   hs->GetYaxis()->SetTitle("dimuons");
+   cs->Modified();  
+  */
+    
+  
   
   hd->SetMarkerStyle(20);
   hd->SetMarkerSize(1.0);
