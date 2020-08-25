@@ -367,12 +367,10 @@ void fit_pT_multi_updated(){
    hd->SetBinContent(i, content);
   }
   
-  /*
    hs->Draw(); 
    hs->GetXaxis()->SetTitle("p_{T} [GeV]");
    hs->GetYaxis()->SetTitle("dimuons");
    cs->Modified();  
-  */
     
   
   
@@ -391,6 +389,12 @@ void fit_pT_multi_updated(){
   l2->AddEntry(histo_tail,"Tail","l");
   l2->SetFillColor(10);
   l2->Draw();
+
+
+  cs->Update();
+  cs->SaveAs("pT_multi_stacked.pdf");
+  
+  
 
 
 

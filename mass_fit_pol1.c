@@ -173,7 +173,7 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   gStyle->SetStatFormat("5.2g");
   gStyle->SetFitFormat("5.2g");
 
- TString dirname = "plots_MCgg_official_30mupt60_2/";
+ TString dirname = "plots_data_80m12_30mupt/";
 
  //TString flatfile="mass_fit/m_trig1.txt";
 // TString flatfile="m_trig4.txt";
@@ -312,14 +312,14 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
     RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0", -0.074, -0.15, 0.05); // 
     // RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0", -0.066874); // fixed from gg MC
 
-    //RooPolynomial mm("mm shape","mm shape", *mMuMu, RooArgList(*mdimucoef1));//, *mdimucoef2, *mdimucoef3));
+    RooPolynomial mm("mm shape","mm shape", *mMuMu, RooArgList(*mdimucoef1));//, *mdimucoef2, *mdimucoef3));
 
    // --- Build polynomial background PDF ---
    // Define shape parameters
    RooRealVar poly_c1("poly_c1", "coefficient of x^1 term", 0.0, -0.1, 0.1); // 0.0, -10000.0, 10000.0
    RooRealVar poly_c2("poly_c2", "coefficient of x^2 term", 0.0, -0.01, 0.01); // 0.0, -10000.0, 10000.0
    // Define cubic polynomial PDF
-   RooPolynomial mm("background", "quadratic polynomial", *mMuMu, RooArgList(poly_c1, poly_c2) );
+ //  RooPolynomial mm("background", "quadratic polynomial", *mMuMu, RooArgList(poly_c1, poly_c2) );
 
 
    RooRealVar lambda("lambda", "slope", 0.0, -1.0, 1.0);
@@ -329,11 +329,11 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
 
 //    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*mm),RooArgList(*nmm)); 
 
-    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(mm),RooArgList(*nmm));        // background only
+  //  RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(mm),RooArgList(*nmm));        // background only
    
    // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,mm),RooArgList(*nu1s,*nmm));        // 1S and bkg
 
-//RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,*nu3s,*nmm));        // all free
+    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,*nu3s,*nmm));        // all free
   
 // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*mm),RooArgList(*nu1s,*nu2s,*nmm));        //yield variable
 //    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*mm),RooArgList(*nu1s,up2sto1s,*nmm));  //two peak
