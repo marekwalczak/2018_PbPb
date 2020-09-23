@@ -51,6 +51,9 @@ cout << endl << "******* getting histos *******" << endl << endl;
   TH2F* sp_QQ_pT_QQ_rap = (TH2F *)f1->Get("sp_QQ_pT_QQ_rap"); // c19
 
 
+
+
+
  // TH2F* sp_mu_pT_mu_rap = (TH2F *)f1->Get("sp_mu_pT_mu_rap"); // c22
 
 
@@ -160,7 +163,9 @@ cout << endl << "******* getting histos *******" << endl << endl;
 	histo_aco->SetLineWidth(2);
 	histo_aco->Draw("");
 	c27->SaveAs("./plots/pdf/histo_aco.pdf"); 
-	
+	c27->SetLogy();
+	c27->SaveAs("./plots/pdf/histo_aco_log.pdf"); 
+
 	/*
 	TCanvas *c28 = new TCanvas("c28","c28",1000,600);
 	histo_mu_Phi->SetLineWidth(2);
@@ -172,6 +177,9 @@ cout << endl << "******* getting histos *******" << endl << endl;
 	histo_QQ_Phi->SetLineWidth(2);
 	histo_QQ_Phi->Draw("");
 	c29->SaveAs("./plots/pdf/histo_QQ_Phi.pdf"); 
+
+
+
 
 /*
 

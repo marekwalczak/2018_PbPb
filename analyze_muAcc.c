@@ -14,9 +14,13 @@
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/ReadTree.C"
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/ReadTree.C"
+
+#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_30M_xDM_official_Shuai/ReadTree.C"
+
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
-#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/ReadTree.C"
 
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_2S_05M_xDM/ReadTree.C"
@@ -55,9 +59,13 @@ void analyze_muAcc(){
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
+  //  TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/MC_gg_2M_xDM_official.root","read");
+
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_30M_xDM_official_Shuai/MC_gg_30M_xDM_official_Shuai_1.root","read");
+
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/MC_coh_1S_05M_xDM_official.root","read");
+ //  TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/MC_coh_1S_05M_xDM_official.root","read");
    
    
    
@@ -457,7 +465,7 @@ void analyze_muAcc(){
  system("root -l -b -q draw_muAcc.c");
  system("root -l -b -q draw_muAcc_profile.c");
 
-  // system("mv plots plots_muAcc");
+   system("mv plots plots_muAcc_shuai_gg");
 
       
   cout << endl << "******* finished and saved *******" << endl;

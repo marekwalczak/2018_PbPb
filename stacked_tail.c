@@ -12,23 +12,35 @@
 
 
 
+// ALICE Collaboration, nucleon dissociation
+Double_t ALICEtail(Double_t *x, Double_t *par) {
+   return par[0] * x[0] * pow((1.0 + ( par[1] / par[2]) * pow(x[0], 2) ), -par[2]); 
+   //return par*x[0]*pow((1.0 + ( 1.8 / 3.6)*pow(x[0], 2) ), -3.6);
+}
+
+/// IN PROGRESS (ADDING TAIL)
+
+void stacked_tail() {
 
 
-void stacked() {
 
-
-
-    TFile* f1 = new TFile("pT_spectrum_bkg1-sig-bkg2s2s3_sum688/plots.root","read"); 
-    TFile* f3 = new TFile("plots_MCc1s_30mupt60_official/plots.root","read"); 
-    TFile* f4 = new TFile("plots_MCi1s_30mupt60_official/plots.root","read"); 
+    TFile* f1 = new TFile("before200922/pT_spectrum_bkg1-sig-bkg2_sum688/plots.root","read"); 
+    TFile* f3 = new TFile("before200922/plots_MCc1s_30mupt60_official/plots.root","read"); 
+    TFile* f4 = new TFile("before200922/plots_MCi1s_30mupt60_official/plots.root","read"); 
 
     TH1F *histo_Data = (TH1F *)f1->Get("histo_QQ_pT_sig_min_bkg1and2");
     TH1F *histo_MC_CohUps = (TH1F *)f3->Get("histo_QQ_pT");
     TH1F *histo_MC_IncohUps = (TH1F *)f4->Get("histo_QQ_pT");
 
 
-    int number_of_bins = 100;
-
+    int rebin = 4;
+    int number_of_bins = 100/rebin;
+    
+    histo_Data->Rebin(rebin);
+    histo_MC_CohUps->Rebin(rebin);
+    histo_MC_IncohUps->Rebin(rebin);
+    
+    
     float count_data  = 0;
     float count_gg    = 0;
     float count_coh   = 0;
@@ -50,8 +62,8 @@ void stacked() {
 
  
        // see the binning of the histos !!!
-    int start = static_cast<int>((from * 25) + 1);
-    int stop  = static_cast<int>(to * 25);
+    int start = static_cast<int>((from * 25/rebin) + 1);
+    int stop  = static_cast<int>(to * 25/rebin);
     
     for (int i = start; i <= stop; i++) {
       count_data += histo_Data->GetBinContent(i);
@@ -63,6 +75,83 @@ void stacked() {
     for (int i=start; i <= stop; i++) {
       count_incoh += histo_MC_IncohUps->GetBinContent(i);
     }
+
+
+
+
+
+
+// **** ALICE ***** //
+   // create a TF1 with the range from 1 to 4 and 2 parameters
+   TF1 *fitAlice = new TF1( "fitAlice", ALICEtail, 1.2, 3.0, 3 );
+   fitAlice->SetNpx(400); // Set the number of points used to draw the function
+   fitAlice->SetLineWidth(4);
+  // fitAlice->SetLineColor(kMagenta);
+
+   // Try without starting values for the parameters
+   // This defaults to 1 for each param.
+   // this results in an ok fit for the polynomial function
+   
+   
+   fitAlice->FixParameter(2, 1.79);
+   fitAlice->FixParameter(3, 3.58);
+   
+  // fitAlice->SetParLimits(2, 1.0 , 2.0);
+  // fitAlice->SetParLimits(3, 3.0 , 4.0);
+   
+  //histo_Data->Fit("fitAlice","0");
+   histo_Data->Fit( "fitAlice", "RQ+" ); // V instead of Q gives terminal output , "ep"
+
+   Double_t parA[3];
+   fitAlice->GetParameters(parA);
+
+   TF1 *FcnAlice = new TF1("FcnAlice", ALICEtail, 0, 4, 3 );
+   FcnAlice->SetParameters(parA);
+   
+   float tailAlice_all = FcnAlice->Integral(0, 4.0 ) / histo_Data->GetBinWidth(1);
+   cout << "Integral of fitted FcnAlice for the whole range is : " << tailAlice_all << endl;
+
+   float tailAlice = FcnAlice->Integral(from, to) / histo_Data->GetBinWidth(1);
+   cout << "Integral of fitted FcnAlice for given range of incoh region is : " << tailAlice << endl;
+   
+
+  TH1F* histo_tail = new TH1F("histo_tail","QQ_pT; QQ_pT [GeV]; events ",number_of_bins,0,4);
+
+  for (int i=1; i<=number_of_bins; i++)
+  {
+   float x=histo_tail->GetBinCenter(i);
+   float y=FcnAlice->Eval(x);
+   histo_tail->SetBinContent(i, y);
+  }
+  
+    
+    float count_tailAlice = 0;
+
+     for (int i=start; i <= stop; i++) {
+     count_tailAlice += histo_tail->GetBinContent(i);
+    }
+
+    float all_tailAlice = 0.0;
+    
+     for (int i=0; i <= number_of_bins; i++) {
+     all_tailAlice += histo_tail->GetBinContent(i);
+    }
+
+
+    cout << "All tailAlice: "  <<  all_tailAlice << ", in given range: " << count_tailAlice << ", given bin: "  << histo_tail->GetBinContent(50) << endl;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     cout << endl;
     cout << "The range is from " << from << " to " << to << endl << endl;
