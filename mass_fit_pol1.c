@@ -173,7 +173,7 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   gStyle->SetStatFormat("5.2g");
   gStyle->SetFitFormat("5.2g");
 
- TString dirname = "plots_data_80m12_30mupt/";
+ TString dirname = "res_data_80m120_aco0075/";
 
  //TString flatfile="mass_fit/m_trig1.txt";
 // TString flatfile="m_trig4.txt";
@@ -273,7 +273,7 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   // fitting background with jjhollar's function * * * * *
 
   // marek - fix s2 to s3 events ratio
-  RooRealVar* ratio3to2 = new RooRealVar("N3toN2","ratio Ups(3S) to Ups(2S)",0.5,0.2,0.8);    // for 2s/1s ratio fix
+  RooRealVar* ratio3to2 = new RooRealVar("N3toN2","ratio Ups(3S) to Ups(2S)",0.66);    // for 2s/1s ratio fix - 0.5,0.2,0.8
   RooFormulaVar up3sto2s("up3sto2s", "@0*@1", RooArgList(*nu2s, *ratio3to2));       // for 2s/1s ratio fix
 
 
@@ -331,16 +331,16 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
 
   //  RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(mm),RooArgList(*nmm));        // background only
    
-   // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,mm),RooArgList(*nu1s,*nmm));        // 1S and bkg
+  //  RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,mm),RooArgList(*nu1s,*nmm));        // 1S and bkg
 
-    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,*nu3s,*nmm));        // all free
+   // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,*nu3s,*nmm));        // all free
   
 // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*mm),RooArgList(*nu1s,*nu2s,*nmm));        //yield variable
 //    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*mm),RooArgList(*nu1s,up2sto1s,*nmm));  //two peak
     //RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,up2sto1s,up3sto1s,*nmm));  //ratio variable
     //  RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,meanup3s,*nmm));    //3s/2s ratio fix (WTF?)
 
-   // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,up3sto2s,*nmm));  // <- 3s/2s ratio fix
+    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,up3sto2s,*nmm));  // <- 3s/2s ratio fix
 
 
   RooDataSet *datatmp = 0;

@@ -27,23 +27,24 @@ void fit_pT_multi_updated(){
 
     cout << endl << "******* opening files *******" << endl;
 
-    TFile* f1 = new TFile("plots_data_30mupt60_92m97/plots.root","read"); 
-//    TFile* f1 = new TFile("pT_spectrum_bkg1-sig-bkg2s2s3_sum688/plots.root","read"); 
-    TFile* f2 = new TFile("plots_MCgg_30mupt60_92m97/plots.root","read"); 
-    TFile* f3 = new TFile("plots_MCc1s_30mupt60_official/plots.root","read"); 
-    TFile* f4 = new TFile("plots_MCi1s_30mupt60_official/plots.root","read"); 
+    //TFile* f1 = new TFile("plots_data_30mupt60_92m97/plots.root","read"); 
+    TFile* f1 = new TFile("plots_data_30mupt60_92m97_binning_aco002/plots.root","read"); 
+    
+    TFile* f2 = new TFile("plots_MCgg_30mupt60_92m97_binning/plots.root","read"); 
+    TFile* f3 = new TFile("plots_MCc1s_30mupt60_binning/plots.root","read"); 
+    TFile* f4 = new TFile("plots_MCi1s_30mupt60_binning/plots.root","read"); 
 
     // range for the incoh ups extraction
-    double ups_from_fit = 688;
-    float from = 0.5;
-    float to   = 1.0;
+    double ups_from_fit = 548;
+    float from = 0.3;
+    float to   = 1.2;
     
     TH1F *histo_Data = (TH1F *)f1->Get("histo_QQ_pT");
     TH1F *histo_MC_gg = (TH1F *)f2->Get("histo_QQ_pT");
     TH1F *histo_MC_CohUps = (TH1F *)f3->Get("histo_QQ_pT");
     TH1F *histo_MC_IncohUps = (TH1F *)f4->Get("histo_QQ_pT");
 
-    int number_of_bins = 100;
+    int number_of_bins = 160;
     float all_data  =  histo_Data->GetEntries();
     float all_gg    =  histo_MC_gg->GetEntries();
     float all_coh   =  histo_MC_CohUps->GetEntries();
@@ -57,8 +58,8 @@ void fit_pT_multi_updated(){
 
 
     // see the binning of the histos !!!
-    int start = static_cast<int>((from * 25) + 1);
-    int stop  = static_cast<int>(to * 25);
+    int start = static_cast<int>((from * 40) + 1);
+    int stop  = static_cast<int>(to * 40);
     
     for (int i = start; i <= stop; i++) {
       count_data += histo_Data->GetBinContent(i);
@@ -167,7 +168,7 @@ void fit_pT_multi_updated(){
 
 
 
-
+count_tailAlice = 0;
 
 
 
@@ -215,7 +216,7 @@ void fit_pT_multi_updated(){
 
 
 
-  TH1F* histo_res = new TH1F("histo_res","QQ_pT; QQ_pT [GeV]; events ", 200 ,0,8);
+  TH1F* histo_res = new TH1F("histo_res","QQ_pT; QQ_pT [GeV]; events ", 320 ,0,8);
 
   histo_res->Add(histo_MC_gg, 1);
   histo_res->Add(histo_MC_CohUps, 1);
@@ -347,11 +348,11 @@ void fit_pT_multi_updated(){
    h4->SetBinContent(i, content);
   }
    h4->SetFillColor(kCyan);
-   hs->Add(h4);
+   //hs->Add(h4);
 
 
    TCanvas *cs = new TCanvas("cs","cs",10,10,1000,600);
-   cs->SetLogy();
+   //cs->SetLogy();
    TText T; T.SetTextFont(42); T.SetTextAlign(21);
    hs->SetTitle("dimuon p_{T} distribution");
 

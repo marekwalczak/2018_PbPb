@@ -326,6 +326,30 @@ cout << endl << "******* making histos *******" << endl << endl;
 
 
 
+ for (int i=1;i<sp_mu_pT_mu_rap_Acc->GetNbinsX();i++){
+    for (int j=1;j<sp_mu_pT_mu_rap_Acc->GetNbinsY();j++){
+      if(sp_mu_pT_mu_rap_Acc->GetBinContent(i,j) < 0.05) sp_mu_pT_mu_rap_Acc->SetBinContent(i,j,0);
+    }
+  }
+
+
+  c4->Update();
+  c4->SaveAs("plots/Acc/sp_mu_pT_mu_rap_Acc_5proc.pdf");
+
+
+
+  for (int i=1;i<sp_mu_pT_mu_rap_Acc->GetNbinsX();i++){
+    for (int j=1;j<sp_mu_pT_mu_rap_Acc->GetNbinsY();j++){
+      if(sp_mu_pT_mu_rap_Acc->GetBinContent(i,j) < 0.1) sp_mu_pT_mu_rap_Acc->SetBinContent(i,j,0);
+    }
+  }
+
+
+  c4->Update();
+  c4->SaveAs("plots/Acc/sp_mu_pT_mu_rap_Acc_10proc.pdf");
+
+
+
 
 cout << endl << "******* THE END *******" << endl << endl;
 

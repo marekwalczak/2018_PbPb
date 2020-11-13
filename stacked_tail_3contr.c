@@ -18,22 +18,25 @@ Double_t ALICEtail(Double_t *x, Double_t *par) {
    //return par*x[0]*pow((1.0 + ( 1.8 / 3.6)*pow(x[0], 2) ), -3.6);
 }
 
-/// IN PROGRESS (ADDING TAIL)
+/// IN PROGRESS (ADDING TAIL) - still not added
 
-void stacked_tail() {
+void stacked_tail_3contr() {
 
 
+    // signal dirname:
+    TString dirname = "pT_spectrum_bkg1-sig-bkg2_sum630";
 
-    TFile* f1 = new TFile("pT_spectrum_bkg1-sig-bkg2s3s_sum688_binning/plots.root","read"); 
-    TFile* f3 = new TFile("plots_MCc1s_30mupt60_binning/plots.root","read"); 
-    TFile* f4 = new TFile("plots_MCi1s_30mupt60_binning/plots.root","read"); 
+
+    TFile* f1 = new TFile(dirname + "/plots.root","read"); 
+    TFile* f3 = new TFile("plots_MCc1s_30mupt60_binning/plots.root","read"); // MC
+    TFile* f4 = new TFile("res_MCi1s_aco0075/plots.root","read"); // MC
 
     TH1F *histo_Data = (TH1F *)f1->Get("histo_QQ_pT_sig_min_bkg1and2");
     TH1F *histo_MC_CohUps = (TH1F *)f3->Get("histo_QQ_pT");
     TH1F *histo_MC_IncohUps = (TH1F *)f4->Get("histo_QQ_pT");
 
 
-    int rebin = 5;
+    int rebin =8;
     int number_of_bins = 160/rebin;
     
     histo_Data->Rebin(rebin);
@@ -45,8 +48,9 @@ void stacked_tail() {
     float count_gg    = 0;
     float count_coh   = 0;
     float count_incoh = 0;
-
+    float tail_count_data  = 0;
     float all_data  = 0;
+
     for (int i = 1; i <= number_of_bins; i++) {
       all_data += histo_Data->GetBinContent(i);
     }
@@ -56,18 +60,18 @@ void stacked_tail() {
     float all_incoh =  histo_MC_IncohUps->GetEntries();
     
 
-    float from = 0.3;
-    float to   = 4.0;
+    float from = 0.4;
+    float to   = 2.0;
     
 
- 
        // see the binning of the histos !!!
-    int start = static_cast<int>((from * 40/rebin) + 1);
-    int stop  = static_cast<int>(to * 40/rebin);
+    int start = static_cast<int>((from * (40/rebin)) + 1);
+    int stop  = static_cast<int>(to * (40/rebin));
     
     for (int i = start; i <= stop; i++) {
       count_data += histo_Data->GetBinContent(i);
     }
+    
     for (int i=start; i <= stop; i++) {
       count_coh += histo_MC_CohUps->GetBinContent(i);
     }
@@ -77,7 +81,17 @@ void stacked_tail() {
     }
 
 
-
+    float tail_from = 1.2;
+    float tail_to   = 2.0;
+    
+       // see the binning of the histos !!!
+    int tail_start = static_cast<int>((tail_from * (40/rebin)) + 1);
+    int tail_stop  = static_cast<int>(tail_to * (40/rebin));
+ 
+    for (int i = tail_start; i <= tail_stop; i++) {
+      tail_count_data += histo_Data->GetBinContent(i);
+    }
+    
 
 
 
@@ -108,10 +122,10 @@ void stacked_tail() {
    TF1 *FcnAlice = new TF1("FcnAlice", ALICEtail, 0, 4, 3 );
    FcnAlice->SetParameters(parA);
    
-   float tailAlice_all = FcnAlice->Integral(0, 4.0 ) / histo_Data->GetBinWidth(1);
+   float tailAlice_all = FcnAlice->Integral(0, 4.0 ) / (histo_Data->GetBinWidth(1) * rebin) ;
    cout << "Integral of fitted FcnAlice for the whole range is : " << tailAlice_all << endl;
 
-   float tailAlice = FcnAlice->Integral(from, to) / histo_Data->GetBinWidth(1);
+   float tailAlice = FcnAlice->Integral(from, to) / (histo_Data->GetBinWidth(1) * rebin) ;
    cout << "Integral of fitted FcnAlice for given range of incoh region is : " << tailAlice << endl;
    
 
@@ -149,6 +163,8 @@ void stacked_tail() {
 
 
 
+    cout << endl << "The range of tail is from " << tail_from << " to " << tail_to << endl;
+    cout << "All data :	"  <<  all_data  << ",	in given range: " << tail_count_data   << endl << endl;
 
 
 
@@ -199,9 +215,22 @@ void stacked_tail() {
    h2->SetFillColor(kBlue);
    hs->Add(h2);
 
-   hs->SetMinimum(-15);
-   hs->SetMaximum(300);
 
+   TH1F *h4 = new TH1F("h4","test hstack", number_of_bins, 0, 4);
+  // fill a histo, normal methods failed here :/
+  for (int i=1; i<=number_of_bins; i++)
+  {
+   content = histo_tail->GetBinContent(i);
+   h4->SetBinContent(i, content);
+  }
+   h4->SetFillColor(kCyan);
+   //hs->Add(h4);
+
+
+
+
+   hs->SetMinimum(-15);
+   hs->SetMaximum(600);
 
 
 
@@ -219,7 +248,7 @@ void stacked_tail() {
    cs->Modified();       
 */
 
-
+   float uncert = 0;
    TText T; 
    T.SetTextFont(42); 
    T.SetTextAlign(21);
@@ -233,6 +262,8 @@ void stacked_tail() {
   {
    content = histo_Data->GetBinContent(i);
    hd->SetBinContent(i, content);
+   uncert = histo_Data->GetBinError(i);
+   hd->SetBinError(i, uncert);
   }
   
   hd->SetMarkerStyle(20);
@@ -242,11 +273,21 @@ void stacked_tail() {
  // hs->Draw("same"); 
   hd->Draw("same, E0");
   
+
+  TLegend *l3 = new TLegend(0.6,0.7,0.8,0.85,NULL,"brNDC");
+  l3->AddEntry(h1, Form("Incoherent : %.0f",tot_inc), "");
+  l3->AddEntry(h1, Form("Coherent   : %.0f",tot_coh), "");
+  //l3->SetFillColor(10);
+  l3->Draw();
+  
    cs->Update();
 
-   cs->SaveAs("sideband_stacked_bins_2s3s.pdf");
-  
-  
+   cs->SaveAs(dirname + "/stacked_pT.pdf");
+   
+  system("mkdir signal_stacked");
+   
+   cs->SaveAs("signal_stacked/" + dirname + ".pdf");
+
 
    
 }
@@ -300,3 +341,7 @@ void stacked() {
 }
 
 */
+
+
+
+

@@ -26,7 +26,6 @@
 
 void pT_spectrum(){
 
-
   system("mkdir pT_spectrum");
   system("cp pT_spectrum.c pT_spectrum/");
 
@@ -34,17 +33,12 @@ cout << "******* opening files *******" << endl;
 
 
 
-TFile* f1 = new TFile("res_data_80m90_aco0075/plots.root","read"); // bkg 1
-TFile* f2 = new TFile("res_data_106m120_aco0075/plots.root","read"); // bkg 2
-TFile* f3 = new TFile("res_data_92m97_aco0075/plots.root","read"); // signal
+TFile* f1 = new TFile("plots_data_30mupt60_80m90/plots.root","read"); // bkg 1
+TFile* f2 = new TFile("plots_data_30mupt60_107m120/plots.root","read"); // bkg 2
+TFile* f3 = new TFile("plots_data_30mupt60_98m106/plots.root","read"); // signal
 
-/*
-TFile* f1 = new TFile("res_data_80m83_aco0075/plots.root","read"); // bkg 1
-TFile* f2 = new TFile("res_data_87m90_aco0075/plots.root","read"); // bkg 2
-TFile* f3 = new TFile("res_data_83m87_aco0075/plots.root","read"); // signal
-*/
 // set the number of the signal events from the inv mass fit
-float N_ups1s = 0;
+float N_ups1s = 302;
   
   
 cout << endl << "******* getting histos *******" << endl << endl;
@@ -52,19 +46,19 @@ cout << endl << "******* getting histos *******" << endl << endl;
   
   TH1F *histo_QQ_pT_bkg1 = (TH1F *)f1->Get("histo_QQ_pT"); // c11
   histo_QQ_pT_bkg1->Sumw2();
-  histo_QQ_pT_bkg1->Rebin(8);
+  histo_QQ_pT_bkg1->Rebin(2);
   float N_bkg1 = histo_QQ_pT_bkg1->GetEntries();
   
   TH1F *histo_QQ_pT_bkg2 = (TH1F *)f2->Get("histo_QQ_pT"); // c11
   histo_QQ_pT_bkg2->Sumw2();
-  histo_QQ_pT_bkg2->Rebin(8);
+  histo_QQ_pT_bkg2->Rebin(2);
   float N_bkg2 = histo_QQ_pT_bkg2->GetEntries();
 
   TH1F *histo_QQ_pT_sig = (TH1F *)f3->Get("histo_QQ_pT"); // c11
   histo_QQ_pT_sig->Sumw2();
-  histo_QQ_pT_sig->Rebin(8);
+  histo_QQ_pT_sig->Rebin(2);
   float N_sig = histo_QQ_pT_sig->GetEntries();
-
+ 
   cout << "N_bkg1 = " << N_bkg1 << endl;
   cout << "N_bkg2 = " << N_bkg2 << endl;
   cout << "N_sig  = " << N_sig << endl;
