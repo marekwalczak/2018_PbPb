@@ -10,11 +10,11 @@
 #include <TClonesArray.h>
 #include "TFile.h"
 
-#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
+//#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/ReadTree.C"
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/ReadTree.C"
-//#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/ReadTree.C"
+#include "/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/ReadTree.C"
 
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/ReadTree.C"
 //#include "/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/ReadTree.C"
@@ -56,26 +56,26 @@ void analyze(){
   
 
   
-  		   double mu_pT_cut_low = 5.2;
+  		   double mu_pT_cut_low = 0;
 		   double mu_pT_cut_high = 100.0;
 		   double QQ_pT_cut_low = 0.0;
 		   double QQ_pT_cut_high = 100.0;
-		   double m_cut_low = 9.2;
-		   double m_cut_high = 9.7;
-		   double aco_low = -1.0;
-		   double aco_high = 10;
+		   double m_cut_low = -9.2;
+		   double m_cut_high = 999.7;
+		   double aco_low = -1;
+		   double aco_high = 10.075;
   
   
-  bool isMC = false;
-  TString dirname = "plots_data_92m97_cuts_52mupt/";
+  bool isMC = true;
+  TString dirname = "plots_Acceptance_mu0_noTrig/";
 
 
 
-   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
+  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_1DM/Onia_UPCtrig_1DM.root","read");
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/Onia_UPCtrig_xDM_1/Onia_UPCtrig_xDM_1.root","read");
 
    //TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM/MC_gg_2M_xDM.root","read");
-  // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/MC_gg_2M_xDM_official.root","read");
+   TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_gg_2M_xDM_official/MC_gg_2M_xDM_official.root","read");
 
   // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM/MC_coh_1S_05M_xDM.root","read");
   // TFile* file1 = new TFile("/Users/marekwalczak/Data/2018PbPb/MC_coh_1S_05M_xDM_official/MC_coh_1S_05M_xDM_official.root","read");
@@ -528,15 +528,15 @@ void analyze(){
 		   //invmass>10 && invmass<11 && //( (mupl_pT<mu_pT_cut_high || mumi_pT<mu_pT_cut_high) ){//
 		   
 		   
-     	  // cuts:  (((QQ_trig&8)==8) && ((HLTrig&8)==8)) {
-          if (aco>aco_low && aco<aco_high && invmass>m_cut_low && invmass<m_cut_high && mupl_pT>mu_pT_cut_low && mumi_pT>mu_pT_cut_low && mupl_pT<mu_pT_cut_high && mumi_pT<mu_pT_cut_high && QQ_pT>QQ_pT_cut_low && QQ_pT<QQ_pT_cut_high && HadEnergy_HF_Minus<7.3 && HadEnergy_HF_Plus<7.6    &&    mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 && ((QQ_trig&8)==8) && ((HLTrig&8)==8) && *QQ_Ntrk==2 && sign==0  ){
+     	  // cuts:  (((QQ_trig&8)==8) && ((HLTrig&8)==8)) {   aco>aco_low && aco<aco_high && invmass>m_cut_low && invmass<m_cut_high && mupl_pT>mu_pT_cut_low && mumi_pT>mu_pT_cut_low && mupl_pT<mu_pT_cut_high && mumi_pT<mu_pT_cut_high && QQ_pT>QQ_pT_cut_low && QQ_pT<QQ_pT_cut_high   &&    mupl_rap > -2.4 && mupl_rap < 2.4 && mumi_rap > -2.4 && mumi_rap < 2.4 &&  
+          if (  1==1   ){
          
           // soft muon: (1==1){//
           if  ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
 
           // acceptance:
-         if ( ( abs(mupl_rap) < 2.4 && ( abs(mupl_pT) > 3.35 || ( abs(mupl_rap) > 0.3 && abs(mupl_pT) > 3.25) ||  (abs(mupl_pT) > (-2.25*abs(mupl_rap) + 5.5) && abs(mupl_rap) > 2.35) || (abs(mupl_pT) > (-4.75*abs(mupl_rap) + 10.9) &&  abs(mupl_pT) > 1.4)) ) &&
-              ( abs(mumi_rap) < 2.4 && ( abs(mumi_pT) > 3.35 || ( abs(mumi_rap) > 0.3 && abs(mumi_pT) > 3.25) ||  (abs(mumi_pT) > (-2.25*abs(mumi_rap) + 5.5) && abs(mumi_rap) > 2.35) || (abs(mumi_pT) > (-4.75*abs(mumi_rap) + 10.9) &&  abs(mumi_pT) > 1.4)) ) ) {
+         if (1==1){// ( ( abs(mupl_rap) < 2.4 && ( abs(mupl_pT) > 3.35 || ( abs(mupl_rap) > 0.3 && abs(mupl_pT) > 3.25) ||  (abs(mupl_pT) > (-2.25*abs(mupl_rap) + 5.5) && abs(mupl_rap) > 2.35) || (abs(mupl_pT) > (-4.75*abs(mupl_rap) + 10.9) &&  abs(mupl_pT) > 1.4)) ) &&
+              //( abs(mumi_rap) < 2.4 && ( abs(mumi_pT) > 3.35 || ( abs(mumi_rap) > 0.3 && abs(mumi_pT) > 3.25) ||  (abs(mumi_pT) > (-2.25*abs(mumi_rap) + 5.5) && abs(mumi_rap) > 2.35) || (abs(mumi_pT) > (-4.75*abs(mumi_rap) + 10.9) &&  abs(mumi_pT) > 1.4)) ) ) {
 
 
 

@@ -15,7 +15,8 @@
 // draws normalized distributions
 void draw_Gen(){
 
-system("mkdir plots/Acc");
+system("rm -r plots/Acc_2");
+system("mkdir plots/Acc_2");
 
 cout << endl << "******* opening files *******" << endl;
 
@@ -23,86 +24,6 @@ TFile* f1 = new TFile("plots/plots.root","read");
 
           
 cout << endl << "******* making histos *******" << endl << endl;
-
-
-
-
-
-  //*************** QQ RAPIDITY *******************//
-  TH1F *histo_QQ_rap_Reco_Gen = (TH1F *)f1->Get("histo_QQ_rap_Reco_Gen");
-  TH1F *histo_QQ_rap_Gen = (TH1F *)f1->Get("histo_QQ_rap_Gen");   
-  
-  
-  TCanvas *c1 = new TCanvas("c1","c1",1000,600);
-  //d1->SetLogy();
-  
-  histo_QQ_rap_Gen->GetXaxis()->SetRangeUser(-7,7);
-  //histo_QQ_rap_Gen->GetYaxis()->SetRangeUser(0, 8000); // zmianiłem
-  histo_QQ_rap_Gen->GetXaxis()->SetTitleOffset(1.2);
-  histo_QQ_rap_Gen->GetYaxis()->SetTitleOffset(1.22);
-  
-  histo_QQ_rap_Gen->GetXaxis()->SetTitle("QQ rap");
-  
-  //histo_QQ_rap_Reco_Gen->SetMarkerStyle(8);
-  //histo_QQ_rap_Reco_Gen->SetMarkerColor(kRed);
-  histo_QQ_rap_Reco_Gen->SetLineColor(kRed);
-  histo_QQ_rap_Reco_Gen->SetLineWidth(6);
-  histo_QQ_rap_Gen->SetLineColor(kBlue);
-  histo_QQ_rap_Gen->SetLineWidth(6);
-  
-  histo_QQ_rap_Gen->Draw("");
-  histo_QQ_rap_Reco_Gen->Draw("hist same");
-  
-  histo_QQ_rap_Reco_Gen->SetStats(0); // gets rid of anoying stat box
-  
-  TLegend *l1 = new TLegend(0.15,0.70,0.30,0.85,NULL,"brNDC");
-  l1->AddEntry(histo_QQ_rap_Gen,"Gen","l");
-  l1->AddEntry(histo_QQ_rap_Reco_Gen,"Reco","l");
-  l1->SetFillColor(10);
-  l1->Draw();
-  
-  c1->Update();
-  c1->SaveAs("plots/Acc/QQ_rap_Gen_vs_Reco.pdf");
-  
-  
-  
-  
-  
-  //*************** QQ pT *******************//
-  TH1F *histo_QQ_pT_Reco_Gen = (TH1F *)f1->Get("histo_QQ_pT_Reco_Gen");
-  TH1F *histo_QQ_pT_Gen = (TH1F *)f1->Get("histo_QQ_pT_Gen");   
-
-  
-  TCanvas *c5 = new TCanvas("c5","c5",1000,600);
-  //d1->SetLogy();
-
-  histo_QQ_pT_Gen->GetXaxis()->SetRangeUser(0,2);
-  //histo_QQ_pT_Gen->GetYaxis()->SetRangeUser(0,50000); // adjust
-  histo_QQ_pT_Gen->GetXaxis()->SetTitleOffset(1.2);
-  histo_QQ_pT_Gen->GetYaxis()->SetTitleOffset(1.22);
- 
-  histo_QQ_pT_Reco_Gen->GetXaxis()->SetTitle("QQ pT");
-
-  //histo_QQ_pT_Reco_Gen->SetMarkerStyle(8);
-  //histo_QQ_pT_Reco_Gen->SetMarkerColor(kRed);
-  histo_QQ_pT_Reco_Gen->SetLineColor(kRed);
-  histo_QQ_pT_Reco_Gen->SetLineWidth(6);
-  histo_QQ_pT_Gen->SetLineColor(kBlue);
-  histo_QQ_pT_Gen->SetLineWidth(6);
-
-  histo_QQ_pT_Gen->Draw("");
-  histo_QQ_pT_Reco_Gen->Draw("hist same");
-
-  histo_QQ_pT_Reco_Gen->SetStats(0); // gets rid of anoying stat box
-
-  TLegend *l5 = new TLegend(0.50,0.70,0.65,0.85,NULL,"brNDC");
-  l5->AddEntry(histo_QQ_pT_Gen,"Gen","l");
-  l5->AddEntry(histo_QQ_pT_Reco_Gen,"Reco","l");
-  l5->SetFillColor(10);
-  l5->Draw();
-
-  c5->Update();
-  c5->SaveAs("plots/Acc/QQ_pT_Gen_vs_Reco.pdf");
 
 
 
@@ -141,7 +62,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   l2->Draw();
   
   c2->Update();
-  c2->SaveAs("plots/Acc/mu_rap_Gen_vs_Reco.pdf");
+  c2->SaveAs("plots/Acc_2/mu_rap_Gen_vs_Reco.pdf");
 
 
 
@@ -177,7 +98,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   l2_2->Draw();
   
   c2_2->Update();
-  c2_2->SaveAs("plots/Acc/mu_rap_Acc.pdf");
+  c2_2->SaveAs("plots/Acc_2/mu_rap_Acc.pdf");
   
   
   
@@ -216,7 +137,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   l2_2_1->Draw();
   
   c2_2_1->Update();
-  c2_2_1->SaveAs("plots/Acc/mu_pT_Gen_vs_Reco.pdf");
+  c2_2_1->SaveAs("plots/Acc_2/mu_pT_Gen_vs_Reco.pdf");
 
 
 
@@ -251,7 +172,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   l2_3_2->Draw();
   
   c2_3_2->Update();
-  c2_3_2->SaveAs("plots/Acc/mu_pT_Acc.pdf");
+  c2_3_2->SaveAs("plots/Acc_2/mu_pT_Acc.pdf");
   
   
   
@@ -287,7 +208,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   l3->Draw();
 
   c3->Update();
-  c3->SaveAs("plots/Acc/sp_QQ_pT_QQ_rap_Acc.pdf");
+  c3->SaveAs("plots/Acc_2/sp_QQ_pT_QQ_rap_Acc.pdf");
 
 
 
@@ -299,8 +220,8 @@ cout << endl << "******* making histos *******" << endl << endl;
   TCanvas *c4 = new TCanvas("c4","c4",1000,600);
   c4->SetLogz();
   
-  sp_mu_pT_mu_rap_Acc->GetXaxis()->SetRangeUser(-7,7);
-  sp_mu_pT_mu_rap_Acc->GetYaxis()->SetRangeUser(1,6.5);
+  sp_mu_pT_mu_rap_Acc->GetXaxis()->SetRangeUser(-4,4);
+  sp_mu_pT_mu_rap_Acc->GetYaxis()->SetRangeUser(0,8);
   sp_mu_pT_mu_rap_Acc->GetXaxis()->SetTitleOffset(1.2);
   sp_mu_pT_mu_rap_Acc->GetYaxis()->SetTitleOffset(1.22);
  
@@ -315,14 +236,42 @@ cout << endl << "******* making histos *******" << endl << endl;
 
   sp_mu_pT_mu_rap_Acc->SetStats(0); // gets rid of anoying stat box
 
-  TLegend *l4 = new TLegend(0.1,0.80,0.25,0.90,NULL,"brNDC");
+  TLegend *l4 = new TLegend(0.1,0.80,0.22,0.90,NULL,"brNDC");
   l4->AddEntry(sp_mu_pT_mu_rap_Acc,"Reco / Gen", "");
   l4->SetFillColor(10);
   l4->Draw();
 
 
   c4->Update();
-  c4->SaveAs("plots/Acc/sp_mu_pT_mu_rap_Acc.pdf");
+  c4->SaveAs("plots/Acc_2/sp_mu_pT_mu_rap_Acc.pdf");
+
+
+
+
+  for (int i=1;i<sp_mu_pT_mu_rap_Acc->GetNbinsX();i++){
+    for (int j=1;j<sp_mu_pT_mu_rap_Acc->GetNbinsY();j++){
+      if(sp_mu_pT_mu_rap_Acc->GetBinContent(i,j) < 0.01) sp_mu_pT_mu_rap_Acc->SetBinContent(i,j,0);
+    }
+  }
+
+
+  c4->Update();
+  c4->SaveAs("plots/Acc_2/sp_mu_pT_mu_rap_Acc_1proc.pdf");
+
+
+
+
+  for (int i=1;i<sp_mu_pT_mu_rap_Acc->GetNbinsX();i++){
+    for (int j=1;j<sp_mu_pT_mu_rap_Acc->GetNbinsY();j++){
+      if(sp_mu_pT_mu_rap_Acc->GetBinContent(i,j) < 0.02) sp_mu_pT_mu_rap_Acc->SetBinContent(i,j,0);
+    }
+  }
+
+
+  c4->Update();
+  c4->SaveAs("plots/Acc_2/sp_mu_pT_mu_rap_Acc_2proc.pdf");
+
+
 
 
 
@@ -334,7 +283,7 @@ cout << endl << "******* making histos *******" << endl << endl;
 
 
   c4->Update();
-  c4->SaveAs("plots/Acc/sp_mu_pT_mu_rap_Acc_5proc.pdf");
+  c4->SaveAs("plots/Acc_2/sp_mu_pT_mu_rap_Acc_5proc.pdf");
 
 
 
@@ -346,8 +295,7 @@ cout << endl << "******* making histos *******" << endl << endl;
 
 
   c4->Update();
-  c4->SaveAs("plots/Acc/sp_mu_pT_mu_rap_Acc_10proc.pdf");
-
+  c4->SaveAs("plots/Acc_2/sp_mu_pT_mu_rap_Acc_10proc.pdf");
 
 
 

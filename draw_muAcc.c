@@ -109,7 +109,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   TCanvas *c2_2_1 = new TCanvas("c2_2_1","c2_2_1",1000,600);
   //d1->SetLogy();
   
-  histo_mu_pT_Gen->GetXaxis()->SetRangeUser(1,7);
+  histo_mu_pT_Gen->GetXaxis()->SetRangeUser(0,7);
   //histo_mu_pT_Reco_Gen->GetYaxis()->SetRangeUser(0,10000);  // adjust
   histo_mu_pT_Gen->GetXaxis()->SetTitleOffset(1.2);
   histo_mu_pT_Gen->GetYaxis()->SetTitleOffset(1.22);
@@ -147,7 +147,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   TCanvas *c2_3_2 = new TCanvas("c2_3_2","c2_3_2",1000,600);
   //c2_3_2->SetLogy();
   
-  histo_mu_pT_Acc->GetXaxis()->SetRangeUser(1,7);
+  histo_mu_pT_Acc->GetXaxis()->SetRangeUser(0,7);
   histo_mu_pT_Acc->GetYaxis()->SetRangeUser(0,1);  // adjust
   histo_mu_pT_Acc->GetXaxis()->SetTitleOffset(1.2);
   histo_mu_pT_Acc->GetYaxis()->SetTitleOffset(1.22);
@@ -181,8 +181,8 @@ cout << endl << "******* making histos *******" << endl << endl;
   TCanvas *c4 = new TCanvas("c4","c4",1000,600);
   c4->SetLogz();
   
-  sp_mu_pT_mu_rap_Acc->GetXaxis()->SetRangeUser(-7,7);
-  sp_mu_pT_mu_rap_Acc->GetYaxis()->SetRangeUser(1,6.5);
+  sp_mu_pT_mu_rap_Acc->GetXaxis()->SetRangeUser(-4,4);
+  sp_mu_pT_mu_rap_Acc->GetYaxis()->SetRangeUser(0,8);
   sp_mu_pT_mu_rap_Acc->GetXaxis()->SetTitleOffset(1.2);
   sp_mu_pT_mu_rap_Acc->GetYaxis()->SetTitleOffset(1.22);
  
@@ -214,7 +214,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   c5->SetLogz();
   
   sp_mu_pT_mu_rap_Gen->GetXaxis()->SetRangeUser(-7,7);
-  sp_mu_pT_mu_rap_Gen->GetYaxis()->SetRangeUser(0,8);
+  sp_mu_pT_mu_rap_Gen->GetYaxis()->SetRangeUser(0,12);
   sp_mu_pT_mu_rap_Gen->GetXaxis()->SetTitleOffset(1.2);
   sp_mu_pT_mu_rap_Gen->GetYaxis()->SetTitleOffset(1.22);
  
@@ -245,8 +245,8 @@ cout << endl << "******* making histos *******" << endl << endl;
   TCanvas *c6 = new TCanvas("c6","c6",1000,600);
   c6->SetLogz();
   
-  sp_mu_pT_mu_rap->GetXaxis()->SetRangeUser(-7,7);
-  sp_mu_pT_mu_rap->GetYaxis()->SetRangeUser(1,6.5);
+  sp_mu_pT_mu_rap->GetXaxis()->SetRangeUser(-4,4);
+  sp_mu_pT_mu_rap->GetYaxis()->SetRangeUser(0,8);
   sp_mu_pT_mu_rap->GetXaxis()->SetTitleOffset(1.2);
   sp_mu_pT_mu_rap->GetYaxis()->SetTitleOffset(1.22);
  

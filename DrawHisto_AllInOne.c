@@ -20,10 +20,10 @@ bool save=1;
 cout << "******* opening files *******" << endl;
 
 
-    TFile* f1 = new TFile("plots_data_92m97/plots.root","read"); 
-    TFile* f2 = new TFile("plots_MCgg_30mupt_92m97_binning_upd/plots.root","read"); 
-    TFile* f3 = new TFile("plots_MCc1s_30mupt60_binning/plots.root","read"); 
-    TFile* f4 = new TFile("plots_MCi1s_30mupt60_binning/plots.root","read"); 
+    TFile* f1 = new TFile("plots_data_92m97_AllCuts_30mupT_aco075/plots.root","read"); 
+    TFile* f2 = new TFile("plots_MC_gg_92m97_AllCuts_30mupT_aco075/plots.root","read"); 
+    TFile* f3 = new TFile("plots_MC_c1s_AllCuts_30mupT_aco075/plots.root","read"); 
+    TFile* f4 = new TFile("plots_MC_i1s_AllCuts_30mupT_aco075/plots.root","read"); 
 
 
 /***
@@ -65,7 +65,7 @@ cout << "******* Acoplanarity... *******" << endl;
   c1->SetLogy();
 
   histo_Data_aco->SetLineStyle(1);
-  histo_Data_aco->SetLineWidth(2);
+  histo_Data_aco->SetLineWidth(4);
   histo_Data_aco->SetLineColor(kBlack);
 
   histo_MC_gg_aco->SetLineStyle(1);
@@ -74,21 +74,22 @@ cout << "******* Acoplanarity... *******" << endl;
 
   histo_MC_gg_aco->SetStats(0); // gets rid of anoying stat box
   histo_MC_gg_aco->SetTitle("normalised acoplanarity distribution");
-  histo_MC_gg_aco->GetXaxis()->SetTitle("acoplanarity");
+  histo_MC_gg_aco->GetXaxis()->SetTitle("A");
   histo_MC_gg_aco->GetYaxis()->SetTitle("a.u.");
   histo_MC_gg_aco->GetXaxis()->SetRangeUser(0,1);
+  histo_MC_gg_aco->GetXaxis()->SetTitleOffset(1.2);
   histo_MC_gg_aco->Draw("Hist");
 
 
 
   histo_MC_CohUps_aco->SetLineStyle(1);
   histo_MC_CohUps_aco->SetLineWidth(4);
-  histo_MC_CohUps_aco->SetLineColor(kBlue);
+  histo_MC_CohUps_aco->SetLineColor(kRed);
   histo_MC_CohUps_aco->Draw("same, Hist");
 
   histo_MC_IncohUps_aco->SetLineStyle(1);
   histo_MC_IncohUps_aco->SetLineWidth(4);
-  histo_MC_IncohUps_aco->SetLineColor(kRed);
+  histo_MC_IncohUps_aco->SetLineColor(kBlue);
   histo_MC_IncohUps_aco->Draw("same, Hist");
   
     histo_Data_aco->Draw("same, E0");
@@ -150,7 +151,7 @@ cout << "******* muon pT... *******" << endl;
   //c2->SetLogy();
 
   histo_Data_mu_pT->SetLineStyle(1);
-  histo_Data_mu_pT->SetLineWidth(2);
+  histo_Data_mu_pT->SetLineWidth(4);
   histo_Data_mu_pT->SetLineColor(kBlack);
 
   histo_MC_gg_mu_pT->SetLineStyle(1);
@@ -158,28 +159,30 @@ cout << "******* muon pT... *******" << endl;
   histo_MC_gg_mu_pT->SetLineColor(kGreen);
 
   histo_MC_gg_mu_pT->SetStats(0); // gets rid of anoying stat box
-  histo_MC_gg_mu_pT->SetTitle("normalised acoplanarity distribution");
-  histo_MC_gg_mu_pT->GetXaxis()->SetTitle("acoplanarity");
+  histo_MC_gg_mu_pT->SetTitle("normalised muon p_{T} distribution");
+  histo_MC_gg_mu_pT->GetXaxis()->SetTitle("p^{#mu}_{T}");
   histo_MC_gg_mu_pT->GetYaxis()->SetTitle("a.u.");
   histo_MC_gg_mu_pT->GetXaxis()->SetRangeUser(0,8);
+  histo_MC_gg_mu_pT->GetYaxis()->SetRangeUser(0,0.2);
+  histo_MC_gg_mu_pT->GetXaxis()->SetTitleOffset(1.2);
   histo_MC_gg_mu_pT->Draw("Hist");
 
 
 
   histo_MC_CohUps_mu_pT->SetLineStyle(1);
   histo_MC_CohUps_mu_pT->SetLineWidth(4);
-  histo_MC_CohUps_mu_pT->SetLineColor(kBlue);
+  histo_MC_CohUps_mu_pT->SetLineColor(kRed);
   histo_MC_CohUps_mu_pT->Draw("same, Hist");
 
   histo_MC_IncohUps_mu_pT->SetLineStyle(1);
   histo_MC_IncohUps_mu_pT->SetLineWidth(4);
-  histo_MC_IncohUps_mu_pT->SetLineColor(kRed);
+  histo_MC_IncohUps_mu_pT->SetLineColor(kBlue);
   histo_MC_IncohUps_mu_pT->Draw("same, Hist");
   
     histo_Data_mu_pT->Draw("same, E0");
 
 
-  TLegend *l2 = new TLegend(0.60,0.70,0.9,0.9,NULL,"brNDC");
+  TLegend *l2 = new TLegend(0.1,0.7,0.4,0.9,NULL,"brNDC");
   //l2->AddEntry(histo_Data_mu_pT,"acoplanarity","");
   l2->AddEntry(histo_Data_mu_pT,"Data","l");
   l2->AddEntry(histo_MC_gg_mu_pT,"MC #gamma#gamma background","l");
@@ -223,6 +226,88 @@ cout << "******* muon rap... *******" << endl;
  */  
   
 cout << "******* dimuon pT.. *******" << endl;
+
+
+
+
+
+
+    TH1F *histo_Data_QQ_pT = (TH1F *)f1->Get("histo_QQ_pT");
+    TH1F *histo_MC_gg_QQ_pT = (TH1F *)f2->Get("histo_QQ_pT");
+    TH1F *histo_MC_CohUps_QQ_pT = (TH1F *)f3->Get("histo_QQ_pT");
+    TH1F *histo_MC_IncohUps_QQ_pT = (TH1F *)f4->Get("histo_QQ_pT");
+
+  // normalize
+  histo_Data_QQ_pT->Scale(1./(histo_Data_QQ_pT->Integral()));
+  histo_MC_gg_QQ_pT->Scale( 1./(histo_MC_gg_QQ_pT->Integral()) );
+  histo_MC_CohUps_QQ_pT->Scale( 1. / (histo_MC_CohUps_QQ_pT->Integral()) );
+  histo_MC_IncohUps_QQ_pT->Scale( 1. / (histo_MC_IncohUps_QQ_pT->Integral()) );
+
+
+ 
+  int reb_c3 = 2;
+
+  histo_Data_QQ_pT->Rebin(reb_c3);
+  histo_MC_gg_QQ_pT->Rebin(reb_c3);
+  histo_MC_CohUps_QQ_pT->Rebin(reb_c3);
+  histo_MC_IncohUps_QQ_pT->Rebin(reb_c3);
+
+
+  TCanvas *c3 = new TCanvas("c3","c3",1000,600);
+  //c3->SetLogy();
+
+  histo_Data_QQ_pT->SetLineStyle(1);
+  histo_Data_QQ_pT->SetLineWidth(4);
+  histo_Data_QQ_pT->SetLineColor(kBlack);
+
+  histo_MC_gg_QQ_pT->SetLineStyle(1);
+  histo_MC_gg_QQ_pT->SetLineWidth(4);
+  histo_MC_gg_QQ_pT->SetLineColor(kGreen);
+
+  histo_MC_gg_QQ_pT->SetStats(0); // gets rid of anoying stat box
+  histo_MC_gg_QQ_pT->SetTitle("normalised dimuon p_{T} distribution");
+  histo_MC_gg_QQ_pT->GetXaxis()->SetTitle("p^{#mu#mu}_{T}");
+  histo_MC_gg_QQ_pT->GetYaxis()->SetTitle("a.u.");
+  histo_MC_gg_QQ_pT->GetXaxis()->SetRangeUser(0,2);
+  histo_MC_gg_QQ_pT->GetYaxis()->SetRangeUser(0,0.5);
+  histo_MC_gg_QQ_pT->GetXaxis()->SetTitleOffset(1.2);
+  histo_MC_gg_QQ_pT->Draw("Hist");
+
+
+
+  histo_MC_CohUps_QQ_pT->SetLineStyle(1);
+  histo_MC_CohUps_QQ_pT->SetLineWidth(4);
+  histo_MC_CohUps_QQ_pT->SetLineColor(kRed);
+  histo_MC_CohUps_QQ_pT->Draw("same, Hist");
+
+  histo_MC_IncohUps_QQ_pT->SetLineStyle(1);
+  histo_MC_IncohUps_QQ_pT->SetLineWidth(4);
+  histo_MC_IncohUps_QQ_pT->SetLineColor(kBlue);
+  histo_MC_IncohUps_QQ_pT->Draw("same, Hist");
+  
+    histo_Data_QQ_pT->Draw("same, E0");
+
+
+  TLegend *l3 = new TLegend(0.6,0.7,0.9,0.9,NULL,"brNDC");
+  //l3->AddEntry(histo_Data_QQ_pT,"acoplanarity","");
+  l3->AddEntry(histo_Data_QQ_pT,"Data","l");
+  l3->AddEntry(histo_MC_gg_QQ_pT,"MC #gamma#gamma background","l");
+  l3->AddEntry(histo_MC_CohUps_QQ_pT,"MC coherent #Upsilon(1S)","l");
+  l3->AddEntry(histo_MC_IncohUps_QQ_pT,"MC incoherent #Upsilon(1S)","l");
+  l3->SetFillColor(10);
+  l3->Draw();
+
+
+  
+  c3->Update();
+  c3->SaveAs("AllInOne/QQ_pT.pdf");
+
+
+
+
+
+
+
 /***
  *         _ _                                               
  *        | (_)                                              
@@ -238,6 +323,80 @@ cout << "******* dimuon rap... *******" << endl;
   
   
   
+
+    TH1F *histo_Data_QQ_rap = (TH1F *)f1->Get("histo_QQ_rap");
+    TH1F *histo_MC_gg_QQ_rap = (TH1F *)f2->Get("histo_QQ_rap");
+    TH1F *histo_MC_CohUps_QQ_rap = (TH1F *)f3->Get("histo_QQ_rap");
+    TH1F *histo_MC_IncohUps_QQ_rap = (TH1F *)f4->Get("histo_QQ_rap");
+
+  // normalize
+  histo_Data_QQ_rap->Scale(1./(histo_Data_QQ_rap->Integral()));
+  histo_MC_gg_QQ_rap->Scale( 1./(histo_MC_gg_QQ_rap->Integral()) );
+  histo_MC_CohUps_QQ_rap->Scale( 1. / (histo_MC_CohUps_QQ_rap->Integral()) );
+  histo_MC_IncohUps_QQ_rap->Scale( 1. / (histo_MC_IncohUps_QQ_rap->Integral()) );
+
+
+ 
+  int reb_c4 = 1;
+
+  histo_Data_QQ_rap->Rebin(reb_c4);
+  histo_MC_gg_QQ_rap->Rebin(reb_c4);
+  histo_MC_CohUps_QQ_rap->Rebin(reb_c4);
+  histo_MC_IncohUps_QQ_rap->Rebin(reb_c4);
+
+
+  TCanvas *c4 = new TCanvas("c4","c4",1000,600);
+  //c4->SetLogy();
+
+  histo_Data_QQ_rap->SetLineStyle(1);
+  histo_Data_QQ_rap->SetLineWidth(4);
+  histo_Data_QQ_rap->SetLineColor(kBlack);
+
+  histo_MC_gg_QQ_rap->SetLineStyle(1);
+  histo_MC_gg_QQ_rap->SetLineWidth(4);
+  histo_MC_gg_QQ_rap->SetLineColor(kGreen);
+
+  histo_MC_gg_QQ_rap->SetStats(0); // gets rid of anoying stat box
+  histo_MC_gg_QQ_rap->SetTitle("normalised dimuon rapidity distribution");
+  histo_MC_gg_QQ_rap->GetXaxis()->SetTitle("y");
+  histo_MC_gg_QQ_rap->GetYaxis()->SetTitle("a.u.");
+  histo_MC_gg_QQ_rap->GetXaxis()->SetRangeUser(-4,4);
+  histo_MC_gg_QQ_rap->GetYaxis()->SetRangeUser(0,0.1);
+  histo_MC_gg_QQ_rap->GetXaxis()->SetTitleOffset(1.2);
+  histo_MC_gg_QQ_rap->Draw("Hist");
+
+
+
+  histo_MC_CohUps_QQ_rap->SetLineStyle(1);
+  histo_MC_CohUps_QQ_rap->SetLineWidth(4);
+  histo_MC_CohUps_QQ_rap->SetLineColor(kRed);
+  histo_MC_CohUps_QQ_rap->Draw("same, Hist");
+
+  histo_MC_IncohUps_QQ_rap->SetLineStyle(1);
+  histo_MC_IncohUps_QQ_rap->SetLineWidth(4);
+  histo_MC_IncohUps_QQ_rap->SetLineColor(kBlue);
+  histo_MC_IncohUps_QQ_rap->Draw("same, Hist");
+  
+    histo_Data_QQ_rap->Draw("same, E0");
+
+
+  TLegend *l4 = new TLegend(0.6,0.7,0.9,0.9,NULL,"brNDC");
+  //l4->AddEntry(histo_Data_QQ_rap,"acoplanarity","");
+  l4->AddEntry(histo_Data_QQ_rap,"Data","l");
+  l4->AddEntry(histo_MC_gg_QQ_rap,"MC #gamma#gamma background","l");
+  l4->AddEntry(histo_MC_CohUps_QQ_rap,"MC coherent #Upsilon(1S)","l");
+  l4->AddEntry(histo_MC_IncohUps_QQ_rap,"MC incoherent #Upsilon(1S)","l");
+  l4->SetFillColor(10);
+  l4->Draw();
+
+
+  
+  c4->Update();
+  c4->SaveAs("AllInOne/QQ_rap.pdf");
+
+
+
+
   
   
   
