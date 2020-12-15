@@ -67,7 +67,7 @@ void analyze(){
   
   
   bool isMC = true;
-  TString dirname = "plots_Acceptance_mu0_noTrig/";
+  TString dirname = "plots_NewAcceptance_Test_SoftID/";
 
 
 
@@ -228,10 +228,10 @@ void analyze(){
   TH2F* sp_QQ_pT_QQ_rap_Reco_Gen = new TH2F("sp_QQ_pT_QQ_rap_Reco_Gen","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,200,0,8);
   TH2F* sp_QQ_pT_QQ_rap_Acc = new TH2F("sp_QQ_pT_QQ_rap_Acc","QQ_pT vs QQ_rap; rapidity; pT",100,-10,10,200,0,8);
 
-  TH2F* sp_mu_pT_mu_rap = new TH2F("sp_mu_pT_mu_rap","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
-  TH2F* sp_mu_pT_mu_rap_Gen = new TH2F("sp_mu_pT_mu_rap_Gen","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
-  TH2F* sp_mu_pT_mu_rap_Reco_Gen = new TH2F("sp_mu_pT_mu_rap_Reco_Gen","mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
-  TH2F* sp_mu_pT_mu_rap_Acc = new TH2F("sp_mu_pT_mu_rap_Acc","Acc: mu_pT vs mu_rap; rapidity; pT",100,-10,10,200,0,10);
+  TH2F* sp_mu_pT_mu_rap = new TH2F("sp_mu_pT_mu_rap","mu_pT vs mu_rap; rapidity; pT",400,-10,10,200,0,10);
+  TH2F* sp_mu_pT_mu_rap_Gen = new TH2F("sp_mu_pT_mu_rap_Gen","mu_pT vs mu_rap; rapidity; pT",400,-10,10,200,0,10);
+  TH2F* sp_mu_pT_mu_rap_Reco_Gen = new TH2F("sp_mu_pT_mu_rap_Reco_Gen","mu_pT vs mu_rap; rapidity; pT",400,-10,10,200,0,10);
+  TH2F* sp_mu_pT_mu_rap_Acc = new TH2F("sp_mu_pT_mu_rap_Acc","Acc: mu_pT vs mu_rap; rapidity; pT",400,-10,10,200,0,10);
 
   TH2F* sp_QQ_pT_Aco = new TH2F("sp_QQ_pT_Aco","dimuon pT vs Acoplanarity; Acoplanarity; dimuon pT",200,0.0,1.0,200,0,5);
 
@@ -304,8 +304,8 @@ void analyze(){
 */ 
                                         
 
-  //for (Long64_t i=0; i<1000; i++) {
-  for (Long64_t i=0; i<nentries; i++) {
+  for (Long64_t i=0; i<500000; i++) {
+  //for (Long64_t i=0; i<nentries; i++) {
   //if (i==14771) break;
      myTree_1->GetEntry(i);
 
@@ -532,11 +532,19 @@ void analyze(){
           if (  1==1   ){
          
           // soft muon: (1==1){//
-          if  ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
+          if (  1==1   ){ // ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
 
-          // acceptance:
-         if (1==1){// ( ( abs(mupl_rap) < 2.4 && ( abs(mupl_pT) > 3.35 || ( abs(mupl_rap) > 0.3 && abs(mupl_pT) > 3.25) ||  (abs(mupl_pT) > (-2.25*abs(mupl_rap) + 5.5) && abs(mupl_rap) > 2.35) || (abs(mupl_pT) > (-4.75*abs(mupl_rap) + 10.9) &&  abs(mupl_pT) > 1.4)) ) &&
-              //( abs(mumi_rap) < 2.4 && ( abs(mumi_pT) > 3.35 || ( abs(mumi_rap) > 0.3 && abs(mumi_pT) > 3.25) ||  (abs(mumi_pT) > (-2.25*abs(mumi_rap) + 5.5) && abs(mumi_rap) > 2.35) || (abs(mumi_pT) > (-4.75*abs(mumi_rap) + 10.9) &&  abs(mumi_pT) > 1.4)) ) ) {
+
+
+
+        // SoftID acceptance: (  1==1   ){ //
+         if  ( ( (abs(mupl_rap) < 2.4)    &&   ( (abs(mupl_pT) > 3.3)     ||  ((abs(mupl_pT) > (-3.0*abs(mupl_rap) + 6.3)) && (abs(mupl_pT) > 2.1))    || ((abs(mupl_pT) > (-4.0/3.0*abs(mupl_rap) + 1.4*7.0/3.0)) &&  (abs(mupl_pT) > 1.0) && (abs(mupl_rap)>1.4))        ))  &&
+                ( (abs(mumi_rap) < 2.4)   &&   ( (abs(mumi_pT) > 3.3)     ||  ((abs(mumi_pT) > (-3.0*abs(mumi_rap) + 6.3)) && (abs(mumi_pT) > 2.1))    || ((abs(mumi_pT) > (-4.0/3.0*abs(mumi_rap) + 1.4*7.0/3.0)) &&  (abs(mumi_pT) > 1.0) && (abs(mumi_rap)>1.4))      )   )   ) {
+
+
+        // TRG acceptance: (  1==1   ){ //
+//         if  ( ( (abs(mupl_rap) < 2.4)    &&   ( (abs(mupl_pT) > 3.3)     ||  ((abs(mupl_pT) > (-3.0*abs(mupl_rap) + 6.3)) && (abs(mupl_pT) > 2.1))    || ((abs(mupl_pT) > (-1.8*abs(mupl_rap) + 4.98)) &&  (abs(mupl_pT) > 1.2))        ))  &&
+//                ( (abs(mumi_rap) < 2.4)   &&   ( (abs(mumi_pT) > 3.3)     ||  ((abs(mumi_pT) > (-3.0*abs(mumi_rap) + 6.3)) && (abs(mumi_pT) > 2.1))    || ((abs(mumi_pT) > (-1.8*abs(mumi_rap) + 4.98)) &&  (abs(mumi_pT) > 1.2))      )   )   ) {
 
 
 

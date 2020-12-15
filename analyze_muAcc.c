@@ -57,7 +57,6 @@ void analyze_muAcc(){
   
   bool isMC = true;
 
-  TString dirname = "plots_muAcc_gg_muOpen/";
 
 
 
@@ -277,12 +276,19 @@ void analyze_muAcc(){
 
 
   ofstream textfile;
+  system("rm -r plots");
   system("mkdir plots");
   system("cp analyze_muAcc.c plots/");
   
 	int Ntrk_count=0;
 	int QQ_size_count=0;
 	int Ntracks_count=0;
+ 
+ 
+ 
+   TString dirname = "muAcc_gg_SoftID+OpenTrig/";
+
+ 
   
 	cout << endl << "******* filling the histos *******" << endl << endl;
 
@@ -295,6 +301,9 @@ void analyze_muAcc(){
 *                                                          | |    
 * 		                                                   |_|    
 */ 
+                 
+                 
+                 
                                         
 
   //for (Long64_t i=0; i<100; i++) {
@@ -373,8 +382,21 @@ void analyze_muAcc(){
 *     \___| \_/ \___|_| |_|\__| |___/\___|_|\___|\___|\__|_|\___/|_| |_|
 *                                                                       
 */                                                                       
-// // mu_rap > -2.4 && mu_rap < 2.4  &&
-   if (  ((HLTrig&32)==32) ){
+
+
+//       TRIGGER SELECTION:
+//       ((HLTrig&1)==1)   1 - HLT_HIUPC_DoubleMu0_NotMBHF2AND_MaxPixelTrack_v1
+//       ((HLTrig&2)==2)   2 - HLT_HIUPC_DoubleMu0_NotMBHF2AND_v1
+//       ((HLTrig&4)==4)   3 - HLT_HIUPC_SingleMu0_NotMBHF2AND_MaxPixelTrack_v1
+//       ((HLTrig&8)==8)   4 - HLT_HIUPC_SingleMu0_NotMBHF2AND_v1
+//       ((HLTrig&16)==16) 5 - HLT_HIUPC_SingleMuOpen_NotMBHF2AND_MaxPixelTrack_v1
+//       ((HLTrig&32)==32) 6 - HLT_HIUPC_SingleMuOpen_NotMBHF2AND_v1
+
+
+
+
+// // mu_rap > -2.4 && mu_rap < 2.4  && //  
+   if ( ((HLTrig&32)==32) ){
           
           // soft mu ID
           TMOneStaTight_mu = tree->Reco_mu_TMOneStaTight[Reco_mu];

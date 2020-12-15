@@ -196,14 +196,222 @@ cout << endl << "******* getting histos *******" << endl << endl;
 	sp_QQ_pT_QQ_rap->Draw("colz");
 	c19->SaveAs("./plots/pdf/sp_QQ_pT_QQ_rap.pdf"); 
 	
+	
+	
+	
+	
+	
+	
+	
+  float point1eta = 1.0;
+  float point1pT = 3.3;
+
+  float point2eta = 1.4;
+  float point2pT = 2.1;
+
+  float point3eta = 1.6;
+  float point3pT = point2pT;
+
+  float point4eta = 2.1;
+  float point4pT = 1.2;
+
+  TLine *l913 = new TLine(-0.3, point1pT, 0.3, point1pT);
+  TLine *l913b = new TLine(0.3, point1pT, 0.3, point1pT);
+  TLine *l913c = new TLine(0.3, point1pT, point1eta, point1pT);
+  TLine *l914 = new  TLine(point1eta, point1pT, point2eta, point2pT);
+  TLine *l915 = new  TLine(point2eta, point2pT, point3eta, point3pT);
+  TLine *l916 = new  TLine(point3eta, point3pT, point4eta, point4pT);
+  TLine *l917 = new  TLine(point4eta, point4pT, 2.4, point4pT);
+  TLine *l918 = new  TLine(2.4, point4pT, 2.4, 8.0);
+  TLine *l923b = new TLine(-0.3, point1pT, -0.3, point1pT);
+  TLine *l923c = new TLine(-0.3, point1pT, -1*point1eta, point1pT);
+  TLine *l924 = new  TLine(-1*point1eta, point1pT, -1*point2eta, point2pT);
+  TLine *l925 = new  TLine(-1*point2eta, point2pT, -1*point3eta, point3pT);
+  TLine *l926 = new  TLine(-1*point3eta, point3pT, -1*point4eta, point4pT);
+  TLine *l927 = new  TLine(-1*point4eta, point4pT, -2.4, point4pT);
+  TLine *l928 = new  TLine(-2.4, point4pT, -2.4, 8.0);
+  
+  l913->SetLineColor(kRed);
+  l913->SetLineWidth(2);
+  l913b->SetLineColor(kRed);
+  l913b->SetLineWidth(2);
+  l913c->SetLineColor(kRed);
+  l913c->SetLineWidth(2);
+  l914->SetLineColor(kRed);
+  l914->SetLineWidth(2);
+  l915->SetLineColor(kRed);
+  l915->SetLineWidth(2);
+  l916->SetLineColor(kRed);
+  l916->SetLineWidth(2);
+  l917->SetLineColor(kRed);
+  l917->SetLineWidth(2);
+  l918->SetLineColor(kRed);
+  l918->SetLineWidth(2);
+  l923b->SetLineColor(kRed);
+  l923b->SetLineWidth(2);
+  l923c->SetLineColor(kRed);
+  l923c->SetLineWidth(2);
+  l924->SetLineColor(kRed);
+  l924->SetLineWidth(2);
+  l925->SetLineColor(kRed);
+  l925->SetLineWidth(2);
+  l926->SetLineColor(kRed);
+  l926->SetLineWidth(2);
+  l927->SetLineColor(kRed);
+  l927->SetLineWidth(2);
+  l928->SetLineColor(kRed);
+  l928->SetLineWidth(2);
+	
+	
+	
+	
+  float point_ShuaiNEW_1eta = 1.0;
+  float point_ShuaiNEW_1pT = 3.3;
+  
+  float point_ShuaiNEW_2eta = 1.4;
+  float point_ShuaiNEW_2pT = 2.1;
+
+  float point_ShuaiNEW_3eta = 1.4;
+  float point_ShuaiNEW_3pT = 1.4;
+
+  float point_ShuaiNEW_4eta = 1.7;
+  float point_ShuaiNEW_4pT = 1.0;
+  
+  TLine *l713 = new TLine(-0.3, 3.3, 0.3, 3.3);
+  TLine *l713b = new TLine(0.3, 3.3, 0.3, 3.3);
+  TLine *l713c = new TLine(0.3, point_ShuaiNEW_1pT, point_ShuaiNEW_1eta, point_ShuaiNEW_1pT);
+  TLine *l714 = new  TLine(point_ShuaiNEW_1eta, point_ShuaiNEW_1pT, point_ShuaiNEW_2eta, point_ShuaiNEW_2pT);
+  TLine *l715 = new  TLine(point_ShuaiNEW_2eta, point_ShuaiNEW_2pT, point_ShuaiNEW_3eta, point_ShuaiNEW_3pT);
+  TLine *l716 = new  TLine(point_ShuaiNEW_3eta, point_ShuaiNEW_3pT, point_ShuaiNEW_4eta, point_ShuaiNEW_4pT);
+  TLine *l717 = new  TLine(point_ShuaiNEW_4eta, point_ShuaiNEW_4pT, 2.4, point_ShuaiNEW_4pT);
+  TLine *l718 = new  TLine(2.4, point_ShuaiNEW_4pT, 2.4, 8.0);
+  TLine *l723b = new TLine(-0.3, point_ShuaiNEW_1pT, -0.3, point_ShuaiNEW_1pT);
+  TLine *l723c = new TLine(-0.3, point_ShuaiNEW_1pT, -1*point_ShuaiNEW_1eta, point_ShuaiNEW_1pT);
+  TLine *l724 = new  TLine(-1*point_ShuaiNEW_1eta, point_ShuaiNEW_1pT, -1*point_ShuaiNEW_2eta, point_ShuaiNEW_2pT);
+  TLine *l725 = new  TLine(-1*point_ShuaiNEW_2eta, point_ShuaiNEW_2pT, -1*point_ShuaiNEW_3eta, point_ShuaiNEW_3pT);
+  TLine *l726 = new  TLine(-1*point_ShuaiNEW_3eta, point_ShuaiNEW_3pT, -1*point_ShuaiNEW_4eta, point_ShuaiNEW_4pT);
+  TLine *l727 = new  TLine(-1*point_ShuaiNEW_4eta, point_ShuaiNEW_4pT, -2.4, point_ShuaiNEW_4pT);
+  TLine *l728 = new  TLine(-2.4, point_ShuaiNEW_4pT, -2.4, 8.0);
+  
+  l713->SetLineColor(kBlack);
+  l713->SetLineWidth(2);
+  l713b->SetLineColor(kBlack);
+  l713b->SetLineWidth(2);
+  l713c->SetLineColor(kBlack);
+  l713c->SetLineWidth(2);
+  l714->SetLineColor(kBlack);
+  l714->SetLineWidth(2);
+  l715->SetLineColor(kBlack);
+  l715->SetLineWidth(2);
+  l716->SetLineColor(kBlack);
+  l716->SetLineWidth(2);
+  l717->SetLineColor(kBlack);
+  l717->SetLineWidth(2);
+  l718->SetLineColor(kBlack);
+  l718->SetLineWidth(2);
+  l723b->SetLineColor(kBlack);
+  l723b->SetLineWidth(2);
+  l723c->SetLineColor(kBlack);
+  l723c->SetLineWidth(2);
+  l724->SetLineColor(kBlack);
+  l724->SetLineWidth(2);
+  l725->SetLineColor(kBlack);
+  l725->SetLineWidth(2);
+  l726->SetLineColor(kBlack);
+  l726->SetLineWidth(2);
+  l727->SetLineColor(kBlack);
+  l727->SetLineWidth(2);
+  l728->SetLineColor(kBlack);
+  l728->SetLineWidth(2);
+
+  
+  l713->SetLineColor(kBlack);
+  l713->SetLineStyle(3);
+  l713b->SetLineColor(kBlack);
+  l713b->SetLineStyle(3);
+  l713c->SetLineColor(kBlack);
+  l713c->SetLineStyle(3);
+  l714->SetLineColor(kBlack);
+  l714->SetLineStyle(3);
+  l715->SetLineColor(kBlack);
+  l715->SetLineStyle(3);
+  l716->SetLineColor(kBlack);
+  l716->SetLineStyle(3);
+  l717->SetLineColor(kBlack);
+  l717->SetLineStyle(3);
+  l718->SetLineColor(kBlack);
+  l718->SetLineStyle(3);
+  l723b->SetLineColor(kBlack);
+  l723b->SetLineStyle(3);
+  l723c->SetLineColor(kBlack);
+  l723c->SetLineStyle(3);
+  l724->SetLineColor(kBlack);
+  l724->SetLineStyle(3);
+  l725->SetLineColor(kBlack);
+  l725->SetLineStyle(3);
+  l726->SetLineColor(kBlack);
+  l726->SetLineStyle(3);
+  l727->SetLineColor(kBlack);
+  l727->SetLineStyle(3);
+  l728->SetLineColor(kBlack);
+  l728->SetLineStyle(3);
+
+	
+	
+	
+	
+	
 	TCanvas *c22 = new TCanvas("c22","c22",1000,600);
 	sp_mu_pT_mu_rap->SetStats(0); // gets rid of anoying stat box
 	sp_mu_pT_mu_rap->Draw("colz");
 	c22->SaveAs("./plots/pdf/sp_mu_pT_mu_rap.pdf"); 
+	
+    l913->DrawClone("same");
+    l913b->DrawClone("same");
+    l913c->DrawClone("same");
+    l914->DrawClone("same");
+    l915->DrawClone("same");
+    l916->DrawClone("same");
+    l917->DrawClone("same");
+    l918->DrawClone("same");
+    l923b->DrawClone("same");
+    l923c->DrawClone("same");
+    l924->DrawClone("same");
+    l925->DrawClone("same");
+    l926->DrawClone("same");
+    l927->DrawClone("same");
+    l928->DrawClone("same");
+    
+	c22->SaveAs("./plots/pdf/sp_mu_pT_mu_rap_profile.pdf"); 
+
+
+    l713->DrawClone("same");
+    l713b->DrawClone("same");
+    l713c->DrawClone("same");
+    l714->DrawClone("same");
+    l715->DrawClone("same");
+    l716->DrawClone("same");
+    l717->DrawClone("same");
+    l718->DrawClone("same");
+    l723b->DrawClone("same");
+    l723c->DrawClone("same");
+    l724->DrawClone("same");
+    l725->DrawClone("same");
+    l726->DrawClone("same");
+    l727->DrawClone("same");
+    l728->DrawClone("same");
+    
+	c22->SaveAs("./plots/pdf/sp_mu_pT_mu_rap_profile2.pdf"); 
+
+
+
+
+
+
+
 
 	
 	TCanvas *c88 = new TCanvas("c88","c88",1000,600);
-
 	sp_QQ_pT_Aco->SetStats(0); // gets rid of anoying stat box
 	sp_QQ_pT_Aco->SetTitle("dimuon p_{T} vs acoplanarity");
 	sp_QQ_pT_Aco->GetXaxis()->SetTitle("A");

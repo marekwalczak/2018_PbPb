@@ -42,7 +42,7 @@ cout << endl << "******* making histos *******" << endl << endl;
   float point3pT = point2pT;
 
   float point4eta = 2.1;
-  float point4pT = 1.1;
+  float point4pT = 1.2;
 
   TLine *l913 = new TLine(-0.3, point1pT, 0.3, point1pT);
   TLine *l913b = new TLine(0.3, point1pT, 0.3, point1pT);
@@ -188,96 +188,301 @@ cout << endl << "******* making histos *******" << endl << endl;
 
 
 
-  float point_guillaume_1eta = 1.1;
-  float point_guillaume_1pT = 3.3;
+  float point_ShuaiNEW_1eta = 1.0;
+  float point_ShuaiNEW_1pT = 3.3;
   
-  float point_guillaume_2eta = 1.4;
-  float point_guillaume_2pT = 2.1;
+  float point_ShuaiNEW_2eta = 1.4;
+  float point_ShuaiNEW_2pT = 2.1;
 
-  float point_guillaume_3eta = 1.55;
-  float point_guillaume_3pT = 2.1;
+  float point_ShuaiNEW_3eta = 1.4;
+  float point_ShuaiNEW_3pT = 1.4;
 
-  float point_guillaume_4eta = 2.2;
-  float point_guillaume_4pT = 1.2;
+  float point_ShuaiNEW_4eta = 1.7;
+  float point_ShuaiNEW_4pT = 1.0;
   
-  TLine *l713 = new TLine(-0.3, 3.4, 0.3, 3.4);
-  TLine *l713b = new TLine(0.3, 3.4, 0.3, 3.4);
-  TLine *l713c = new TLine(0.3, point_guillaume_1pT, point_guillaume_1eta, point_guillaume_1pT);
-  TLine *l714 = new  TLine(point_guillaume_1eta, point_guillaume_1pT, point_guillaume_2eta, point_guillaume_2pT);
-  TLine *l715 = new  TLine(point_guillaume_2eta, point_guillaume_2pT, point_guillaume_3eta, point_guillaume_3pT);
-  TLine *l716 = new  TLine(point_guillaume_3eta, point_guillaume_3pT, point_guillaume_4eta, point_guillaume_4pT);
-  TLine *l717 = new  TLine(point_guillaume_4eta, point_guillaume_4pT, 2.4, point_guillaume_4pT);
-  TLine *l718 = new  TLine(2.4, point_guillaume_4pT, 2.4, 8.0);
-  TLine *l723b = new TLine(-0.3, point_guillaume_1pT, -0.3, point_guillaume_1pT);
-  TLine *l723c = new TLine(-0.3, point_guillaume_1pT, -1*point_guillaume_1eta, point_guillaume_1pT);
-  TLine *l724 = new  TLine(-1*point_guillaume_1eta, point_guillaume_1pT, -1*point_guillaume_2eta, point_guillaume_2pT);
-  TLine *l725 = new  TLine(-1*point_guillaume_2eta, point_guillaume_2pT, -1*point_guillaume_3eta, point_guillaume_3pT);
-  TLine *l726 = new  TLine(-1*point_guillaume_3eta, point_guillaume_3pT, -1*point_guillaume_4eta, point_guillaume_4pT);
-  TLine *l727 = new  TLine(-1*point_guillaume_4eta, point_guillaume_4pT, -2.4, point_guillaume_4pT);
-  TLine *l728 = new  TLine(-2.4, point_guillaume_4pT, -2.4, 8.0);
+  TLine *l713 = new TLine(-0.3, 3.3, 0.3, 3.3);
+  TLine *l713b = new TLine(0.3, 3.3, 0.3, 3.3);
+  TLine *l713c = new TLine(0.3, point_ShuaiNEW_1pT, point_ShuaiNEW_1eta, point_ShuaiNEW_1pT);
+  TLine *l714 = new  TLine(point_ShuaiNEW_1eta, point_ShuaiNEW_1pT, point_ShuaiNEW_2eta, point_ShuaiNEW_2pT);
+  TLine *l715 = new  TLine(point_ShuaiNEW_2eta, point_ShuaiNEW_2pT, point_ShuaiNEW_3eta, point_ShuaiNEW_3pT);
+  TLine *l716 = new  TLine(point_ShuaiNEW_3eta, point_ShuaiNEW_3pT, point_ShuaiNEW_4eta, point_ShuaiNEW_4pT);
+  TLine *l717 = new  TLine(point_ShuaiNEW_4eta, point_ShuaiNEW_4pT, 2.4, point_ShuaiNEW_4pT);
+  TLine *l718 = new  TLine(2.4, point_ShuaiNEW_4pT, 2.4, 8.0);
+  TLine *l723b = new TLine(-0.3, point_ShuaiNEW_1pT, -0.3, point_ShuaiNEW_1pT);
+  TLine *l723c = new TLine(-0.3, point_ShuaiNEW_1pT, -1*point_ShuaiNEW_1eta, point_ShuaiNEW_1pT);
+  TLine *l724 = new  TLine(-1*point_ShuaiNEW_1eta, point_ShuaiNEW_1pT, -1*point_ShuaiNEW_2eta, point_ShuaiNEW_2pT);
+  TLine *l725 = new  TLine(-1*point_ShuaiNEW_2eta, point_ShuaiNEW_2pT, -1*point_ShuaiNEW_3eta, point_ShuaiNEW_3pT);
+  TLine *l726 = new  TLine(-1*point_ShuaiNEW_3eta, point_ShuaiNEW_3pT, -1*point_ShuaiNEW_4eta, point_ShuaiNEW_4pT);
+  TLine *l727 = new  TLine(-1*point_ShuaiNEW_4eta, point_ShuaiNEW_4pT, -2.4, point_ShuaiNEW_4pT);
+  TLine *l728 = new  TLine(-2.4, point_ShuaiNEW_4pT, -2.4, 8.0);
   
-  l713->SetLineColor(kGreen);
+  l713->SetLineColor(kBlack);
   l713->SetLineWidth(2);
-  l713b->SetLineColor(kGreen);
+  l713b->SetLineColor(kBlack);
   l713b->SetLineWidth(2);
-  l713c->SetLineColor(kGreen);
+  l713c->SetLineColor(kBlack);
   l713c->SetLineWidth(2);
-  l714->SetLineColor(kGreen);
+  l714->SetLineColor(kBlack);
   l714->SetLineWidth(2);
-  l715->SetLineColor(kGreen);
+  l715->SetLineColor(kBlack);
   l715->SetLineWidth(2);
-  l716->SetLineColor(kGreen);
+  l716->SetLineColor(kBlack);
   l716->SetLineWidth(2);
-  l717->SetLineColor(kGreen);
+  l717->SetLineColor(kBlack);
   l717->SetLineWidth(2);
-  l718->SetLineColor(kGreen);
+  l718->SetLineColor(kBlack);
   l718->SetLineWidth(2);
-  l723b->SetLineColor(kGreen);
+  l723b->SetLineColor(kBlack);
   l723b->SetLineWidth(2);
-  l723c->SetLineColor(kGreen);
+  l723c->SetLineColor(kBlack);
   l723c->SetLineWidth(2);
-  l724->SetLineColor(kGreen);
+  l724->SetLineColor(kBlack);
   l724->SetLineWidth(2);
-  l725->SetLineColor(kGreen);
+  l725->SetLineColor(kBlack);
   l725->SetLineWidth(2);
-  l726->SetLineColor(kGreen);
+  l726->SetLineColor(kBlack);
   l726->SetLineWidth(2);
-  l727->SetLineColor(kGreen);
+  l727->SetLineColor(kBlack);
   l727->SetLineWidth(2);
-  l728->SetLineColor(kGreen);
+  l728->SetLineColor(kBlack);
   l728->SetLineWidth(2);
 
   
-  l713->SetLineColor(kGreen);
+  l713->SetLineColor(kBlack);
   l713->SetLineStyle(3);
-  l713b->SetLineColor(kGreen);
+  l713b->SetLineColor(kBlack);
   l713b->SetLineStyle(3);
-  l713c->SetLineColor(kGreen);
+  l713c->SetLineColor(kBlack);
   l713c->SetLineStyle(3);
-  l714->SetLineColor(kGreen);
+  l714->SetLineColor(kBlack);
   l714->SetLineStyle(3);
-  l715->SetLineColor(kGreen);
+  l715->SetLineColor(kBlack);
   l715->SetLineStyle(3);
-  l716->SetLineColor(kGreen);
+  l716->SetLineColor(kBlack);
   l716->SetLineStyle(3);
-  l717->SetLineColor(kGreen);
+  l717->SetLineColor(kBlack);
   l717->SetLineStyle(3);
-  l718->SetLineColor(kGreen);
+  l718->SetLineColor(kBlack);
   l718->SetLineStyle(3);
-  l723b->SetLineColor(kGreen);
+  l723b->SetLineColor(kBlack);
   l723b->SetLineStyle(3);
-  l723c->SetLineColor(kGreen);
+  l723c->SetLineColor(kBlack);
   l723c->SetLineStyle(3);
-  l724->SetLineColor(kGreen);
+  l724->SetLineColor(kBlack);
   l724->SetLineStyle(3);
-  l725->SetLineColor(kGreen);
+  l725->SetLineColor(kBlack);
   l725->SetLineStyle(3);
-  l726->SetLineColor(kGreen);
+  l726->SetLineColor(kBlack);
   l726->SetLineStyle(3);
-  l727->SetLineColor(kGreen);
+  l727->SetLineColor(kBlack);
   l727->SetLineStyle(3);
-  l728->SetLineColor(kGreen);
+  l728->SetLineColor(kBlack);
   l728->SetLineStyle(3);
+
+/*
+( 0 < | η | 0.3 & p T > 3.4 GeV ) OR
+( 0.3 < | η | 1.1 & p T > 3.3 GeV ) OR
+( 1.1 < | η | 1.4 & p T > 7.7 − 4.0 × | η | GeV ) OR
+( 1.4 < | η | 1.55 & p T > 2.1 GeV ) OR
+( 1.55 < | η | 2.2 & p T > 4.25 − 1.39 × | η | GeV ) OR
+( 2.2 < | η | 2.4 & p T > 1.2 GeV )
+*/
+
+
+
+  float point_hybridSoftID_1eta = 1.1;
+  float point_hybridSoftID_1pT = 3.3;
+  
+  float point_hybridSoftID_2eta = 1.4;
+  float point_hybridSoftID_2pT = 2.1;
+
+  float point_hybridSoftID_3eta = 1.55;
+  float point_hybridSoftID_3pT = 2.1;
+
+  float point_hybridSoftID_4eta = 2.2;
+  float point_hybridSoftID_4pT = 1.2;
+  
+  TLine *l613 = new TLine(-0.3, 3.4, 0.3, 3.4);
+  TLine *l613b = new TLine(0.3, 3.4, 0.3, 3.4);
+  TLine *l613c = new TLine(0.3, point_hybridSoftID_1pT, point_hybridSoftID_1eta, point_hybridSoftID_1pT);
+  TLine *l614 = new  TLine(point_hybridSoftID_1eta, point_hybridSoftID_1pT, point_hybridSoftID_2eta, point_hybridSoftID_2pT);
+  TLine *l615 = new  TLine(point_hybridSoftID_2eta, point_hybridSoftID_2pT, point_hybridSoftID_3eta, point_hybridSoftID_3pT);
+  TLine *l616 = new  TLine(point_hybridSoftID_3eta, point_hybridSoftID_3pT, point_hybridSoftID_4eta, point_hybridSoftID_4pT);
+  TLine *l617 = new  TLine(point_hybridSoftID_4eta, point_hybridSoftID_4pT, 2.4, point_hybridSoftID_4pT);
+  TLine *l618 = new  TLine(2.4, point_hybridSoftID_4pT, 2.4, 8.0);
+  TLine *l623b = new TLine(-0.3, point_hybridSoftID_1pT, -0.3, point_hybridSoftID_1pT);
+  TLine *l623c = new TLine(-0.3, point_hybridSoftID_1pT, -1*point_hybridSoftID_1eta, point_hybridSoftID_1pT);
+  TLine *l624 = new  TLine(-1*point_hybridSoftID_1eta, point_hybridSoftID_1pT, -1*point_hybridSoftID_2eta, point_hybridSoftID_2pT);
+  TLine *l625 = new  TLine(-1*point_hybridSoftID_2eta, point_hybridSoftID_2pT, -1*point_hybridSoftID_3eta, point_hybridSoftID_3pT);
+  TLine *l626 = new  TLine(-1*point_hybridSoftID_3eta, point_hybridSoftID_3pT, -1*point_hybridSoftID_4eta, point_hybridSoftID_4pT);
+  TLine *l627 = new  TLine(-1*point_hybridSoftID_4eta, point_hybridSoftID_4pT, -2.4, point_hybridSoftID_4pT);
+  TLine *l628 = new  TLine(-2.4, point_hybridSoftID_4pT, -2.4, 8.0);
+  
+  l613->SetLineColor(kBlue);
+  l613->SetLineWidth(2);
+  l613b->SetLineColor(kBlue);
+  l613b->SetLineWidth(2);
+  l613c->SetLineColor(kBlue);
+  l613c->SetLineWidth(2);
+  l614->SetLineColor(kBlue);
+  l614->SetLineWidth(2);
+  l615->SetLineColor(kBlue);
+  l615->SetLineWidth(2);
+  l616->SetLineColor(kBlue);
+  l616->SetLineWidth(2);
+  l617->SetLineColor(kBlue);
+  l617->SetLineWidth(2);
+  l618->SetLineColor(kBlue);
+  l618->SetLineWidth(2);
+  l623b->SetLineColor(kBlue);
+  l623b->SetLineWidth(2);
+  l623c->SetLineColor(kBlue);
+  l623c->SetLineWidth(2);
+  l624->SetLineColor(kBlue);
+  l624->SetLineWidth(2);
+  l625->SetLineColor(kBlue);
+  l625->SetLineWidth(2);
+  l626->SetLineColor(kBlue);
+  l626->SetLineWidth(2);
+  l627->SetLineColor(kBlue);
+  l627->SetLineWidth(2);
+  l628->SetLineColor(kBlue);
+  l628->SetLineWidth(2);
+
+
+  l613->SetLineColor(kBlue);
+  l613->SetLineStyle(4);
+  l613b->SetLineColor(kBlue);
+  l613b->SetLineStyle(4);
+  l613c->SetLineColor(kBlue);
+  l613c->SetLineStyle(4);
+  l614->SetLineColor(kBlue);
+  l614->SetLineStyle(4);
+  l615->SetLineColor(kBlue);
+  l615->SetLineStyle(4);
+  l616->SetLineColor(kBlue);
+  l616->SetLineStyle(4);
+  l617->SetLineColor(kBlue);
+  l617->SetLineStyle(4);
+  l618->SetLineColor(kBlue);
+  l618->SetLineStyle(4);
+  l623b->SetLineColor(kBlue);
+  l623b->SetLineStyle(4);
+  l623c->SetLineColor(kBlue);
+  l623c->SetLineStyle(4);
+  l624->SetLineColor(kBlue);
+  l624->SetLineStyle(4);
+  l625->SetLineColor(kBlue);
+  l625->SetLineStyle(4);
+  l626->SetLineColor(kBlue);
+  l626->SetLineStyle(4);
+  l627->SetLineColor(kBlue);
+  l627->SetLineStyle(4);
+  l628->SetLineColor(kBlue);
+  l628->SetLineStyle(4);
+
+
+
+
+
+
+  float point_softID_1eta = 1.0;
+  float point_softID_1pT = 3.3;
+  
+  float point_softID_2eta = 1.3;
+  float point_softID_2pT = 2.1;
+
+  float point_softID_3eta = 1.3;
+  float point_softID_3pT = 1.5;
+
+  float point_softID_4eta = 1.9;
+  float point_softID_4pT = 0.9;
+
+
+
+  
+  TLine *l513 = new TLine(-0.3, 3.3, 0.3, 3.3);
+  TLine *l513b = new TLine(0.3, 3.3, 0.3, 3.3);
+  TLine *l513c = new TLine(0.3, point_softID_1pT, point_softID_1eta, point_softID_1pT);
+  TLine *l514 = new  TLine(point_softID_1eta, point_softID_1pT, point_softID_2eta, point_softID_2pT);
+  TLine *l515 = new  TLine(point_softID_2eta, point_softID_2pT, point_softID_3eta, point_softID_3pT);
+  TLine *l516 = new  TLine(point_softID_3eta, point_softID_3pT, point_softID_4eta, point_softID_4pT);
+  TLine *l517 = new  TLine(point_softID_4eta, point_softID_4pT, 2.4, point_softID_4pT);
+  TLine *l518 = new  TLine(2.4, point_softID_4pT, 2.4, 8.0);
+  TLine *l523b = new TLine(-0.3, point_softID_1pT, -0.3, point_softID_1pT);
+  TLine *l523c = new TLine(-0.3, point_softID_1pT, -1*point_softID_1eta, point_softID_1pT);
+  TLine *l524 = new  TLine(-1*point_softID_1eta, point_softID_1pT, -1*point_softID_2eta, point_softID_2pT);
+  TLine *l525 = new  TLine(-1*point_softID_2eta, point_softID_2pT, -1*point_softID_3eta, point_softID_3pT);
+  TLine *l526 = new  TLine(-1*point_softID_3eta, point_softID_3pT, -1*point_softID_4eta, point_softID_4pT);
+  TLine *l527 = new  TLine(-1*point_softID_4eta, point_softID_4pT, -2.4, point_softID_4pT);
+  TLine *l528 = new  TLine(-2.4, point_softID_4pT, -2.4, 8.0);
+  
+  l513->SetLineColor(kCyan);
+  l513->SetLineWidth(2);
+  l513b->SetLineColor(kCyan);
+  l513b->SetLineWidth(2);
+  l513c->SetLineColor(kCyan);
+  l513c->SetLineWidth(2);
+  l514->SetLineColor(kCyan);
+  l514->SetLineWidth(2);
+  l515->SetLineColor(kCyan);
+  l515->SetLineWidth(2);
+  l516->SetLineColor(kCyan);
+  l516->SetLineWidth(2);
+  l517->SetLineColor(kCyan);
+  l517->SetLineWidth(2);
+  l518->SetLineColor(kCyan);
+  l518->SetLineWidth(2);
+  l523b->SetLineColor(kCyan);
+  l523b->SetLineWidth(2);
+  l523c->SetLineColor(kCyan);
+  l523c->SetLineWidth(2);
+  l524->SetLineColor(kCyan);
+  l524->SetLineWidth(2);
+  l525->SetLineColor(kCyan);
+  l525->SetLineWidth(2);
+  l526->SetLineColor(kCyan);
+  l526->SetLineWidth(2);
+  l527->SetLineColor(kCyan);
+  l527->SetLineWidth(2);
+  l528->SetLineColor(kCyan);
+  l528->SetLineWidth(2);
+
+
+  l513->SetLineColor(kCyan);
+  l513->SetLineStyle(5);
+  l513b->SetLineColor(kCyan);
+  l513b->SetLineStyle(5);
+  l513c->SetLineColor(kCyan);
+  l513c->SetLineStyle(5);
+  l514->SetLineColor(kCyan);
+  l514->SetLineStyle(5);
+  l515->SetLineColor(kCyan);
+  l515->SetLineStyle(5);
+  l516->SetLineColor(kCyan);
+  l516->SetLineStyle(5);
+  l517->SetLineColor(kCyan);
+  l517->SetLineStyle(5);
+  l518->SetLineColor(kCyan);
+  l518->SetLineStyle(5);
+  l523b->SetLineColor(kCyan);
+  l523b->SetLineStyle(5);
+  l523c->SetLineColor(kCyan);
+  l523c->SetLineStyle(5);
+  l524->SetLineColor(kCyan);
+  l524->SetLineStyle(5);
+  l525->SetLineColor(kCyan);
+  l525->SetLineStyle(5);
+  l526->SetLineColor(kCyan);
+  l526->SetLineStyle(5);
+  l527->SetLineColor(kCyan);
+  l527->SetLineStyle(5);
+  l528->SetLineColor(kCyan);
+  l528->SetLineStyle(5);
+
+
+
+
 
 
 
@@ -415,11 +620,13 @@ system("mkdir plots/Acc_2");
 
   sp_mu_pT_mu_rap_Acc_123->SetStats(0); // gets rid of anoying stat box
 
-  TLegend *l123 = new TLegend(0.1,0.70,0.22,0.90,NULL,"brNDC");
+  TLegend *l123 = new TLegend(0.1,0.80,0.25,0.90,NULL,"brNDC");
   l123->AddEntry(sp_mu_pT_mu_rap_Acc_123,"Reco / Gen", "");
-  l123->AddEntry(l913,"Marek", "l");
-  l123->AddEntry(l813,"Shuai", "l");
-  l123->AddEntry(l713,"AN2018_316", "l");
+  l123->AddEntry(l913,"Marek - SoftID + Trig", "l");
+//  l123->AddEntry(l813,"Shuai", "l");
+  l123->AddEntry(l713,"Shuai - SoftID", "l");
+//  l123->AddEntry(l613,"hybridSoftID", "l");
+//  l123->AddEntry(l513,"SoftID - Marek", "l");
   l123->SetFillColor(10);
   l123->Draw();
 
@@ -442,7 +649,7 @@ system("mkdir plots/Acc_2");
     l928->DrawClone("same");
 
 
-
+/*
     l813->DrawClone("same");
     l813b->DrawClone("same");
     l813c->DrawClone("same");
@@ -459,7 +666,7 @@ system("mkdir plots/Acc_2");
     l827->DrawClone("same");
     l828->DrawClone("same");
 
-
+*/
 
     l713->DrawClone("same");
     l713b->DrawClone("same");
@@ -477,6 +684,45 @@ system("mkdir plots/Acc_2");
     l727->DrawClone("same");
     l728->DrawClone("same");
 
+/*
+
+
+    l613->DrawClone("same");
+    l613b->DrawClone("same");
+    l613c->DrawClone("same");
+    l614->DrawClone("same");
+    l615->DrawClone("same");
+    l616->DrawClone("same");
+    l617->DrawClone("same");
+    l618->DrawClone("same");
+    l623b->DrawClone("same");
+    l623c->DrawClone("same");
+    l624->DrawClone("same");
+    l625->DrawClone("same");
+    l626->DrawClone("same");
+    l627->DrawClone("same");
+    l628->DrawClone("same");
+
+
+
+
+
+    l513->DrawClone("same");
+    l513b->DrawClone("same");
+    l513c->DrawClone("same");
+    l514->DrawClone("same");
+    l515->DrawClone("same");
+    l516->DrawClone("same");
+    l517->DrawClone("same");
+    l518->DrawClone("same");
+    l523b->DrawClone("same");
+    l523c->DrawClone("same");
+    l524->DrawClone("same");
+    l525->DrawClone("same");
+    l526->DrawClone("same");
+    l527->DrawClone("same");
+    l528->DrawClone("same");
+*/
 
 
 
