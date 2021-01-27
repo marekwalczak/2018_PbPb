@@ -177,6 +177,9 @@ void analyze_muAcc(){
     int Gen_mu_whichRec=0;
     int index_finder = 0;
     
+    // trigger for muons
+    int mu_trig;
+    
     // soft mu ID
     bool TMOneStaTight_mu;
     bool TMOneStaTight_mumi;
@@ -286,7 +289,7 @@ void analyze_muAcc(){
  
  
  
-   TString dirname = "muAcc_gg_SoftID+OpenTrig/";
+   TString dirname = "muAcc_gg_TRG_corrected_acctest/";
 
  
   
@@ -393,10 +396,11 @@ void analyze_muAcc(){
 //       ((HLTrig&32)==32) 6 - HLT_HIUPC_SingleMuOpen_NotMBHF2AND_v1
 
 
+          mu_trig = tree->Reco_mu_trig[Reco_mu];
 
 
 // // mu_rap > -2.4 && mu_rap < 2.4  && //  
-   if ( ((HLTrig&32)==32) ){
+   if ( 1==1 ){ // ((mu_trig&32)==32) 
           
           // soft mu ID
           TMOneStaTight_mu = tree->Reco_mu_TMOneStaTight[Reco_mu];
@@ -429,11 +433,25 @@ void analyze_muAcc(){
 			    
                 Gen_Reco_co++;
 
+// SOFT ID acceptance test
+/*
+                if  ( ! ( (abs(Gen_mu_rap) < 2.4)    &&  ( ( Gen_mu_pT > 3.3)     ||  ( (Gen_mu_pT > (-4.0*abs(Gen_mu_rap) + 7.3)) && (Gen_mu_pT > 2.1) )    ||  ( (abs(Gen_mu_rap) > 1.3) && (Gen_mu_pT < 2.1) && (Gen_mu_pT > 1.53))  ||  ( (Gen_mu_pT > (-1.325*abs(Gen_mu_rap) + 3.2525)) &&  (Gen_mu_pT > 1.0) && (Gen_mu_pT <= 1.53) )  )   ) ) { 
+                    break;
+                     }
+
+
+// TRG acceptance test
+/*
+                if  ( ! ( (abs(Gen_mu_rap) < 2.4)    &&  ( (Gen_mu_pT > 3.45) || (abs(Gen_mu_rap)>0.3 &&  abs(Gen_mu_rap)<1.1 &&  Gen_mu_pT>3.3 )    ||  ( (Gen_mu_pT > ((-1.15/0.35)*abs(Gen_mu_rap) + 6.91429)) && (Gen_mu_pT > 2.15) )    ||  ( (abs(Gen_mu_rap) > 1.45) && (abs(Gen_mu_rap) < 1.65) && (Gen_mu_pT > 2.15))  ||  ( (Gen_mu_pT > ((-0.95/0.45)*abs(Gen_mu_rap) + 5.63333)) &&  (Gen_mu_pT > 1.2) && (Gen_mu_pT <= 2.15) )  )   ) ) { 
+                    break;
+                     }
+*/
+
+
                 histo_mu_pT_Reco_Gen->Fill(Gen_mu_pT);
                 histo_mu_rap_Reco_Gen->Fill(Gen_mu_rap);
                 sp_mu_pT_mu_rap_Reco_Gen->Fill(Gen_mu_rap, Gen_mu_pT);
                 break;
-                
             }//  Gen muon loop
                 
             if (Gen_Reco_co==0) cout << "             ->  no Gen muon found " << ", Gen_mu_pT: " << Gen_mu_pT << ", Gen_mu_rap: " << Gen_mu_rap << ", mu_pT: " << mu_pT << ", mu_rap: " << mu_rap << endl;

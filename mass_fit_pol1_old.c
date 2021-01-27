@@ -173,7 +173,7 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   gStyle->SetStatFormat("5.2g");
   gStyle->SetFitFormat("5.2g");
 
- TString dirname = "plots_data_80m120_AllCuts_30mupT_aco075/";
+ TString dirname = "res_data_80m120_aco0075/";
 
  //TString flatfile="mass_fit/m_trig1.txt";
 // TString flatfile="m_trig4.txt";
@@ -181,15 +181,15 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
 
 
 
-  RooRealVar* mMuMu = new RooRealVar("mMuMu","M",8,12,"GeV"); // #mu^{+}#mu^{-} mass
+  RooRealVar* mMuMu = new RooRealVar("mMuMu","#mu^{+}#mu^{-} mass",8,12,"GeV");
   RooRealVar* mMuMuFull = new RooRealVar("mMuMuFull","Dimuon mass",8,12,"GeV");
   
   // fit to the background * * * * *
 
-//    RooRealVar* mdimucoef1 = new RooRealVar("slope par.","slope par.",0.0,-50000.0,50000.0);
-//  RooRealVar* mdimucoef1 = new RooRealVar("slope par.","slope par.",-0.0562);//fix freom MC
- // RooRealVar* mdimucoef1 = new RooRealVar("slope par.","slope par.", -0.074, -0.15, 0.05); // 
- // RooRealVar* mdimucoef1 = new RooRealVar("slope par.","slope par.", -0.066874); // fixed from gg MC
+//    RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0",0.0,-50000.0,50000.0);
+//  RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0",-0.0562);//fix freom MC
+ // RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0", -0.074, -0.15, 0.05); // 
+ // RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0", -0.066874); // fixed from gg MC
   
   
   
@@ -211,13 +211,13 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
  *                                
  *                                
  */
-   RooRealVar* ups1smdimucoef1 = new RooRealVar("#Upsilon(1S) mass","#Upsilon(1S) mass",9.45, 9.0, 10.0);
-//    RooRealVar* ups1smdimucoef1 = new RooRealVar("#Upsilon(1S) mass","#Upsilon(1S) mass",9.452);//MC fixed
-//   RooRealVar* ups1smdimucoef1 = new RooRealVar("#Upsilon(1S) mass","#Upsilon(1S) mass",9.46);//PDG fixed
-//   RooRealVar* ups1smdimucoef2 = new RooRealVar("#Upsilon(1S) width","#Upsilon(1S) width",0.095,0.0475,0.1425);
-   RooRealVar* ups1smdimucoef2 = new RooRealVar("#Upsilon(1S) width","#Upsilon(1S) width", 0.17, 0.09, 0.21);
-//   RooRealVar* ups1smdimucoef2 = new RooRealVar("#Upsilon(1S) width","#Upsilon(1S) width",0.075,0.0375,0.1125);
-// RooRealVar* ups1smdimucoef2 = new RooRealVar("#Upsilon(1S) width","#Upsilon(1S) width",0.15);
+   RooRealVar* ups1smdimucoef1 = new RooRealVar("Upsilon(1S) mass","Upsilon(1S) mass",9.45, 9.0, 10.0);
+//    RooRealVar* ups1smdimucoef1 = new RooRealVar("Upsilon(1S) mass","Upsilon(1S) mass",9.452);//MC fixed
+//   RooRealVar* ups1smdimucoef1 = new RooRealVar("Upsilon(1S) mass","Upsilon(1S) mass",9.46);//PDG fixed
+//   RooRealVar* ups1smdimucoef2 = new RooRealVar("Upsilon(1S) width","Upsilon(1S) width",0.095,0.0475,0.1425);
+   RooRealVar* ups1smdimucoef2 = new RooRealVar("Upsilon(1S) width","Upsilon(1S) width", 0.17, 0.09, 0.21);
+//   RooRealVar* ups1smdimucoef2 = new RooRealVar("Upsilon(1S) width","Upsilon(1S) width",0.075,0.0375,0.1125);
+// RooRealVar* ups1smdimucoef2 = new RooRealVar("Upsilon(1S) width","Upsilon(1S) width",0.15);
 
 
   RooRealVar* ups2smdimucoef1 = new RooRealVar("Upsilon(2S) mass","Upsilon(2S) mass",10.022);//MC fixed
@@ -232,20 +232,20 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   //  RooRealVar* ups3smdimucoef2 = new RooRealVar("Upsilon(3S) width","Upsilon(3S) width",0.1,0.01,1.0);
 
 
-//    RooRealVar* nmm = new RooRealVar("No of bkg.","number of signal events",167.0);
-//    RooRealVar* nmm = new RooRealVar("No of bkg.","number of signal events",103.0);
-  RooRealVar* nmm = new RooRealVar("No of bkg.","number of signal events",37000.0,20000.0,50000.0); 
-  /*  RooRealVar* nu1s = new RooRealVar("No of #Upsilon(1S)","number of Upsilon 1S",35.0); 
-      RooRealVar* nu2s = new RooRealVar("No of #Upsilon(2S)","number of Upsilon 2S",17.0);
-      RooRealVar* nu3s = new RooRealVar("No of #Upsilon(3S)","number of Upsilon 3S",12.0);*/
-  RooRealVar* nu1s = new RooRealVar("No of #Upsilon(1S)","number of Upsilon 1S", 909.0 ,400.0,1400.0);
-  RooRealVar* nu2s = new RooRealVar("No of #Upsilon(2S)","number of Upsilon 2S",500,50,1000);
-  RooRealVar* nu3s = new RooRealVar("No of #Upsilon(3S)","number of Upsilon 3S",300,50.0,1000);
+//    RooRealVar* nmm = new RooRealVar("N(dimuon events)","number of signal events",167.0);
+//    RooRealVar* nmm = new RooRealVar("N(dimuon events)","number of signal events",103.0);
+  RooRealVar* nmm = new RooRealVar("N(dimuon events)","number of signal events",37000.0,20000.0,50000.0); 
+  /*  RooRealVar* nu1s = new RooRealVar("N(Upsilon(1S))","number of Upsilon 1S",35.0); 
+      RooRealVar* nu2s = new RooRealVar("N(Upsilon(2S))","number of Upsilon 2S",17.0);
+      RooRealVar* nu3s = new RooRealVar("N(Upsilon(3S))","number of Upsilon 3S",12.0);*/
+  RooRealVar* nu1s = new RooRealVar("N(Upsilon(1S))","number of Upsilon 1S", 909.0 ,400.0,1400.0);
+  RooRealVar* nu2s = new RooRealVar("N(Upsilon(2S))","number of Upsilon 2S",500,50,1000);
+  RooRealVar* nu3s = new RooRealVar("N(Upsilon(3S))","number of Upsilon 3S",300,50.0,1000);
 
 
-  /*RooRealVar* nu1s = new RooRealVar("No of #Upsilon(1S)","number of Upsilon 1S",50.0,0.0,1000.0); 
-    RooRealVar* nu2s = new RooRealVar("No of #Upsilon(2S)","number of Upsilon 2S",50.0,0.0,1000.0);
-    RooRealVar* nu3s = new RooRealVar("No of #Upsilon(3S)","number of Upsilon 3S",50.0,0.0,1000.0);*/
+  /*RooRealVar* nu1s = new RooRealVar("N(Upsilon(1S))","number of Upsilon 1S",50.0,0.0,1000.0); 
+    RooRealVar* nu2s = new RooRealVar("N(Upsilon(2S))","number of Upsilon 2S",50.0,0.0,1000.0);
+    RooRealVar* nu3s = new RooRealVar("N(Upsilon(3S))","number of Upsilon 3S",50.0,0.0,1000.0);*/
 
   // my attempt * * * * *
   RooRealVar* mratio2 = new RooRealVar("mratio2","ratio Upsilon(2S) mass", 1.0595);    // scale width 2s/1s mass
@@ -309,8 +309,8 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   // RooChebychev* mm = new RooChebychev("mm shape","mm shape", *mMuMu, RooArgList(*mdimucoef1, *mdimucoef2));
   //  RooChebychev* mm = new RooChebychev("mm shape","mm shape", *mMuMu, RooArgList(*mdimucoef1, *mdimucoef2, *mdimucoef3));
 
-    RooRealVar* mdimucoef1 = new RooRealVar("slope par.","slope par.", -0.074, -0.15, 0.05); // 
-    // RooRealVar* mdimucoef1 = new RooRealVar("slope par.","slope par.", -0.066874); // fixed from gg MC
+    RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0", -0.074, -0.15, 0.05); // 
+    // RooRealVar* mdimucoef1 = new RooRealVar("dimuon p0","dimuon p0", -0.066874); // fixed from gg MC
 
     RooPolynomial mm("mm shape","mm shape", *mMuMu, RooArgList(*mdimucoef1));//, *mdimucoef2, *mdimucoef3));
 
@@ -333,14 +333,14 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
    
   //  RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,mm),RooArgList(*nu1s,*nmm));        // 1S and bkg
 
-    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,*nu3s,*nmm));        // all free
+   // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,*nu3s,*nmm));        // all free
   
 // RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*mm),RooArgList(*nu1s,*nu2s,*nmm));        //yield variable
 //    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*mm),RooArgList(*nu1s,up2sto1s,*nmm));  //two peak
     //RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,up2sto1s,up3sto1s,*nmm));  //ratio variable
     //  RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,meanup3s,*nmm));    //3s/2s ratio fix (WTF?)
 
-  //  RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,up3sto2s,*nmm));  // <- 3s/2s ratio fix
+    RooAddPdf* totshape = new RooAddPdf("totshape","total PDF",RooArgList(*ups1,*ups2,*ups3,mm),RooArgList(*nu1s,*nu2s,up3sto2s,*nmm));  // <- 3s/2s ratio fix
 
 
   RooDataSet *datatmp = 0;
@@ -374,8 +374,7 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
   RooPlot* xframe = mMuMu->frame() ;
   xframe->SetMaximum(15);
   //  xframe->GetYaxis()->SetTitle("Events/0.05 GeV");
-  xframe->GetYaxis()->SetTitle("Number of events / 0.08 GeV");
-  xframe->GetYaxis()->SetTitleOffset(1.1);
+  xframe->GetYaxis()->SetTitle("Events/0.08 GeV");
   datatmp->plotOn(xframe,RooFit::Binning(50));//for 0.05 binning
   //  totshape->plotOn(xframe);
   //  mm-plotOn(xframe,LineColor(kRed),LineStyle(kDashed));
@@ -409,10 +408,10 @@ void mass_fit_pol1(const float hbcut=2.0, const float ptcut=1.00)
    pt->SetFillColor(0);
    pt->SetTextAlign(12);
    pt->SetTextSize(0.04);
-//   TText *text = pt->AddText("No of #Upsilon(1S) =  19.2 #pm 6.2");
-//   text = pt->AddText("No of #Upsilon(2S) =  16.2 #pm 6.0");
-//   text = pt->AddText("No of #Upsilon(3S) =  5.7 #pm 4.6");
-//   text = pt->AddText("No of bkg. =  171 #pm 15");
+//   TText *text = pt->AddText("N(Upsilon(1S)) =  19.2 #pm 6.2");
+//   text = pt->AddText("N(Upsilon(2S)) =  16.2 #pm 6.0");
+//   text = pt->AddText("N(Upsilon(3S)) =  5.7 #pm 4.6");
+//   text = pt->AddText("N(dimuon events) =  171 #pm 15");
    TText *text = pt->AddText("N(Y(1S)) =  20.2 #pm 6.7");
    text = pt->AddText("N(Y(2S)) =  15.7 #pm 6.1");
    text = pt->AddText("N(Y(3S)) =  6.5 #pm 4.9");

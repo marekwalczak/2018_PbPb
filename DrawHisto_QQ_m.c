@@ -59,8 +59,8 @@ void DrawHisto_QQ_m(){
   massHisto->SetMinimum(0.0);
   massHisto->GetXaxis()->SetTitleFont(42);
   massHisto->GetYaxis()->SetTitleFont(42);
-  massHisto->GetXaxis()->SetTitle("mass [GeV]");
-  massHisto->GetYaxis()->SetTitle("dimuons");
+  massHisto->GetXaxis()->SetTitle("M [GeV]");
+  massHisto->GetYaxis()->SetTitle("Number of events");
   massHisto->SetFillColor(kYellow);
   massHisto->SetLineWidth(2);
   massHisto->SetLineColor(kBlue+1);
@@ -85,7 +85,7 @@ void DrawHisto_QQ_m(){
   lumiTextOffset   = 0.3; // default 0.28
   
   //lumi_5TeV = "pp, ~20 pb^{-1} lumi";
-  lumi_5TeV = "PbPb"; // , 1621,60 #mub^{-1}
+  lumi_5TeV = "PbPb data"; // , 1621,60 #mub^{-1}
 
   // Call the CMS_lumi macro to draw:
   // CMS preliminary, aligned on the right and justified (iPos=33, third argument)

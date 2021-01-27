@@ -535,17 +535,28 @@ void analyze(){
           if (  1==1   ){ // ( (TMOneStaTight_mupl>0 && TMOneStaTight_mumi>0 && nTrkWMea_mupl>5 && nTrkWMea_mumi>5 && nPixWMea_mupl>0 && nPixWMea_mumi>0 && highPurity_mupl==true && highPurity_mumi==true && dxy_mupl<0.3 && dxy_mumi<0.3 && dz_mupl<20 && dz_mumi<20) ){
 
 
+        // NEW SoftID acceptance (ANDRE): (  1==1   ){ //
+         if   (   ( (abs(mupl_rap) < 2.4)    &&  ( ( mupl_pT > 3.3)     ||  ( (mupl_pT > (-4.0*abs(mupl_rap) + 7.3)) && (mupl_pT > 2.1) )    ||  ( (abs(mupl_rap) > 1.3) && (mupl_pT < 2.1) && (mupl_pT > 1.53))  ||  ( (mupl_pT > (-1.325*abs(mupl_rap) + 3.2525)) &&  (mupl_pT > 1.0) && (mupl_pT < 1.53) )     )     ) &&
+              ( (abs(mumi_rap) < 2.4)    &&  ( ( mumi_pT > 3.3)     ||  ( (mumi_pT > (-4.0*abs(mumi_rap) + 7.3)) && (mumi_pT > 2.1) )    ||  ( (abs(mumi_rap) > 1.3) && (mumi_pT < 2.1) && (mumi_pT > 1.53))  ||  ( (mumi_pT > (-1.325*abs(mumi_rap) + 3.2525)) &&  (mumi_pT > 1.0) && (mumi_pT < 1.53) )     )   ) ) {
 
 
-        // SoftID acceptance: (  1==1   ){ //
-         if  ( ( (abs(mupl_rap) < 2.4)    &&   ( (abs(mupl_pT) > 3.3)     ||  ((abs(mupl_pT) > (-3.0*abs(mupl_rap) + 6.3)) && (abs(mupl_pT) > 2.1))    || ((abs(mupl_pT) > (-4.0/3.0*abs(mupl_rap) + 1.4*7.0/3.0)) &&  (abs(mupl_pT) > 1.0) && (abs(mupl_rap)>1.4))        ))  &&
-                ( (abs(mumi_rap) < 2.4)   &&   ( (abs(mumi_pT) > 3.3)     ||  ((abs(mumi_pT) > (-3.0*abs(mumi_rap) + 6.3)) && (abs(mumi_pT) > 2.1))    || ((abs(mumi_pT) > (-4.0/3.0*abs(mumi_rap) + 1.4*7.0/3.0)) &&  (abs(mumi_pT) > 1.0) && (abs(mumi_rap)>1.4))      )   )   ) {
+
+        // NEW!!! -> TRG acceptance: (  1==1   ){ //
+                if  ( ( (abs(mupl_rap) < 2.4)    &&  ( (mupl_pT > 3.45) || (abs(mupl_rap)>0.3 &&  abs(mupl_rap)<1.1 &&  mupl_pT>3.3 )    ||  ( (mupl_pT > ((-1.15/0.35)*abs(mupl_rap) + 6.91429)) && (mupl_pT > 2.15) )    ||  ( (abs(mupl_rap) > 1.45) && (abs(mupl_rap) < 1.65) && (mupl_pT > 2.15))  ||  ( (mupl_pT > ((-0.95/0.45)*abs(mupl_rap) + 5.63333)) &&  (mupl_pT > 1.2) && (mupl_pT <= 2.15) )  )   ) && 
+                 ( (abs(mumi_rap) < 2.4)    &&  ( (mumi_pT > 3.45) || (abs(mumi_rap)>0.3 &&  abs(mumi_rap)<1.1 &&  mumi_pT>3.3 )    ||  ( (mumi_pT > ((-1.15/0.35)*abs(mumi_rap) + 6.91429)) && (mumi_pT > 2.15) )    ||  ( (abs(mumi_rap) > 1.45) && (abs(mumi_rap) < 1.65) && (mumi_pT > 2.15))  ||  ( (mumi_pT > ((-0.95/0.45)*abs(mumi_rap) + 5.63333)) &&  (mumi_pT > 1.2) && (mumi_pT <= 2.15) )  )   ) )  {
 
 
-        // TRG acceptance: (  1==1   ){ //
-//         if  ( ( (abs(mupl_rap) < 2.4)    &&   ( (abs(mupl_pT) > 3.3)     ||  ((abs(mupl_pT) > (-3.0*abs(mupl_rap) + 6.3)) && (abs(mupl_pT) > 2.1))    || ((abs(mupl_pT) > (-1.8*abs(mupl_rap) + 4.98)) &&  (abs(mupl_pT) > 1.2))        ))  &&
-//                ( (abs(mumi_rap) < 2.4)   &&   ( (abs(mumi_pT) > 3.3)     ||  ((abs(mumi_pT) > (-3.0*abs(mumi_rap) + 6.3)) && (abs(mumi_pT) > 2.1))    || ((abs(mumi_pT) > (-1.8*abs(mumi_rap) + 4.98)) &&  (abs(mumi_pT) > 1.2))      )   )   ) {
 
+
+        // old SoftID acceptance: (  1==1   ){ //
+//         if  ( ( (abs(mupl_rap) < 2.4)    &&   ( mupl_pT > 3.3)     ||  (mupl_pT > (-3.0*abs(mupl_rap) + 6.3)) && mupl_pT > 2.1))    || (mupl_pT > (-4.0/3.0*abs(mupl_rap) + 1.4*7.0/3.0)) &&  mupl_pT > 1.0) && (abs(mupl_rap)>1.4))        ))  &&
+//                ( (abs(mumi_rap) < 2.4)   &&   ( mumi_pT > 3.3)     ||  (mumi_pT > (-3.0*abs(mumi_rap) + 6.3)) && mumi_pT > 2.1))    || (mumi_pT > (-4.0/3.0*abs(mumi_rap) + 1.4*7.0/3.0)) &&  mumi_pT > 1.0) && (abs(mumi_rap)>1.4))      )   )   ) {
+
+
+
+        // old TRG acceptance: (  1==1   ){ //
+//         if  ( ( (abs(mupl_rap) < 2.4)    &&   ( mupl_pT > 3.3)     ||  (mupl_pT > (-3.0*abs(mupl_rap) + 6.3)) && mupl_pT > 2.1))    || (mupl_pT > (-1.8*abs(mupl_rap) + 4.98)) &&  mupl_pT > 1.2))        ))  &&
+//                ( (abs(mumi_rap) < 2.4)   &&   ( mumi_pT > 3.3)     ||  (mumi_pT > (-3.0*abs(mumi_rap) + 6.3)) && mumi_pT > 2.1))    || (mumi_pT > (-1.8*abs(mumi_rap) + 4.98)) &&  mumi_pT > 1.2))      )   )   ) {
 
 
           histo_QQ_size->Fill(nsize);

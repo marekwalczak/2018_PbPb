@@ -55,12 +55,12 @@ void DrawHisto_QQ_pT(){
 
   // Draw histograms
   cout << "Drawing histogram: " << pTHisto->GetEntries() << " entries"<< endl;
-  pTHisto->GetXaxis()->SetRangeUser(0,4);
+  pTHisto->GetXaxis()->SetRangeUser(0,1.5);
   //pTHisto->GetYaxis()->SetRangeUser(0,1300);
   pTHisto->GetXaxis()->SetTitleFont(42);
   pTHisto->GetYaxis()->SetTitleFont(42);
-  pTHisto->GetXaxis()->SetTitle("p_{T} [GeV]");
-  pTHisto->GetYaxis()->SetTitle("dimuons");
+  pTHisto->GetXaxis()->SetTitle("p^{#mu#mu}_{T} [GeV]");
+  pTHisto->GetYaxis()->SetTitle("Number of events");
   pTHisto->SetFillColor(kYellow);
   pTHisto->SetLineWidth(2);
   pTHisto->SetLineColor(kBlue+1);
@@ -71,7 +71,7 @@ void DrawHisto_QQ_pT(){
   // Options to be used with the CMS_lumi macro
   //
   double entries = pTHisto->GetEntries();
-  writeExtraText = true;       // if extra text
+  writeExtraText = false;       // if extra text
   extraText      = Form("%g events", entries);  // default extra text is "Preliminary"
   
   //
@@ -84,7 +84,7 @@ void DrawHisto_QQ_pT(){
   lumiTextOffset   = 0.3; // default 0.28
   
   //lumi_5TeV = "pp, ~20 pb^{-1} lumi";
-  lumi_5TeV = "PbPb"; // , 1621,60 #mub^{-1}
+  lumi_5TeV = "PbPb data"; // , 1621,60 #mub^{-1}
 
   // Call the CMS_lumi macro to draw:
   // CMS preliminary, aligned on the right and justified (iPos=33, third argument)
